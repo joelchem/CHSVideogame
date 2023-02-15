@@ -6,9 +6,5 @@ public class Test {
 		System.out.println("Goodbye World");
 		System.out.println("hehehehe");
 	}
+
 }
-
-// git add . 
-// git commit -m "message"
-// git push
-
