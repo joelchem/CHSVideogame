@@ -8,5 +8,7 @@ public class Test {
 		System.out.println("The world is an oyster");
 		
 		System.out.println("SLKFJ");
+		
+		System.out.println("This highlighted part is my change");
 	}
 }
