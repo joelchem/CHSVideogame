@@ -1,2 +1,2 @@
-INDEX VERSION 1.131+/Users/wujw1/eclipse-workspace/CHSVideogame/.metadata/.plugins/org.eclipse.jdt.core
-302908380.index
+INDEX VERSION 1.131+C:\Users\tulip\Documents\CHSVideogame\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
