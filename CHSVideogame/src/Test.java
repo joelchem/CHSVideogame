@@ -6,5 +6,8 @@ public class Test {
 		System.out.println("Goodbye World");
 		System.out.println("The world is an oyster");
 
+		Game game = new Game();
+		
+
 	}
 }

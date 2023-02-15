@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 public class Game {
     static enum Difficulty{
@@ -23,7 +24,19 @@ public class Game {
         this.objects = new ArrayList<InteractableObject>();
         this.students = new ArrayList<OncomingStudent>();
         this.score = 0;
-        this.scoreboard = new File("/usr/local/bin/Top_Scores");
+        this.scoreboard = new File("Top_Scores.txt");
+        try {
+            if(this.scoreboard.createNewFile()){
+                System.out.println("Top_Scores.txt File Created in CHSVideogame root directory");
+            }
+            else{
+                System.out.println("Top_Scores.txt File is already in CHSVideogame root directory");
+            }
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         this.menu = new MainMenu();
         this.gameOver = false;
     }
