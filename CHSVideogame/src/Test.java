@@ -6,6 +6,8 @@ public class Test {
 
 		System.out.println("Goodbye World");
 		System.out.println("osidjfjoisdfjoisdfjsiod");
+		
+		System.out.println("Bethany is here!");
 
 	}
 }
