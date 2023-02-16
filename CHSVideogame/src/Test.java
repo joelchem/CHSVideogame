@@ -11,6 +11,6 @@ public class Test {
 		
 		System.out.println("test");
 		
-		System.out.println("====");
+		System.out.println("=====");
 	}
 }
