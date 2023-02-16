@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 public class Game {
-    static enum Difficulty{
+    public static enum Difficulty{
         EASY,
         MEDIUM,
         HARD
@@ -44,22 +44,6 @@ public class Game {
         this.menu = new MainMenu();
         this.gameOver = false;
     }
-    public void startGameloop(){
-        //might need to re-explain how calculateFrame interacts within the method here
-        calculateFrame();
-        //x is a placeholder for value based on difficulty 
-        int x = 0;
-        map = new Map();
-        player = new Player();
-        for(int i = 0; i < x; i++){
-            objects.add(new InteractableObject());
-            students.add(new OncomingStudent());
-        }
-
-    }
-
-    private void calculateFrame(){
-    }
 
     public InteractableObject getInteractableObject(int index){
         return objects.get(index);
@@ -69,11 +53,17 @@ public class Game {
         return students.get(index);
     }
     public void setOncomingStudent(OncomingStudent student, int index){
-        students.set(index, student);
+        this.students.set(index, student);
+    }
+    public void addOncomingStudent(OncomingStudent student){
+        this.students.add(student);
+    }
+    public void addInteractableObject(InteractableObject object){
+        this.objects.add(object);
     }
 
     public Map getMap(){
-        return this.map;
+        return map;
     }
 
     public void setMap(Map newMap){
@@ -81,13 +71,16 @@ public class Game {
         //or
     }
     public Camera getCamera(){
-        return this.camera;
+        return camera;
     }
     public void setCamera(Camera newCamera){
         this.camera = newCamera;
     }
     public Player getPlayer(){
         return player;
+    }
+    public void setPlayer(Player play){
+        this.player = play;
     }
     public int getScore(){
         return score;
@@ -104,10 +97,10 @@ public class Game {
         this.diff = difficulty;
     }
     public Difficulty getDifficulty(){
-        return this.diff;
+        return diff;
     }
     public double getRemainingDistance(){
-        return this.remainingDistance;
+        return remainingDistance;
     }
     public void setRemainingDistance(double dist){
         this.remainingDistance = dist;
@@ -116,10 +109,12 @@ public class Game {
         if(player.getHealth()==0 || player.getStrength()==0 || this.remainingDistance == 0)
             this.gameOver = true;
         //some logic
+        //should create a new endscreen object
         fileWrite.write(score);
         fileWrite.close();
+        
     }
     public boolean getGameOver(){
-        return this.gameOver;
+        return gameOver;
     }
 }
