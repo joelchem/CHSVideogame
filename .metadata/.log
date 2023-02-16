@@ -364,3 +364,23 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.filesystem 4 280 2023-02-15 09:44:49.863
+!MESSAGE Cannot create file, access denied: C:\Users\wujw1\eclipse-workspace\CHSVideogame\.metadata\.plugins\org.eclipse.egit.core\.org.eclipse.egit.core.cmp.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\wujw1
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(WindowsFileSystemProvider.java:519)
+	at java.base/java.nio.file.Files.createDirectory(Files.java:694)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Files.java:801)
+	at java.base/java.nio.file.Files.createDirectories(Files.java:787)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:309)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.writeSilently(FileSystemResourceManager.java:1232)
+	at org.eclipse.core.internal.resources.SaveManager.saveMetaInfo(SaveManager.java:1310)
+	at org.eclipse.core.internal.resources.SaveManager.saveMetaInfo(SaveManager.java:1291)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1211)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1143)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
