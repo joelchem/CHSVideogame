@@ -5,7 +5,7 @@ public class Test {
 		System.out.println("Hello World.");
 		System.out.println("Goodbye World");
 		System.out.println("ENOCH WAS HERE");
-		System.out.println("brah brah");
+		System.out.println("brah");
 	}
 
 }
