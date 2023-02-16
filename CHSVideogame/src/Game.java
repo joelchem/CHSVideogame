@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 public class Game {
     static enum Difficulty{
@@ -18,6 +20,7 @@ public class Game {
     private double remainingDistance;
     private MainMenu menu;
     private boolean gameOver;
+    private FileWriter fileWrite;
 
     public Game(){
         this.camera = new Camera();
@@ -27,7 +30,8 @@ public class Game {
         this.scoreboard = new File("Top_Scores.txt");
         try {
             if(this.scoreboard.createNewFile()){
-                System.out.println("Top_Scores.txt File Created in CHSVideogame root directory");
+                System.out.println("Top_Scores.txt File created in CHSVideogame root directory");
+                fileWrite = new FileWriter(scoreboard, true);
             }
             else{
                 System.out.println("Top_Scores.txt File is already in CHSVideogame root directory");
@@ -111,6 +115,9 @@ public class Game {
     public void setGameOver(){
         if(player.getHealth()==0 || player.getStrength()==0 || this.remainingDistance == 0)
             this.gameOver = true;
+        //some logic
+        fileWrite.write(score);
+        fileWrite.close();
     }
     public boolean getGameOver(){
         return this.gameOver;
