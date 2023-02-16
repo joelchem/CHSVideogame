@@ -7,7 +7,6 @@ public class DisplayObject {
     //dimensions[0] = width
     //dimensions[1] = height
 
-
     DisplayObject(int x, int y, Game userGame) {
         posX = x;
         posY = y;
@@ -25,7 +24,7 @@ public class DisplayObject {
     public void testForCollision() {
 
     }
-    
+
     public void renderSprite() {
 
     }
