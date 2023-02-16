@@ -1,0 +1,58 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class metricconversion implements ActionListener{
+	JFrame frame;
+	JPanel panel;
+	JComboBox metri;
+	JLabel title;
+	JLabel answe;
+	
+	metricconversion(){
+		frame = new JFrame("Metric Conversion");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		
+		title = new JLabel("Metric Conversion: ");
+		title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		panel.add(title);
+		
+		String[] conve = {"Inch to Centimeter", "Foot to Meter", "Gallon to Liter", "Pound to Kilogram"};
+		metri = new JComboBox(conve);
+		metri.setSelectedIndex(0);
+		metri.addActionListener(this);
+		panel.add(metri);
+		
+		answe = new JLabel("");
+		panel.add(answe);
+		
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	public void actionPerformed(ActionEvent a) {
+		JComboBox comboBox = (JComboBox) a.getSource();
+		String selection = (String) comboBox.getSelectedItem();
+		if (selection.equals("Inch to Centimeter")) {
+			answe.setText("1 inch = 2.54 centimeters");
+		} else if (selection.equals("Foot to Meter")) {
+			answe.setText("1 foot = 0.3048 meters");
+		} else if (selection.equals("Gallon to Liter")) {
+			answe.setText("1 gallon = 4.5461 liters");
+		} else if (selection.equals("Pound to Kilogram")) {
+			answe.setText("1 pound = 0.4536 kilograms");
+		}
+		title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		answe.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		frame.pack();
+	}	
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new metricconversion();
+			}
+		});
+	}
+}
