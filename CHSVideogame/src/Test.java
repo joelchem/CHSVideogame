@@ -1,13 +1,18 @@
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Hello World.");
+		System.out.println("Goodbye World");
+		System.out.println("AAAAAAAAAAAAAAAAA");
+		System.out.println("askdakjdalsd");
 
 		System.out.println("Goodbye World");
 		System.out.println("The world is an oyster");
 		
-		System.out.println("i'm gonna kill you! if you don't beat me to it!");
-
+		System.out.println("test");
+		
+		System.out.println("=====");
+		
+		System.out.println("pls work :(");
 	}
 }
