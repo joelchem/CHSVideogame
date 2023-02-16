@@ -6,6 +6,8 @@ public class Dollar {
 		super(x,y,game);
 		DollarSprite = image;
 	}
+	
+	//probably going to be changed to a specialization of on collision. 
 	public void testForCollision() {
 		
 	}
