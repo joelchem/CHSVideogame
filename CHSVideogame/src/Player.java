@@ -56,7 +56,7 @@ public class Player {
 	}
 	
 	public int getStrength() {
-		return 0;
+		return strength;
 	}
 	
 	public void setTurning(boolean turning) {
