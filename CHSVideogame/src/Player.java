@@ -19,10 +19,6 @@ public class Player {
 		
 	}
 	
-	public void renderSprite(int screenX, int screenY) {
-		
-	}
-	
 	public void updateMoney(boolean b) {
 		
 	}
