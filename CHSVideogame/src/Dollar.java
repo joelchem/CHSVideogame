@@ -1,6 +1,6 @@
 import java.awt.Image;
 
-public class Dollar {
+public class Dollar extends DisplayObject{
 	Image DollarSprite;
 	public Dollar(int x, int y, Game game, Image image) {
 		super(x,y,game);
