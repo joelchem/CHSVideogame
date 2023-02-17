@@ -6,7 +6,7 @@ public class Player {
 	private int strength, health;
 	private boolean isCrouching;
 	private int velocity;
-	private ArrayList<Image> sprites;
+	private Image[] sprites;
 	private int positionX, positionY;
 	private double distance;
 	private int spriteFrame;
@@ -14,44 +14,46 @@ public class Player {
 	private boolean money;
 	private boolean isTurning;
 	private int turnX, turnY;
+	private boolean hasJacket;
 	
 	public Player(Game g) {
-		
+		game = g;
 	}
 	
 	public void updateMoney(boolean b) {
-		
+		money = b;
 	}
 	
 	public boolean getMoney() {
-		return false;
-	}
-	public int getVelocity() {
-		return 0;
+		return money;
 	}
 	
-	public void setVelocity(int  x) {
-		
+	public void setVelocity(int x) {
+		velocity = x;
+	}
+	
+	public int getVelocity() {
+		return velocity;
 	}
 	
 	public void setCrouch(boolean b) {
-		
+		isCrouching = b;
 	}
 	
 	public boolean getCrouch() {
-		return false;
+		return isCrouching;
 	}
 	
 	public void setHealth(int x) {
-		
+		health = x;
 	}
 	
 	public int getHealth() {
-		return 0;
+		return health;
 	}
 	
 	public void updateStrength(int x) {
-		
+		strength+=x;
 	}
 	
 	public int getStrength() {
@@ -59,46 +61,49 @@ public class Player {
 	}
 	
 	public void setTurning(boolean turning) {
-		
+		isTurning = turning;
 	}
 	
 	public boolean getTurning() {
-		return false;
+		return isTurning;
 	}
 	
 	public int getTurnX() {
-		return 0;
+		return turnX;
 	}
 	
 	public int getTurnY() {
-		return 0;
+		return turnY;
 	}
 	
 	public void setTurnX(int newTurnX) {
-		
+		turnX = newTurnX;
 	}
 	
 	public void setTurnY(int newTurnY) {
-		
+		turnY = newTurnY;
 	}
 	
 	public int getPositionX() {
-		return 0;
+		return positionX;
 	}
 	
 	public int getPositionY() {
-		return 0;
+		return positionY;
 	}
 	public void setPositionX(int posX) {
-		
+		positionX = posX;
 	}
 	
 	public void setPositionY(int posY) {
-		
+		positionY = posY;
 	}
 	
-	public void crouch() {
-		
+	public void setJacket(boolean b) {
+		hasJacket = b;
 	}
-
+	
+	public boolean getJacket() {
+		return hasJacket;
+	}
 }
