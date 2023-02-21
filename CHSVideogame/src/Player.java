@@ -1,5 +1,4 @@
 import java.awt.Image;
-import java.util.ArrayList;
 
 public class Player {
 	
@@ -57,7 +56,7 @@ public class Player {
 	}
 	
 	public int getStrength() {
-		return 0;
+		return strength;
 	}
 	
 	public void setTurning(boolean turning) {

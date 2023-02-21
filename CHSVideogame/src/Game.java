@@ -25,6 +25,7 @@ public class Game {
         } catch(Exception ex) {
         	System.out.println("LET ME IN");
         }
+        difficulty = " ";
     }
     
     public DisplayObject getDisplayObject(int index) {
@@ -46,4 +47,42 @@ public class Game {
     public void addOncomingStudent(OncomingStudent student) {
     	oncomingStudents.add(student);
     }
+    
+    public Map getMap() {
+    	return map;
+    }
+    
+    public void setMap(Map mapSet) {
+    	map = mapSet;
+    }
+    
+    public Camera getCamera() {
+    	return camera;
+    }
+    
+    public void setCamera(Camera cam) {
+    	camera = cam;
+    }
+    
+    public Player getPlayer() {
+    	return player;
+    }
+    
+    public void setPlayer(Player play) {
+    	player = play;
+    }
+    
+    public int getScore() {
+    	return score;
+    }
+    
+    public void setScore(int x) {
+    	score = x;
+    }
+    
+    public File getScoreBoardFile() {
+    	return scoreBoard;
+    }
+    
+   
 }
