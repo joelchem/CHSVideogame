@@ -15,7 +15,7 @@ public class GameRunner {
         game.setDifficulty(map.getDifficulty());
 
         for(int i = 0; i < x; i++){
-            game.addInteractableObject(new InteractableObject());
+            game.addDisplayObject(new DisplayObject());
             game.addOncomingStudent(new OncomingStudent());
         }
 
