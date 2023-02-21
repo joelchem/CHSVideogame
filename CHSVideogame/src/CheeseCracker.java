@@ -8,7 +8,7 @@ public class CheeseCracker extends DisplayObject {
 	public void testForCollision( ) {
 		//test for collision from superclass?
 		// 5 to be replaced with whatever number
-		updateStrength(getStrength() - 5);
+		updateStrength(Game.getPlayer().getStrength() - 5);
 	}
  
 

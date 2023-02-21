@@ -11,6 +11,7 @@ public class Game {
 	private File scoreBoard;
 	private double remainingDistance;
 	private String difficulty;
+	private boolean gameOver;
 	
     public Game(){
     	map = new Map(this);
@@ -26,6 +27,7 @@ public class Game {
         	System.out.println("LET ME IN");
         }
         difficulty = " ";
+        gameOver = false;
     }
     
     public DisplayObject getDisplayObject(int index) {
@@ -73,9 +75,43 @@ public class Game {
     	return score;
     }
     public void setScore(int x) {
-    	score = x;
+    	score += x;
     }
     public File getScoreBoardFile() {
     	return scoreBoard;
+<<<<<<< HEAD
     }  
+=======
+    }
+    
+    public void setDifficulty(String diff) {
+    	difficulty = diff;
+    }
+    
+    public String getDifficulty() {
+    	return difficulty;
+    }
+    
+    public double getRemainingDistance() {
+    	return remainingDistance;
+    }
+    
+    public void setRemainingDistance(double x) {
+    	remainingDistance -= x;
+    }
+    
+    public void setGameOver() {
+    	int health = player.getHealth();
+    	int strength = player.getStrength();
+    	if(health==0||strength==0||remainingDistance==0) {
+    		gameOver = true;
+    	} else {
+    		gameOver = false;
+    	}
+    }
+    
+    public boolean getGameOver() {
+    	return gameOver;
+    }
+>>>>>>> 9c7d1db83b4bbb19003777e6475d7f22a9d3d584
 }
