@@ -1,6 +1,6 @@
 import java.awt.Image;
 
-public class Jacket {
+public class Jacket extends DisplayObject{
 	Image jacketSprite;
 	public Jacket(int x, int y, Game game, Image image) {
 		super(x,y,game);
