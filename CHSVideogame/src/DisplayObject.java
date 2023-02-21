@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public class DisplayObject {
     private Game game;
     private int posX;
@@ -6,7 +8,6 @@ public class DisplayObject {
     private int[] dimensions;
     //dimensions[0] = width
     //dimensions[1] = height
-
     DisplayObject(int x, int y, Game userGame) {
         posX = x;
         posY = y;
