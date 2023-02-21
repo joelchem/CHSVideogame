@@ -21,14 +21,16 @@ public class DisplayObject {
     public int getDimensionY() {
         return dimensions[1];
     }
-
     public void testForCollision() {
 
     }
-
-    public void renderSprite() {
-
+    public void setSprite(Image theSprite) {
+    	sprite = theSprite;
     }
+    public Image getSprite() {
+    	return sprite;
+    }
+
 
     //To be specialized, used for determining conditions in the event that the player collides with a given interactable object
     public void onCollision() {
