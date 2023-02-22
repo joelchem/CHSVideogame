@@ -92,11 +92,11 @@ public class DisplayObject {
         return posY;
     }
     
-    public int setPosX(int x) {
+    public void setPosX(int x) {
     	posX = x;
     }
     
-    public int setPosY(int y) {
+    public void setPosY(int y) {
     	posY = y;
     }
 } 
