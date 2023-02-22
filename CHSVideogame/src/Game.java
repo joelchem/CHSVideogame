@@ -13,7 +13,7 @@ public class Game {
 	private String difficulty;
 	private boolean gameOver;
 	
-    public Game(){
+	public Game(){
     	map = new Map(this);
         camera = new Camera(this);
         oncomingStudents = new ArrayList<>();
@@ -24,14 +24,14 @@ public class Game {
         try {
         	scoreBoard.createNewFile();
         } catch(Exception ex) {
-        	System.out.println("LET ME IN");
+        	System.out.println("LET ME IN!!!!!!");
         }
         difficulty = " ";
         gameOver = false;
     }
     
-    public DisplayObject getDisplayObject(int index) {
-    	return displayObjects.get(index);
+	public DisplayObject getDisplayObject(int index) {
+		return displayObjects.get(index);
     }
     
     public void addDisplayObject (DisplayObject obj) {
