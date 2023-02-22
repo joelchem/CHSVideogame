@@ -65,25 +65,23 @@ public class Game {
     public void setCamera(Camera cam) {
     	camera = cam;
     }
-    
     public Player getPlayer() {
     	return player;
     }
-    
     public void setPlayer(Player play) {
     	player = play;
     }
-    
     public int getScore() {
     	return score;
     }
-    
     public void setScore(int x) {
     	score += x;
     }
-    
     public File getScoreBoardFile() {
     	return scoreBoard;
+<<<<<<< HEAD
+    }  
+=======
     }
     
     public void setDifficulty(String diff) {
@@ -115,4 +113,5 @@ public class Game {
     public boolean getGameOver() {
     	return gameOver;
     }
+>>>>>>> 9c7d1db83b4bbb19003777e6475d7f22a9d3d584
 }
