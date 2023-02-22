@@ -3,12 +3,12 @@ import java.awt.*;
 
 public class OncomingStudent extends DisplayObject{
 	private ArrayList<Image> students;
-	private double dimensionX, dimensionY;
 	private Game game;
 	private int velocityX, velocityY, positionX, positionY, index;
+	public final int DIMENSION_X, DIMENSION_Y, GRAZE, HEAD_ON, STRENGTH_DEC; //these will equal something later, placeholder
 	
 	public OncomingStudent(Game g, int posX, int posY) {
-		super.DisplayObject(g, );
+		super(g, DIMENSION_X, DIMENSION_Y);
 		game = g;
 		positionX = posX;
 		positionY = posY;
@@ -49,7 +49,9 @@ public class OncomingStudent extends DisplayObject{
 	
 	//specialize on collision
 	
-	public void checkForCollision() {
+	public void onCollision() {
+		super.onCollision();
+		if()
 		/*
 		 * if player is colliding w student, determine severity
 		 * 
