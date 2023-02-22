@@ -7,8 +7,6 @@ public class DisplayObject {
     private Image sprite;
     private int dimensionX;
     private int dimensionY;
-    //dimensions[0] = width
-    //dimensions[1] = height
     DisplayObject(Game userGame, int dimensionX, int dimensionY) {
         this.dimensionX = dimensionX;
         this.dimensionY = dimensionY;
@@ -31,11 +29,17 @@ public class DisplayObject {
     	int playerPosX = player.getPositionX();
     	int playerPosY = player.getPositionY();
     	
+    	int lengthX = dimensionX/2;
+    	int lengthY = dimensionY/2;
+    	
+    	int playerLengthX = 0;
+    	int playerLenthY = 0;
+    	
     	//Call overlap with x and y values, if it passes, call onCollision
     	//NOTE: May need to modify the dimension adding in the future
     	
-    	boolean overlapX = overLap(posX, posX+dimensionX, player.getPositionX(), 5);
-    	boolean overlapY = overLap(posY, posY+dimensionY, player.getPositionY(), 6);
+    	boolean overlapX = overLap(posX-lengthX, posX+lengthX, player.getPositionX()-playerLengthX, player.getPositionX()+playerLengthX);
+    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), playerLengthY);
     			
     	//Player method to be determined in the future
     	if (overlapX && overlapY) {
@@ -45,8 +49,14 @@ public class DisplayObject {
     	
     }
     
+    //Checks to see if there is an overlap on whatever plane
+    //Compares the start positions of both sprites and checks to see if there is an over
     private boolean overLap(int spriteStart, int spriteEnd, int playerStart, int playerEnd) {
-    	if (spriteStart < spriteEnd )    	
+    	if (spriteStart < spriteEnd ) {
+    		
+    	} else {
+    		
+    	}
     	
     	return false;
     }
@@ -73,5 +83,13 @@ public class DisplayObject {
 
     public int getY() {
         return posY;
+    }
+    
+    public int setPosX(int x) {
+    	posX = x;
+    }
+    
+    public int setPosY(int y) {
+    	posY = y;
     }
 } 
