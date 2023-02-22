@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.*;
 
 public class DisplayObject {
     private Game game;
@@ -7,6 +7,7 @@ public class DisplayObject {
     private Image sprite;
     private int dimensionX;
     private int dimensionY;
+    
     DisplayObject(Game userGame, int dimensionX, int dimensionY) {
         this.dimensionX = dimensionX;
         this.dimensionY = dimensionY;
@@ -52,13 +53,20 @@ public class DisplayObject {
     //Checks to see if there is an overlap on whatever plane
     //Compares the start positions of both sprites and checks to see if there is an over
     private boolean overLap(int spriteStart, int spriteEnd, int playerStart, int playerEnd) {
-    	if (spriteStart < spriteEnd ) {
-    		
-    	} else {
-    		
-    	}
+    	if (playerStart < spriteStart) {
+    		if (playerEnd > spriteStart && playerEnd < spriteEnd) 
+    			return true;
+    		else 
+    			return false;
+    	} else if (playerStart > spriteStart){
+    		if (playerStart < spriteEnd) 
+    			return true;
+    		else {
+    			return false;
+    		}
+    	} 
     	
-    	return false;
+    	return true;
     }
 
     public void setSprite(Image theSprite) {
@@ -68,7 +76,6 @@ public class DisplayObject {
     public Image getSprite() {
     	return sprite;
     }
-
 
     //To be specialized, used for determining conditions in the event that the player collides with a given interactable object
     public void onCollision() {
