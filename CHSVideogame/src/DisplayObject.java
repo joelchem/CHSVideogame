@@ -21,11 +21,7 @@ public class DisplayObject {
     public int getDimensionY() {
         return dimensions[1];
     }
-<<<<<<< HEAD
-=======
 
-    
->>>>>>> 66a31f3526454ebb83d990fb0967d312a1de23bb
     public void testForCollision() {
     	Player player = game.getPlayer();
     	//First check to see if the sprite is left or right of the player
@@ -37,9 +33,11 @@ public class DisplayObject {
     	//Call overlap with x and y values, if it passes, call onCollision
     	//NOTE: May need to modify the dimension adding in the future
     	
-    	boolean overlapX = overLap(posX, posX+dimensions[0], player.getPositionX(), player.getPositionX()+)
-    	
-    	if (overLap(posX, posX+dimensions[0], )) {
+    	boolean overlapX = overLap(posX, posX+dimensions[0], player.getPositionX(), 5);
+    	boolean overlapY = overLap(posY, posY+dimensions[1], player.getPositionY(), 6);
+    			
+    	//Player method to be determined in the future
+    	if (overlapX && overlapY) {
     		onCollision();
     	}
     	
@@ -53,6 +51,7 @@ public class DisplayObject {
 
     public void setSprite(Image theSprite) {
     	sprite = theSprite;
+    }
 
     public Image getSprite() {
     	return sprite;
