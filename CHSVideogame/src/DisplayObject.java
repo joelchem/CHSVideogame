@@ -40,7 +40,7 @@ public class DisplayObject {
     	//NOTE: May need to modify the dimension adding in the future
     	
     	boolean overlapX = overLap(posX-lengthX, posX+lengthX, player.getPositionX()-playerLengthX, player.getPositionX()+playerLengthX);
-    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), playerLengthY);
+    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), player.getPositionX()+playerLengthX);
     			
     	//Player method to be determined in the future
     	if (overlapX && overlapY) {
@@ -79,9 +79,7 @@ public class DisplayObject {
 
     //To be specialized, used for determining conditions in the event that the player collides with a given interactable object
     public void onCollision() {
-    	int xCoord = 0;
-    	int yCoord = 0;
-    
+    	System.out.println("The player has collided with this object");
     }
 
     public int getX() {
