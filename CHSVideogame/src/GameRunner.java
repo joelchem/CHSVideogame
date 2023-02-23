@@ -18,10 +18,17 @@ public class GameRunner {
             game.addDisplayObject(new DisplayObject());
             game.addOncomingStudent(new OncomingStudent());
         }
+        
 
     }
 
     private void calculateFrame(){
+    	int x = game.getPlayer().getPositionX();
+    	int y = game.getPlayer().getPositionY();
     	
     }
+    
+    public static void main(String[] args) {
+		
+	}
 }

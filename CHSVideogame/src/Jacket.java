@@ -1,13 +1,14 @@
 import java.awt.Image;
 public class Jacket extends DisplayObject{
 	Image jacketSprite;
+	Game game;
 	public Jacket(int x, int y, Game game, Image image) {
-		super(x,y,game);
+		super(game,y,x);
 		jacketSprite =image;
+		this.game = game;
 	}
-	public void testForCollision() {
-		//test for collision - from superclass?
-		// 5 to be replaced with whatever number
-	//	updateStrength(getStrength() - 5);
+
+	public void onCollision() {
+		game.getPlayer().setJacket(true);
 	}
 }

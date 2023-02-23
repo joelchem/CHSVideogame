@@ -3,7 +3,7 @@ public class CheeseCracker extends DisplayObject {
 	Image cheeseCrackerSprite;
 	Game theGame;
 	public CheeseCracker(int x, int y, Game game, Image theImage) {
-		super(x,y,game);
+		super(game, x,y);
 		setSprite(theImage);
 		theGame=game;
 	}

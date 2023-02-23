@@ -79,9 +79,6 @@ public class Game {
     }
     public File getScoreBoardFile() {
     	return scoreBoard;
-<<<<<<< HEAD
-    }  
-=======
     }
     
     public void setDifficulty(String diff) {
@@ -113,5 +110,4 @@ public class Game {
     public boolean getGameOver() {
     	return gameOver;
     }
->>>>>>> 9c7d1db83b4bbb19003777e6475d7f22a9d3d584
 }
