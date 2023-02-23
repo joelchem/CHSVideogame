@@ -1,10 +1,7 @@
-import java.awt.Image;
 public class Jacket extends DisplayObject{
-	Image jacketSprite;
 	Game game;
-	public Jacket(int x, int y, Game game, Image image) {
+	public Jacket(int x, int y, Game game) {
 		super(game,y,x);
-		jacketSprite =image;
 		this.game = game;
 	}
 
