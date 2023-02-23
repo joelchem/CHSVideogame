@@ -1,4 +1,5 @@
 import java.awt.Image;
+
 public class Jacket extends DisplayObject{
 	Image jacketSprite;
 	Game game;
