@@ -10,7 +10,7 @@ public class TrashCan extends DisplayObject {
 		trashcanSprite=theImage;
     }
     public void onCollision() {
-    	// implement seperate collision test? cuz you have to come up behind the trashcan, not bump
+    	// implement separate collision test? cuz you have to come up behind the trashcan, not bump
     	theGame.getPlayer().setCrouch(true);
     }
 }

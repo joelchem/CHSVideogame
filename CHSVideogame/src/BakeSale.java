@@ -9,9 +9,4 @@ public class BakeSale extends DisplayObject{
 			
 		}
 	}
-<<<<<<< Updated upstream
-            
-=======
-
->>>>>>> Stashed changes
 }
