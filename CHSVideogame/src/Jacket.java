@@ -1,5 +1,4 @@
 import java.awt.Image;
-
 public class Jacket extends DisplayObject{
 	Image jacketSprite;
 	Game game;
@@ -8,8 +7,8 @@ public class Jacket extends DisplayObject{
 		jacketSprite =image;
 		this.game = game;
 	}
+
 	public void onCollision() {
 		game.getPlayer().setJacket(true);
 	}
-
 }
