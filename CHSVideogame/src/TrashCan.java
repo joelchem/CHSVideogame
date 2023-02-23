@@ -1,13 +1,10 @@
 import java.awt.Image;
 
 public class TrashCan extends DisplayObject {
-	Image trashcanSprite;
 	Game theGame;
-    public TrashCan(int x, int y, Game game, Image theImage) {
-    	super(game,x,y);
-		setSprite(theImage);
+    public TrashCan(int x, int y, Game game, Image sprite) {
+    	super(game,x,y,sprite);
 		theGame=game;
-		trashcanSprite=theImage;
     }
     public void onCollision() {
     	// implement separate collision test? cuz you have to come up behind the trashcan, not bump
