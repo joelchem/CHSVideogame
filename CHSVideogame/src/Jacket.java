@@ -1,5 +1,4 @@
 import java.awt.Image;
-
 public class Jacket extends DisplayObject{
 	Image jacketSprite;
 	public Jacket(int x, int y, Game game, Image image) {
@@ -9,7 +8,6 @@ public class Jacket extends DisplayObject{
 	public void testForCollision() {
 		//test for collision - from superclass?
 		// 5 to be replaced with whatever number
-		updateStrength(getStrength() - 5);
+	//	updateStrength(getStrength() - 5);
 	}
-
 }

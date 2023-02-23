@@ -42,7 +42,7 @@ public class Game {
     	displayObjects.remove(index);
     }
    
-    public OncomingStudents getOncomingStudents(int index) {
+    public OncomingStudent getOncomingStudents(int index) {
     	return oncomingStudents.get(index);
     }
     
