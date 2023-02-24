@@ -13,7 +13,7 @@ public class CheeseCracker extends DisplayObject {
 	public void onCollision() {
 		Player player = game.getPlayer();
 		if (exists) {
-			exists = false; W
+			exists = false; 
 			player.updateStrength(cheese_cracker_increase);
 			setSprite(null);
 		}
