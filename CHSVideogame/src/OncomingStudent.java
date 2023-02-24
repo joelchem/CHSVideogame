@@ -63,19 +63,39 @@ public class OncomingStudent extends DisplayObject{
 		int yOver=0;
 		//if right of student and left of player overlap
 		if((positionX+(DIMENSION_X/2)>playPX-(playDX/2)&&playPX+(playDX/2)>positionX+(DIMENSION_X/2))) {
-			xOver = Math.abs(positionX+(DIMENSION_X/2)-playPX-(playDX/2));
+			xOver = Math.abs(positionX+(DIMENSION_X/2)-playPX+(playDX/2));
 		}
 		
 		//if left of student and right of player overlap
 		if(positionX-(DIMENSION_X/2)>playPX+(playDX/2)&&positionX-(DIMENSION_X/2)>playPX-(playDX/2)) {
-			xOver = Math.abs(positionX-(DIMENSION_X/2)-playPX+(playDX/2));
+			xOver = Math.abs(positionX-(DIMENSION_X/2)-playPX-(playDX/2));
 		}
 		
 		//if top of student overlaps with bottom of player
-		if(positionY-(DIMENSION_Y/2)<playPY+(playDY/2)&&positionY-(DIMENSION_Y/2)<playPY-(playDY/2)) {
-			yOver = Math.abs(positionY-(DIMENSION_Y/2)-playPY+(playPY/2));
+		if(positionY-(DIMENSION_Y/2)<playPY+(playDY/2)&&positionY-(DIMENSION_Y/2)>playPY-(playDY/2)) {
+			yOver = Math.abs(positionY-(DIMENSION_Y/2)-playPY-(playPY/2));
 		}
-	
+		
+		//if bottom of student overlaps with top of player
+		if(positionY+(DIMENSION_Y/2)>playPY-(playDY/2)&&positionY+(DIMENSION_Y/2)<playPY+(playDY/2)) {
+			yOver = Math.abs(positionY+(DIMENSION_Y/2)-playPY+(playDY/2));
+		}
+		
+		if(yOver>xOver) {
+			if(yOver>0) {
+				if(yOver>GRAZE_INT) {
+					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
+				} else {
+					player.setHealth(player.getHealth()-GRAZE_HEALTH);
+				}
+			} else if(xOver>0) {
+				if(xOver>GRAZE_INT) {
+					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
+				}else {
+					player.setHealth(player.getHealth()-GRAZE_HEALTH);
+				}
+			}
+		}
 		
 		/*
 		 * if player is colliding w student, determine severity
