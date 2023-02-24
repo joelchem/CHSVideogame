@@ -12,3 +12,4 @@ public class Dollar extends DisplayObject{
     }
 
 }
+
