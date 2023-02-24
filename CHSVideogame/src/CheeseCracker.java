@@ -2,9 +2,8 @@ import java.awt.Image;
 public class CheeseCracker extends DisplayObject {
 	Image cheeseCrackerSprite;
 	Game theGame;
-	public CheeseCracker(int x, int y, Game game, Image theImage) {
-		super(game, x,y);
-		setSprite(theImage);
+	public CheeseCracker(int x, int y, Game game, Image sprite) {
+		super(game, x, y, sprite);
 		theGame=game;
 	}
 	public void onCollision() {
