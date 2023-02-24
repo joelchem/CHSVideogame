@@ -9,5 +9,6 @@ public class TrashCan extends DisplayObject {
     public void onCollision() {
     	// implement separate collision test? cuz you have to come up behind the trashcan, not bump
     	theGame.getPlayer().setCrouch(true);
+    	// somewhere it will need to stop the movement for while the player is behind the trashcan
     }
 }

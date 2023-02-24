@@ -9,7 +9,11 @@ public class CheeseCracker extends DisplayObject {
 	public void onCollision() {
 		//test for collision from superclass?
 		// 5 to be replaced with whatever number
-	//(Game.getPlayer().getStrength() + 5);
+	    theGame.getPlayer().updateStrength(5);
 		theGame.removeDisplayObject(0);
 	}
 }
+
+
+
+
