@@ -19,7 +19,7 @@ public class CheeseCracker extends DisplayObject {
 		}
 	}
 	
-	public void testForColision() {
+	public void testForCollision() {
 		if (exists) 
 			super.testForCollision();
 	}
