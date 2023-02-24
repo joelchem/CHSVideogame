@@ -12,6 +12,7 @@ public class Game {
 	private double remainingDistance;
 	private String difficulty;
 	private boolean gameOver;
+	private boolean lost;
 	
 	public Game(){
     	map = new Map(this);
@@ -100,11 +101,21 @@ public class Game {
     public void setGameOver() {
     	int health = player.getHealth();
     	int strength = player.getStrength();
-    	if(health==0||strength==0||remainingDistance==0) {
+    	if(health==0||strength==0) {
     		gameOver = true;
+    		lost = true;
+    	} else if(remainingDistance==0){
+    		gameOver = true;
+    		lost = false;
     	} else {
     		gameOver = false;
     	}
+    	
+    }
+    //also sets lost
+    
+    public boolean getLost() {
+    	return lost;
     }
     
     public boolean getGameOver() {
