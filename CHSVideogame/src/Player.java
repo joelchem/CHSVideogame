@@ -5,7 +5,7 @@ public class Player {
 	private int strength, health;
 	private boolean isCrouching;
 	private int velocity;
-	private Image[] sprites;
+	private Image[] sprites; // still need sprites
 	private int positionX, positionY;
 	private double distance;
 	private int spriteFrame;
@@ -14,9 +14,23 @@ public class Player {
 	private boolean isTurning;
 	private int turnX, turnY;
 	private boolean hasJacket;
+	private int dimX;
+	private int dimY;
 	
 	public Player(Game g) {
 		game = g;
+	}
+	
+	public Image getSprite() {
+		return sprites[spriteFrame];
+	}
+	
+	public int getDimensionX() {
+		return dimX;
+	}
+	
+	public int getDimensionY() {
+		return dimY;
 	}
 	
 	public void updateMoney(boolean b) {
@@ -106,3 +120,5 @@ public class Player {
 		return hasJacket;
 	}
 }
+
+

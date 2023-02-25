@@ -1,15 +1,26 @@
 import java.awt.Image;
 
 public class Dollar extends DisplayObject{
-	Image DollarSprite;
-	public Dollar(int x, int y, Game game, Image image) {
-		super(x,y,game);
-		DollarSprite = image;
-	}
-	
-	//probably going to be changed to a specialization of on collision. 
-	public void testForCollision() {
+	Game game;
+	private boolean exists;
+	public Dollar(int dimensionX, int dimensionY, Game game, Image sprite) {
+		super(game,dimensionX,dimensionY, sprite);
+		this.game = game;
+		exists = true;
 		
 	}
-
+	
+	public void onCollision() {
+    	Player player = game.getPlayer();
+		if (exists) {
+			exists = false; 
+			player.updateMoney(true);
+			setSprite(null);
+		}
+    }
+	
+	public void testForCollision() {
+		if (exists) 
+			super.testForCollision();
+	}
 }

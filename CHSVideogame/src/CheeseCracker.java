@@ -1,16 +1,30 @@
 import java.awt.Image;
-
 public class CheeseCracker extends DisplayObject {
-	Image cheeseCrackerSprite;
-	public CheeseCracker(int x, int y, Game game, Image image) {
-		super(x,y,game);
-		cheeseCrackerSprite =image;
+	private Game game;
+	private final int cheese_cracker_increase = 5;
+	private boolean exists;
+	
+	public CheeseCracker(int x, int y, Game game, Image sprite) {
+		super(game, x, y, sprite);
+		this.game = game;
+		exists = true;
 	}
-	public void testForCollision( ) {
-		//test for collision - from superclass?
-		// 5 to be replaced with whatever number
-		updateStrength(getStrength() - 5);
+	
+	public void onCollision() {
+		Player player = game.getPlayer();
+		if (exists) {
+			exists = false; 
+			player.updateStrength(cheese_cracker_increase);
+			setSprite(null);
+		}
 	}
- 
+	
+	public void testForCollision() {
+		if (exists) 
+			super.testForCollision();
+	}
 
 }
+
+
+
