@@ -29,8 +29,43 @@ public class StraightPath extends PathSegment{
 	}
 
 	public Point getPos(double distOnSegment, double strafeOffset) {
-		// TODO: fix this
-		return getPos(distOnSegment);
+		Point linePoint = getPos(distOnSegment);
+		if((endPoint.getY()-startPoint.getY())==0.) {
+			if(startPoint.getX()<endPoint.getX()) {
+				strafeOffset *= -1;
+			}
+			return new Point((int)linePoint.getX(), (int)(linePoint.getY()+strafeOffset));
+		} else if((endPoint.getX()-startPoint.getX())==0.) {
+			if(endPoint.getY()<startPoint.getY()) {
+				strafeOffset *= -1;
+			}
+			return new Point((int)(linePoint.getX()+strafeOffset), (int)linePoint.getY());
+		} else {
+			double perpSlope = -(endPoint.getX()-startPoint.getX())/(endPoint.getY()-startPoint.getY());
+			double mult = strafeOffset/Math.sqrt(1+Math.pow(perpSlope, 2));
+			return new Point((int)(linePoint.getX()+mult),(int)(linePoint.getY()+mult*perpSlope));
+		}
+	}
+
+	public double heading(double distOnSegment) {
+		if((endPoint.getY()-startPoint.getY())==0.) {
+			if(startPoint.getX()<endPoint.getX()) {
+				return -Math.PI/2;
+			}
+			return Math.PI/2;
+		} else if((endPoint.getX()-startPoint.getX())==0.) {
+			if(endPoint.getY()<startPoint.getY()) {
+				return 0;
+			}
+			return Math.PI;
+		} else {
+			double angle = Math.atan((endPoint.getY()-startPoint.getY())/(endPoint.getX()-startPoint.getX()));
+			if((endPoint.getX()-startPoint.getX())<0) {
+				angle += Math.PI;
+			}
+			return angle;
+		}
+		
 	}
 	
 	

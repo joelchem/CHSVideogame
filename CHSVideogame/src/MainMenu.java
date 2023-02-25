@@ -32,12 +32,12 @@ public class MainMenu implements ActionListener{
 	GameRunner gameRunner;
 
 	public static void main(String[] args) {
-//		try {
-//			new MainMenu(1000, 1000).gameOver();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			new MainMenu(1000, 1000).gameOver();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	// public MainMenu(Game game, GameRunner gameRunner) {
@@ -72,9 +72,9 @@ public class MainMenu implements ActionListener{
             g.fillRect(200, 62, 30, 10);
         }
     }
-	public MainMenu(Game game, GameRunner gr, int x, int y) {
-		this.game = game;
-		gameRunner = gr;
+	public MainMenu(int x, int y) {
+//		this.game = game;
+//		gameRunner = gr;
 		width = x;
 		height = y;
 		

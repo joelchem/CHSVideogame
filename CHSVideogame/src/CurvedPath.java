@@ -12,7 +12,9 @@ public class CurvedPath extends PathSegment{
 		start = curveStart;
 		curveAngle = angle;
 		startAngle = Math.atan((start.getY()-center.getY())/(start.getX()-center.getX()));
-		
+		if((start.getX()-center.getX())<0) {
+			startAngle += Math.PI;
+		}
 	}
 	
 	private double radius() {
@@ -36,9 +38,28 @@ public class CurvedPath extends PathSegment{
 	}
 	@Override
 	public Point getPos(double distOnSegment, double strafeOffset) {
-		// TODO: do this
+		if(distOnSegment < 0) {
+			return getPos(0);
+		} else if(distOnSegment > length()) {
+			return getPos(length()-.01);
+		}
+		double newAngle = curveAngle*distOnSegment/length() + startAngle;
 		
-		return getPos(distOnSegment);
+		double radius = radius()+Math.signum(curveAngle)*strafeOffset;
+		
+		
+		return new Point((int)(radius*Math.cos(newAngle)+center.getX()),
+				(int)(radius*Math.sin(newAngle)+center.getY()));
+	}
+
+	public double heading(double distOnSegment) {
+		System.out.println(startAngle+" "+curveAngle*distOnSegment/length()+" "+Math.signum(curveAngle)*(Math.PI/2)+" "+(startAngle - curveAngle*distOnSegment/length() + 0* Math.PI));
+//		return (startAngle + curveAngle*distOnSegment/length() + Math.signum(curveAngle)*(-Math.PI/2));
+
+		return (startAngle - curveAngle*distOnSegment/length() + 0*Math.PI/* + Math.signum(curveAngle)*(-Math.PI/2)*/);
+		
+		// it works in 3rd and 6th turn when u add Math.PI oaisdhjfioafsdjoji
+		
 	}
 	
 }
