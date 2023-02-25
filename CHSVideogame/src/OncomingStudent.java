@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class OncomingStudent extends DisplayObject{
 	private ArrayList<Image> students;
+	private ArrayList<OncomingStudent> currentStudents;
 	private Game game;
 	private int velocityX, velocityY, positionX, positionY, index;
 	private int playPX, playPY, playDX, playDY;
@@ -21,6 +22,7 @@ public class OncomingStudent extends DisplayObject{
 		playPY = player.getPositionY();
 		playDX = player.getDimensionX();
 		playDY = player.getDimensionY();
+		generateList();
 	}
 	
 	public void setXVelocity(int vel) {
@@ -96,19 +98,35 @@ public class OncomingStudent extends DisplayObject{
 				}
 			}
 		}
-		
-		/*
-		 * if player is colliding w student, determine severity
-		 * 
-		 * trigger damage indicator for player based on severity
-		 * 
-		 * subtract appropriate amount of health from player
-		 */
-		//get back
 	}
 	
+	private void generateList() {
+		int i = 0;
+		while(game.getOncomingStudents(i)!=null) {
+			currentStudents.add(game.getOncomingStudents(i));
+		}
+	}
 	
 	public void checkProximity() {
+		int posX;
+		int dimX;
+		if(currentStudents.size()>=1) {
+			for(OncomingStudent stud:currentStudents) {
+				if(positionY==stud.getPositionY()) {
+					posX = stud.getPositionX();
+					dimX = stud.getDimensionX()/2;
+					if(positionX>stud.getPositionX()) {
+						if(positionX-(DIMENSION_X/2)==posX+dimX) {
+							separate(stud);
+						}
+					} else if(positionX<stud.getPositionX()) {
+						if(positionX+(DIMENSION_X/2)==posX-dimX) {
+							separate(stud);
+						}
+					}
+				}
+			}
+		}
 		/*
 		 * check for other incoming students where the player is in between them blah blah blah
 		 * 
@@ -116,5 +134,9 @@ public class OncomingStudent extends DisplayObject{
 		 * 
 		 */
 		//get back
+	}
+	
+	private void separate(OncomingStudent student) {
+		//separate !!!!
 	}
 }
