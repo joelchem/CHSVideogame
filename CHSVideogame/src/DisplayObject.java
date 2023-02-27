@@ -8,9 +8,10 @@ public class DisplayObject {
     private int dimensionX;
     private int dimensionY;
     
-    DisplayObject(Game userGame, int dimensionX, int dimensionY) {
+    DisplayObject(Game userGame, int dimensionX, int dimensionY, Image sprite) {
         this.dimensionX = dimensionX;
         this.dimensionY = dimensionY;
+        this.sprite = sprite;
         game = userGame;
     }
 
@@ -46,7 +47,6 @@ public class DisplayObject {
     	if (overlapX && overlapY) {
     		onCollision();
     	}
-    	
     	
     }
     

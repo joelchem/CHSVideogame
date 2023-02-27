@@ -5,8 +5,8 @@ public class WaterFountain extends DisplayObject {
 	final static int health_restored = 5;
 	private Game game;
 
-	WaterFountain(Game userGame, int dimensionX, int dimensionY, Image image) {
-		super(userGame, dimensionX, dimensionY);
+	WaterFountain(Game userGame, int dimensionX, int dimensionY, Image sprite) {
+		super(userGame, dimensionX, dimensionY, sprite);
 		game = userGame;
 	}
 	

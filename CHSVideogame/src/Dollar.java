@@ -1,13 +1,29 @@
+import java.awt.Image;
+
 public class Dollar extends DisplayObject{
-	
-	Game theGame;
-	public Dollar(int dimensionX, int dimensionY, Game game) {
-		super(game,dimensionX,dimensionY);
-		theGame = game;
+	Game game;
+	private boolean exists;
+	public Dollar(int dimensionX, int dimensionY, Game game, Image sprite) {
+		super(game,dimensionX,dimensionY, sprite);
+		this.game = game;
+		exists = true;
+		
 	}
 	
 	public void onCollision() {
-    	theGame.getPlayer().updateMoney(true);
+    	Player player = game.getPlayer();
+		if (exists) {
+			exists = false; 
+			player.updateMoney(true);
+			setSprite(null);
+		}
     }
+	
+	public void testForCollision() {
+		if (exists) 
+			super.testForCollision();
+	}
+
 
 }
+
