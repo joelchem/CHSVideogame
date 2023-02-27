@@ -6,15 +6,13 @@ public class Camera {
 	
 	private int posX;
 	private int posY;
-	private int cameraWidth;
-	private int cameraHeight;
+	private final int cameraWidth = 500;
+	private final int cameraHeight = 500;
 	private double heading;
 	private Game game;
 	
-	Camera(Game gameObj, int setCameraWidth, int setCameraHeight) {
+	Camera(Game gameObj) {
 		game = gameObj;
-		cameraWidth = setCameraWidth;
-		cameraHeight = setCameraHeight;
 		heading = 0;
 		posX = 0;
 		posY = 0;
@@ -26,6 +24,14 @@ public class Camera {
 	
 	public int getY() {
 		return posY;
+	}
+	
+	public int getDimX() {
+		return cameraWidth;
+	}
+	
+	public int getDimY() {
+		return cameraHeight;
 	}
 	
 	public double getHeading() {
@@ -48,6 +54,20 @@ public class Camera {
 		AffineTransform t = new AffineTransform();
 		t.translate(-posX+cameraWidth/2,  -posY+cameraHeight/2);
 		t.rotate(heading,posX,posY);
+		return t;
+	}
+	
+	public AffineTransform getObjectTransform(
+			Point pos, double heading, int dimX, int dimY) {
+		double diag = Math.hypot((double)dimX, (double)dimY)/2;
+		double innerAngle = Math.acos((double)dimX/(double)dimY);
+		
+		double offsetX = diag*Math.cos(innerAngle-heading);
+		double offsetY = diag*Math.sin(innerAngle-heading);
+		
+		AffineTransform t = new AffineTransform();
+		t.translate(pos.getX()-offsetX, pos.getY()-offsetY);
+		t.rotate(-heading);
 		return t;
 	}
 	

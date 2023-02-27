@@ -1,4 +1,8 @@
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Player {
 	
@@ -7,18 +11,52 @@ public class Player {
 	private int velocity;
 	private Image[] sprites; // still need sprites
 	private int positionX, positionY;
-	private double distance;
 	private int spriteFrame;
+	private double distOnPath;
 	private Game game;
 	private boolean money;
-	private boolean isTurning;
-	private int turnX, turnY;
 	private boolean hasJacket;
-	private int dimX;
-	private int dimY;
+	private double heading;
+	private final int dimX = 17;
+	private final int dimY = 36;
 	
 	public Player(Game g) {
 		game = g;
+		try {
+		    sprites = new Image[] {
+		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
+		    };
+		} catch (IOException e) {
+			System.out.println("Some or all player sprites not found.");
+		}
+		
+		spriteFrame = 0;
+		health = 10;
+		strength = 10;
+		isCrouching = false;
+		velocity = 0;
+		positionX = 0;
+		positionY = 0;
+		distOnPath = 0;
+		money = false;
+		hasJacket = false;
+		
+	}
+	
+	public void setHeading(double newHead) {
+		heading = newHead;
+	}
+	
+	public double getHeading() {
+		return heading;
+	}
+	
+	public double getDistOnPath() {
+		return distOnPath;
+	}
+	
+	public void setDistOnPath(double newDist) {
+		distOnPath = newDist;
 	}
 	
 	public Image getSprite() {
@@ -71,30 +109,6 @@ public class Player {
 	
 	public int getStrength() {
 		return strength;
-	}
-	
-	public void setTurning(boolean turning) {
-		isTurning = turning;
-	}
-	
-	public boolean getTurning() {
-		return isTurning;
-	}
-	
-	public int getTurnX() {
-		return turnX;
-	}
-	
-	public int getTurnY() {
-		return turnY;
-	}
-	
-	public void setTurnX(int newTurnX) {
-		turnX = newTurnX;
-	}
-	
-	public void setTurnY(int newTurnY) {
-		turnY = newTurnY;
 	}
 	
 	public int getPositionX() {

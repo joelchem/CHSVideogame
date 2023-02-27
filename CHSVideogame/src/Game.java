@@ -16,7 +16,8 @@ public class Game {
 
 	public Game() {
 		map = new Map(this, "medium");
-		camera = new Camera(this, 500, 500);
+		difficulty = "medium";
+		camera = new Camera(this);
 		oncomingStudents = new ArrayList<OncomingStudent>();
 		displayObjects = new ArrayList<DisplayObject>();
 		player = new Player(this);
@@ -30,6 +31,7 @@ public class Game {
 		difficulty = " ";
 		gameOver = false;
 	}
+	
 
 	public DisplayObject getDisplayObject(int index) {
 		return displayObjects.get(index);

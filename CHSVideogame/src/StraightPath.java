@@ -8,6 +8,8 @@ public class StraightPath extends PathSegment{
 	StraightPath(Point start, Point end) {
 		startPoint = start;
 		endPoint = end;
+//		System.out.print(this+" ");
+//		System.out.println(heading(0));
 	}
 
 	public double length() {

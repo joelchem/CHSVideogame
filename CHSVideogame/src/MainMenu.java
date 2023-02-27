@@ -26,20 +26,12 @@ public class MainMenu implements ActionListener{
 	JFrame frame1;
 	JFrame frame2;
 	JFrame frame3;
-	int width;
-	int height;
 	Game game;
 	GameRunner gameRunner;
+	
+	private final int width = 1000;
+	private final int height = 1000;
 
-	public static void main(String[] args) {
-		try {
-			new MainMenu(1000, 1000).gameOver();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	// public MainMenu(Game game, GameRunner gameRunner) {
 	// //this.game = game;
 	// //this.gameRunner = gameRunner;
@@ -72,11 +64,9 @@ public class MainMenu implements ActionListener{
             g.fillRect(200, 62, 30, 10);
         }
     }
-	public MainMenu(int x, int y) {
-//		this.game = game;
-//		gameRunner = gr;
-		width = x;
-		height = y;
+	public MainMenu(Game game, GameRunner gr) {
+		this.game = game;
+		gameRunner = gr;
 		
 		contentPane1 = new JPanel();
 		contentPane1.setLayout(null);
@@ -87,7 +77,7 @@ public class MainMenu implements ActionListener{
 		contentPane1.add(map);
 		frame1 = new JFrame();
 		frame1.add(contentPane1);
-		frame1.setSize(x, y);
+		frame1.setSize(width, height);
 		frame1.setVisible(true);
 		frame1.setDefaultCloseOperation(frame1.EXIT_ON_CLOSE);
 		
@@ -105,7 +95,7 @@ public class MainMenu implements ActionListener{
 		contentPane2.add(back);
 		frame2 = new JFrame();
 		frame2.add(contentPane2);
-		frame2.setSize(x, y);
+		frame2.setSize(width, height);
 		frame2.setDefaultCloseOperation(frame2.EXIT_ON_CLOSE);
 		
 
@@ -117,13 +107,13 @@ public class MainMenu implements ActionListener{
 		contentPane3b = new JPanel();
 		contentPane3b.setLayout(null);
 		contentPane3b.setBackground(Color.CYAN);
-		contentPane3b.setSize(x, y);
+		contentPane3b.setSize(width, height);
 		
 		frame3 = new JFrame();
 		frame3.setLayout(null);
 		frame3.add(contentPane3a);
 		frame3.add(contentPane3b);
-		frame3.setSize(x, y);
+		frame3.setSize(width, height);
 		frame3.setDefaultCloseOperation(frame3.EXIT_ON_CLOSE);
 		
 	}
@@ -138,20 +128,20 @@ public class MainMenu implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Start")) {
-			//gameRunner.startGameLoop();
-			//gameOver()
+			gameRunner.startGameloop();
+			frame1.setVisible(false);
 		} else if (e.getActionCommand().equals("Easy")) {
-			//game.setDifficulty("easy");
+			game.setDifficulty("easy");
 			easy.setBackground(Color.ORANGE);
 			medium.setBackground(Color.white);
 			hard.setBackground(Color.white);
 		} else if (e.getActionCommand().equals("Medium")) {
-			//game.setDifficulty("medium);
+			game.setDifficulty("medium");
 			medium.setBackground(Color.ORANGE);
 			easy.setBackground(Color.white);
 			hard.setBackground(Color.white);
 		} else if (e.getActionCommand().equals("Hard")) {
-			//game.setDifficulty("hard");
+			game.setDifficulty("hard");
 			hard.setBackground(Color.ORANGE);
 			medium.setBackground(Color.white);
 			easy.setBackground(Color.white);
