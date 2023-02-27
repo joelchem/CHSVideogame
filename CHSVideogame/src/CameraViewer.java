@@ -98,9 +98,15 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		
 		for(int i = 0; i < game.displayObjectAmt(); i++) {
 			DisplayObject obj = game.getDisplayObject(i);
+			
 			Image sprite = obj.getSprite();
-//			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2, 
-//					obj.getY()-obj.getDimensionY()/2, this);
+			Point objPos = new Point(obj.getX(), obj.getY());
+
+			AffineTransform objTransform = game.getCamera().getObjectTransform(
+					objPos, obj.getHeading(),obj.getDimensionX(), obj.getDimensionY());
+			g.drawImage(sprite, objTransform, this);
+			Shape theCircle = new Ellipse2D.Double(obj.getX() - 2, obj.getY() - 2, 2.0 * 2, 2.0 * 2);
+			g.draw(theCircle);
 
 		}
 		
@@ -112,47 +118,14 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		}
 		
 		Player player = game.getPlayer();
-//		g.drawImage(player.getSprite(), player.getPositionX()-player.getDimensionX()/2,
-//				player.getPositionY()-player.getDimensionY()/2, this);
-		
-//		double diag = Math.hypot((double)player.getDimensionX(), (double)player.getDimensionY())/2;
-//		double innerAngle = Math.acos((double)player.getDimensionX()/(double)player.getDimensionY());
-//		
-//		double offsetX = diag*Math.cos(innerAngle-player.getHeading());
-//		double offsetY = diag*Math.sin(innerAngle-player.getHeading());
-//		
-//		AffineTransform t = new AffineTransform();
-//		t.translate(player.getPositionX()-offsetX,  player.getPositionY()-offsetY);
-//		t.rotate(-player.getHeading());
+
 		Point playerPos = new Point(player.getPositionX(), player.getPositionY());
 		AffineTransform playerTransform = game.getCamera().getObjectTransform(
 				playerPos, player.getHeading(),player.getDimensionX(), player.getDimensionY());
+		System.out.println(playerTransform.alskdj);
 		g.drawImage(player.getSprite(), playerTransform, this);
 		
-		
-		
-	    Shape theCircle = new Ellipse2D.Double(player.getPositionX() - 2, player.getPositionY() - 2, 2.0 * 2, 2.0 * 2);
-		g.draw(theCircle);
 
-//		Point pos = path.getPos(iterator);
-//		heading = path.heading(iterator);
-//		cameraX = (int)pos.getX();
-//		cameraY = (int)pos.getY();
-//		
-//		
-//		Image img = null;
-//		try {
-//		    img = ImageIO.read(new File("assets/map_test.png")).getScaledInstance(dimX, dimY, 0);
-//		} catch (IOException e) {
-//		}
-//		AffineTransform camTransform = new AffineTransform();
-//		camTransform.translate(-cameraX+cameraWidth/2,  -cameraY+cameraHeight/2);
-//		camTransform.rotate(heading,cameraX,cameraY);
-//		g.transform(camTransform);
-//		g.drawImage(img, pointX-dimX/2, pointY-dimY/2, this);
-//		
-//		iterator = (iterator + 2)%path.length();
-//		repaint();
 	}
 	
 	public static void startWindow(CameraViewer cam) {

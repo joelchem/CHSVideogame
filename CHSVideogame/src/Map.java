@@ -2,6 +2,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -12,12 +13,9 @@ public class Map {
     Game game;
     Image mapImage;
     Path path;
-    int xCoor=0;
-    int yCoor=0;
-    int [][] fountain = new int[2][2];
-    int [][] jacket = new int[1][1];
-    int [][] bakeSale = new int [1][1];
-//    int [][] cracker = new int [][];
+    
+    ArrayList<DisplayObject> placedObjects;;
+    
     private final int dimX = 800*10;
     private final int dimY = 600*10;
     
@@ -29,8 +27,11 @@ public class Map {
         try {
 		    mapImage = ImageIO.read(new File("assets/map_test2_noise.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
-			System.out.println("Some or all player sprites not found.");
+			System.out.println("Some or all map sprit not found.");
 		}
+        
+        placedObjects = new ArrayList<DisplayObject>();
+        placedObjects.add(new BakeSale(game, 2330, 1990, Math.PI/2));
        
         
     }
@@ -58,6 +59,14 @@ public class Map {
 		combinePath.addPath(new StraightPath(new Point(5230, 3770), new Point(5230, 4530)));
 		combinePath.addPath(new CurvedPath(new Point(5230, 4530), new Point(5340, 4530), -Math.PI/2));
 		return combinePath;
+    }
+    
+    public int placedObjectLen() {
+    	return placedObjects.size();
+    }
+    
+    public DisplayObject getPlacedObject(int i) {
+    	return placedObjects.get(i);
     }
     
     public String getDifficulty() {
