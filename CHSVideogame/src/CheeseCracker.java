@@ -1,20 +1,16 @@
 import java.awt.Image;
-
 public class CheeseCracker extends DisplayObject {
-<<<<<<< Updated upstream
-	public CheeseCracker(int x, int y, Game game, Image theImage) {
-=======
 	Image cheeseCrackerSprite;
-	public CheeseCracker(int x, int y, Game game, Image image) {
->>>>>>> Stashed changes
-		super(x,y,game);
+	Game theGame;
+	public CheeseCracker(int x, int y, Game game, Image theImage) {
+		super(game, x,y);
 		setSprite(theImage);
+		theGame=game;
 	}
-	public void testForCollision( ) {
+	public void onCollision() {
 		//test for collision from superclass?
 		// 5 to be replaced with whatever number
-		updateStrength(Game.getPlayer().getStrength() - 5);
+	//(Game.getPlayer().getStrength() + 5);
+		theGame.removeDisplayObject(0);
 	}
- 
-
 }

@@ -39,6 +39,7 @@ public class GameRunner {
             totalInteractableObj = 10;
             // maxValue = ;
         }
+        
 
         // for(int i = 0; i<3; i++){
         //     switch(i){
@@ -91,6 +92,7 @@ public class GameRunner {
     }
 
     private void calculateFrame(){
+<<<<<<< HEAD
         if(game.getGameOver()){
             game.ends idk;
         }
@@ -115,5 +117,14 @@ public class GameRunner {
             game.testForCollision();
             game.setCamera();
     }
+=======
+    	int x = game.getPlayer().getPositionX();
+    	int y = game.getPlayer().getPositionY();
+    	
+>>>>>>> 2b8949b123e46b196ebed0b53ee3e6a810bc299e
     }
+    
+    public static void main(String[] args) {
+		
+	}
 }

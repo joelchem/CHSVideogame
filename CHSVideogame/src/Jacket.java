@@ -1,15 +1,16 @@
+<<<<<<< HEAD
 import java.awt.Image;
 
+=======
+>>>>>>> 8a7cc077f0cadb7e74d134ec332783327d79b3f1
 public class Jacket extends DisplayObject{
-	Image jacketSprite;
-	public Jacket(int x, int y, Game game, Image image) {
-		super(x,y,game);
-		jacketSprite =image;
-	}
-	public void testForCollision() {
-		//test for collision - from superclass?
-		// 5 to be replaced with whatever number
-		updateStrength(getStrength() - 5);
+	Game game;
+	public Jacket(int x, int y, Game game) {
+		super(game,y,x);
+		this.game = game;
 	}
 
+	public void onCollision() {
+		game.getPlayer().setJacket(true);
+	}
 }

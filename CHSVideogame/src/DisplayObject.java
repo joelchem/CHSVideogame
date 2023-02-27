@@ -1,31 +1,27 @@
-import java.awt.Image;
+import java.awt.*;
 
 public class DisplayObject {
     private Game game;
     private int posX;
     private int posY;
     private Image sprite;
-    private int[] dimensions;
-    //dimensions[0] = width
-    //dimensions[1] = height
-    DisplayObject(int x, int y, Game userGame) {
-        posX = x;
-        posY = y;
+    private int dimensionX;
+    private int dimensionY;
+    
+    DisplayObject(Game userGame, int dimensionX, int dimensionY) {
+        this.dimensionX = dimensionX;
+        this.dimensionY = dimensionY;
         game = userGame;
     }
 
     public int getDimensionX() {
-        return dimensions[0];
+        return dimensionX;
     }
 
     public int getDimensionY() {
-        return dimensions[1];
+        return dimensionY;
     }
-<<<<<<< HEAD
-=======
 
-    
->>>>>>> 66a31f3526454ebb83d990fb0967d312a1de23bb
     public void testForCollision() {
     	Player player = game.getPlayer();
     	//First check to see if the sprite is left or right of the player
@@ -34,38 +30,56 @@ public class DisplayObject {
     	int playerPosX = player.getPositionX();
     	int playerPosY = player.getPositionY();
     	
+    	int lengthX = dimensionX/2;
+    	int lengthY = dimensionY/2;
+    	
+    	int playerLengthX = 0;
+    	int playerLenthY = 0;
+    	
     	//Call overlap with x and y values, if it passes, call onCollision
     	//NOTE: May need to modify the dimension adding in the future
     	
-    	boolean overlapX = overLap(posX, posX+dimensions[0], player.getPositionX(), player.getPositionX()+)
-    	
-    	if (overLap(posX, posX+dimensions[0], )) {
+    	boolean overlapX = overLap(posX-lengthX, posX+lengthX, player.getPositionX()-playerLengthX, player.getPositionX()+playerLengthX);
+    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), player.getPositionX()+playerLengthX);
+    			
+    	//Player method to be determined in the future
+    	if (overlapX && overlapY) {
     		onCollision();
     	}
     	
     	
     }
     
+    //Checks to see if there is an overlap on whatever plane
+    //Compares the start positions of both sprites and checks to see if there is an over
     private boolean overLap(int spriteStart, int spriteEnd, int playerStart, int playerEnd) {
+    	if (playerStart < spriteStart) {
+    		if (playerEnd > spriteStart && playerEnd < spriteEnd) 
+    			return true;
+    		else 
+    			return false;
+    	} else if (playerStart > spriteStart){
+    		if (playerStart < spriteEnd) 
+    			return true;
+    		else {
+    			return false;
+    		}
+    	} 
     	
-    	return false;
+    	return true;
     }
 
     public void setSprite(Image theSprite) {
     	sprite = theSprite;
+    }
 
     public Image getSprite() {
     	return sprite;
     }
 
-
     //To be specialized, used for determining conditions in the event that the player collides with a given interactable object
     public void onCollision() {
-    	int xCoord = 0;
-    	int yCoord = 0;
-    	
-    	
-
+    	System.out.println("The player has collided with this object");
     }
 
     public int getX() {
@@ -74,5 +88,13 @@ public class DisplayObject {
 
     public int getY() {
         return posY;
+    }
+    
+    public void setPosX(int x) {
+    	posX = x;
+    }
+    
+    public void setPosY(int y) {
+    	posY = y;
     }
 } 
