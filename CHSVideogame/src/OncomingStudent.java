@@ -9,7 +9,9 @@ public class OncomingStudent extends DisplayObject{
 	private int playPX, playPY, playDX, playDY;
 	private Player player;
 	public final int DIMENSION_X, DIMENSION_Y, GRAZE_HEALTH, HEAD_ON_HEALTH, STRENGTH_DEC,
-		GRAZE_INT; //these will equal something later, placeholder
+		GRAZE_INT, AVOID_VX, AVOID_VY, AVOID_DISX, AVOID_DISY; //these will equal something later, placeholder
+	//AVOID_V what velocity students change to when splitting
+	//AVOID_DIS distance they separate by 
 	
 	public OncomingStudent(Game g, int posX, int posY) {
 		super(g, DIMENSION_X, DIMENSION_Y);
@@ -117,11 +119,17 @@ public class OncomingStudent extends DisplayObject{
 					dimX = stud.getDimensionX()/2;
 					if(positionX>stud.getPositionX()) {
 						if(positionX-(DIMENSION_X/2)==posX+dimX) {
-							separate(stud);
+							stud.setXVelocity(AVOID_VX);
+							stud.setYVelocity(AVOID_VY);
+							velocityX = AVOID_VX;
+							velocityY = AVOID_VY;
 						}
 					} else if(positionX<stud.getPositionX()) {
 						if(positionX+(DIMENSION_X/2)==posX-dimX) {
-							separate(stud);
+							stud.setXVelocity(AVOID_VX);
+							stud.setYVelocity(AVOID_VY);
+							velocityX = AVOID_VX;
+							velocityY = AVOID_VY;
 						}
 					}
 				}
@@ -133,10 +141,9 @@ public class OncomingStudent extends DisplayObject{
 		 * if so, update velocity of current oncoming student and other-->they move in opposite directions and dodge each other
 		 * 
 		 */
-		//get back
 	}
 	
-	private void separate(OncomingStudent student) {
-		//separate !!!!
+	public Image getImage() {
+		return students.get(index);
 	}
 }
