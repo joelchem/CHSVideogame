@@ -121,12 +121,12 @@ public class OncomingStudent extends DisplayObject{
 						if(positionX-(DIMENSION_X/2)==posX+dimX) {
 							stud.setXVelocity(AVOID_VX);
 							stud.setYVelocity(AVOID_VY);
-							velocityX = AVOID_VX;
+							velocityX = -AVOID_VX;
 							velocityY = AVOID_VY;
 						}
 					} else if(positionX<stud.getPositionX()) {
 						if(positionX+(DIMENSION_X/2)==posX-dimX) {
-							stud.setXVelocity(AVOID_VX);
+							stud.setXVelocity(-AVOID_VX);
 							stud.setYVelocity(AVOID_VY);
 							velocityX = AVOID_VX;
 							velocityY = AVOID_VY;
