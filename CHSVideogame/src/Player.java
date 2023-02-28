@@ -11,14 +11,15 @@ public class Player {
 	private int velocity;
 	private Image[] sprites; // still need sprites
 	private int positionX, positionY;
+	private int offset;
 	private int spriteFrame;
 	private double distOnPath;
 	private Game game;
 	private boolean money;
 	private boolean hasJacket;
 	private double heading;
-	private final int dimX = 17;
-	private final int dimY = 36;
+	private final int dimX = 30;
+	private final int dimY = 60;
 	
 	public Player(Game g) {
 		game = g;
@@ -37,6 +38,7 @@ public class Player {
 		velocity = 0;
 		positionX = 0;
 		positionY = 0;
+		offset = 0;
 		distOnPath = 0;
 		money = false;
 		hasJacket = false;
@@ -132,6 +134,15 @@ public class Player {
 	
 	public boolean getJacket() {
 		return hasJacket;
+	}
+	
+	public void setOffset(int strafe) {
+		Map map = game.getMap();
+		offset = Math.max(-1*map.getMaxStrafe()*map.getScale(), Math.min(map.getMaxStrafe()*map.getScale(), strafe));
+	}
+	
+	public int getOffset() {
+		return offset;
 	}
 }
 

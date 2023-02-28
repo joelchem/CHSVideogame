@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -30,11 +31,6 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 	double heading = 0;
 	double iterator = 0;
 	
-	int pointX = 0;
-	int pointY = 0;
-	int dimX = 2000;
-	int dimY = 2000;
-	
 	int cameraWidth;
 	int cameraHeight;
 	
@@ -46,7 +42,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		cameraWidth = game.getCamera().getDimX();
 		cameraHeight = game.getCamera().getDimY();
 		
-		
+		addMouseMotionListener(this);
 
 		
 		Path combinePath = new Path();
@@ -77,11 +73,11 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 	}
 	
 	public int getDimX() {
-		return dimX;
+		return cameraWidth;
 	}
 	
 	public int getDimY() {
-		return dimY;
+		return cameraHeight;
 	}
 	
 	
@@ -91,8 +87,10 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 
 		AffineTransform camTransform = game.getCamera().getTransform();
 		g.transform(camTransform);
+		
+		
 		Image mapImg = game.getMap().getMapImage();
-		g.drawImage(mapImg, 0, 0, this);
+		g.drawImage(mapImg, AffineTransform.getScaleInstance(game.getMap().getScale(), game.getMap().getScale()), this);
 		
 		
 		
@@ -103,10 +101,12 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 			Point objPos = new Point(obj.getX(), obj.getY());
 
 			AffineTransform objTransform = game.getCamera().getObjectTransform(
-					objPos, obj.getHeading(),obj.getDimensionX(), obj.getDimensionY());
-			g.drawImage(sprite, objTransform, this);
-			Shape theCircle = new Ellipse2D.Double(obj.getX() - 2, obj.getY() - 2, 2.0 * 2, 2.0 * 2);
-			g.draw(theCircle);
+					objPos, obj.getHeading(), obj.getDimensionX(), obj.getDimensionY());
+//			System.out.println(objTransform+" "+objPos+" "+obj.getHeading()+" "+obj.getDimensionX()+" "+obj.getDimensionY());
+			g.drawImage(obj.getSprite(),  objTransform, this);
+//			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2,
+//					obj.getY()-obj.getDimensionY()/2, this);
+			
 
 		}
 		
@@ -122,20 +122,21 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		Point playerPos = new Point(player.getPositionX(), player.getPositionY());
 		AffineTransform playerTransform = game.getCamera().getObjectTransform(
 				playerPos, player.getHeading(),player.getDimensionX(), player.getDimensionY());
-		System.out.println(playerTransform.alskdj);
+//		System.out.println(playerTransform+" "+player.getHeading());
 		g.drawImage(player.getSprite(), playerTransform, this);
 		
 
 	}
 	
 	public static void startWindow(CameraViewer cam) {
+		System.out.println(cam.getDimX()+" "+cam.getDimY());
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		cam.setSize(new Dimension(500, 500));
-		cam.setPreferredSize(new Dimension(500, 500));
+		cam.setSize(new Dimension(cam.getDimX(), cam.getDimY()));
+		cam.setPreferredSize(new Dimension(cam.getDimX(), cam.getDimY()));
 		JFrame graphFrame = new JFrame("CHSVideogame");
 		graphFrame.setResizable(false);
-		graphFrame.setSize(new Dimension(500+11, 500+11));
-		graphFrame.setPreferredSize(new Dimension(500+11, 500+11));
+		graphFrame.setSize(new Dimension(cam.getDimX()+11, cam.getDimY()+11));
+		graphFrame.setPreferredSize(new Dimension(cam.getDimX()+11, cam.getDimY()+11));
 		graphFrame.setContentPane(cam);
 		graphFrame.pack();
 		graphFrame.setVisible(true);
@@ -145,7 +146,16 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 	public void mouseDragged(MouseEvent e) {}
 
 	public void mouseMoved(MouseEvent e) {
+		Point mousePos = e.getPoint();
+		AffineTransform reverseCam;
+		try {
+			reverseCam = game.getCamera().getTransform().createInverse();
+		} catch (NoninvertibleTransformException e1) {
+			e1.printStackTrace();
+		}
 		
+		int offset = game.getCamera().getDimX()/2-(int)mousePos.getX();
+		game.getPlayer().setOffset(offset);
 	}
 	
 	

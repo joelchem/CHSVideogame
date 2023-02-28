@@ -6,8 +6,8 @@ public class Camera {
 	
 	private int posX;
 	private int posY;
-	private final int cameraWidth = 500;
-	private final int cameraHeight = 500;
+	private final int cameraWidth = 900;
+	private final int cameraHeight = 900;
 	private double heading;
 	private Game game;
 	
@@ -60,10 +60,13 @@ public class Camera {
 	public AffineTransform getObjectTransform(
 			Point pos, double heading, int dimX, int dimY) {
 		double diag = Math.hypot((double)dimX, (double)dimY)/2;
-		double innerAngle = Math.acos((double)dimX/(double)dimY);
+		double innerAngle = Math.atan((double)dimY/(double)dimX);
+		
+		
 		
 		double offsetX = diag*Math.cos(innerAngle-heading);
 		double offsetY = diag*Math.sin(innerAngle-heading);
+		
 		
 		AffineTransform t = new AffineTransform();
 		t.translate(pos.getX()-offsetX, pos.getY()-offsetY);

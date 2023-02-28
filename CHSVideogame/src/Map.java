@@ -14,10 +14,14 @@ public class Map {
     Image mapImage;
     Path path;
     
-    ArrayList<DisplayObject> placedObjects;;
+    ArrayList<DisplayObject> placedObjects;
     
-    private final int dimX = 800*10;
-    private final int dimY = 600*10;
+    
+    private int scale = 25;
+    private int dimX = 797;
+    private int dimY = 600;
+    
+    private int maxStrafe = 11;
     
 
     public Map(Game game, String level) {
@@ -31,9 +35,17 @@ public class Map {
 		}
         
         placedObjects = new ArrayList<DisplayObject>();
-        placedObjects.add(new BakeSale(game, 2330, 1990, Math.PI/2));
+        placedObjects.add(new BakeSale(game, 233*scale, 199*scale, -Math.PI/2));
        
         
+    }
+    
+    public int getMaxStrafe() {
+    	return maxStrafe;
+    }
+    
+    public int getScale() {
+    	return scale;
     }
     
     public int getDimensionX() {
@@ -50,14 +62,14 @@ public class Map {
     
     public Path getPath() {
     	Path combinePath = new Path();
-		combinePath.addPath(new StraightPath(new Point(1240, 2100), new Point(2740, 2100)));
-		combinePath.addPath(new CurvedPath(new Point(2740, 2100), new Point(2740, 2210), Math.PI/2));
-		combinePath.addPath(new StraightPath(new Point(2850, 2210), new Point(2850, 3550)));
-		combinePath.addPath(new CurvedPath(new Point(2850, 3550), new Point(2960, 3550), -Math.PI/2));
-		combinePath.addPath(new StraightPath(new Point(2960, 3660), new Point(5120, 3660)));
-		combinePath.addPath(new CurvedPath(new Point(5120, 3660), new Point(5120, 3770), Math.PI/2));
-		combinePath.addPath(new StraightPath(new Point(5230, 3770), new Point(5230, 4530)));
-		combinePath.addPath(new CurvedPath(new Point(5230, 4530), new Point(5340, 4530), -Math.PI/2));
+		combinePath.addPath(new StraightPath(new Point(124*scale, 210*scale), new Point(274*scale, 210*scale)));
+		combinePath.addPath(new CurvedPath(new Point(274*scale, 210*scale), new Point(274*scale, 221*scale), Math.PI/2));
+		combinePath.addPath(new StraightPath(new Point(285*scale, 221*scale), new Point(285*scale, 355*scale)));
+		combinePath.addPath(new CurvedPath(new Point(285*scale, 355*scale), new Point(296*scale, 355*scale), -Math.PI/2));
+		combinePath.addPath(new StraightPath(new Point(296*scale, 366*scale), new Point(512*scale, 366*scale)));
+		combinePath.addPath(new CurvedPath(new Point(512*scale, 366*scale), new Point(512*scale, 377*scale), Math.PI/2));
+		combinePath.addPath(new StraightPath(new Point(523*scale, 377*scale), new Point(523*scale, 453*scale)));
+		combinePath.addPath(new CurvedPath(new Point(523*scale, 453*scale), new Point(534*scale, 453*scale), -Math.PI/2));
 		return combinePath;
     }
     

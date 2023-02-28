@@ -39,7 +39,7 @@ public class GameRunner implements ActionListener {
     
     private void calculateFrame(){
     	Player player = game.getPlayer();
-        Point strafePos = game.getMap().getPath().getPos(player.getDistOnPath());
+        Point strafePos = game.getMap().getPath().getPos(player.getDistOnPath(), player.getOffset());
         Point pos = game.getMap().getPath().getPos(player.getDistOnPath());
         player.setPositionX((int)strafePos.getX());
         player.setPositionY((int)strafePos.getY());
@@ -47,7 +47,7 @@ public class GameRunner implements ActionListener {
         game.getCamera().setX((int)pos.getX());
         game.getCamera().setY((int)pos.getY());
         game.getCamera().setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
-        player.setDistOnPath(player.getDistOnPath()+10);
+        player.setDistOnPath(player.getDistOnPath()+20);
     }
     
     public static void main(String[] args) {

@@ -111,6 +111,7 @@ public class CurvedPath extends PathSegment{
 		}
 		
 		return (startAngle - curveAngle*distOnSegment/length() + extra/* + Math.signum(curveAngle)*(-Math.PI/2)*/);
+//		return (startAngle + curveAngle*distOnSegment/length() + Math.signum(curveAngle)*Math.PI/2);
 //		>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		// it works in 3rd and 6th turn when u add Math.PI oaisdhjfioafsdjoji
 //		double closeFrontDist = distOnSegment + 0.000001;
