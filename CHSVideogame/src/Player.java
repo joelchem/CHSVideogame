@@ -18,8 +18,8 @@ public class Player {
 	private boolean money;
 	private boolean hasJacket;
 	private double heading;
-	private final int dimX = 30;
-	private final int dimY = 60;
+	private final int dimX = 40;
+	private final int dimY = 80;
 	
 	public Player(Game g) {
 		game = g;
