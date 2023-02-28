@@ -41,7 +41,8 @@ public class Camera {
 		t.rotate(heading,cameraX,cameraY);
 		System.out.println(t.transform(new Point(pointX, pointY), new Point.Double()));
 		
-
+    
 	}
 	
-}
+}                
+                                  
