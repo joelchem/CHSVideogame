@@ -48,7 +48,6 @@ public class DisplayObject {
     		onCollision();
     	}
     	
-    	
     }
     
     //Checks to see if there is an overlap on whatever plane
