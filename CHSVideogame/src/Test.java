@@ -1,112 +1,119 @@
+import java.awt.Point;
+
 public class Test {
 
-	public static boolean areRotatedRectanglesColliding(double x1, double y1, double width1, double height1,
-			double angle1, double x2, double y2, double width2, double height2, double angle2) {
+	
+	public static boolean isPointInsideQuadrilateral(double x, double y, double[] quadX, double[] quadY) {
+	    // Check if the point is inside the bounds of the quadrilateral
+	    double minX = Double.POSITIVE_INFINITY;
+	    double maxX = Double.NEGATIVE_INFINITY;
+	    double minY = Double.POSITIVE_INFINITY;
+	    double maxY = Double.NEGATIVE_INFINITY;
 
-		// Calculate the corners of the first rectangle
-		double[] corners1 = getCorners(x1, y1, width1, height1, angle1);
+	    for (int i = 0; i < 4; i++) {
+	        if (quadX[i] < minX) {
+	            minX = quadX[i];
+	        }
+	        if (quadX[i] > maxX) {
+	            maxX = quadX[i];
+	        }
+	        if (quadY[i] < minY) {
+	            minY = quadY[i];
+	        }
+	        if (quadY[i] > maxY) {
+	            maxY = quadY[i];
+	        }
+	    }
 
-		// Calculate the corners of the second rectangle
-		double[] corners2 = getCorners(x2, y2, width2, height2, angle2);
+	    if (x < minX || x > maxX || y < minY || y > maxY) {
+	        return false;
+	    }
 
-		// Check if any of the corners of rectangle 1 are inside rectangle 2
-		for (int i = 0; i < 4; i++) {
-			if (isPointInsideRectangle(corners1[i], corners1[i + 1], corners2)) {
-				return true;
-			}
-		}
+	    // Calculate the cross products of each pair of adjacent edges
+	    double[] crossProducts = new double[4];
+	    for (int i = 0; i < 4; i++) {
+	        double dx1 = quadX[(i + 1) % 4] - quadX[i];
+	        double dy1 = quadY[(i + 1) % 4] - quadY[i];
+	        double dx2 = x - quadX[i];
+	        double dy2 = y - quadY[i];
+	        crossProducts[i] = dx1 * dy2 - dx2 * dy1;
+	    }
 
-		// Check if any of the corners of rectangle 2 are inside rectangle 1
-		for (int i = 0; i < 4; i++) {
-			if (isPointInsideRectangle(corners2[i], corners2[i + 1], corners1)) {
-				return true;
-			}
-		}
+	    // If the signs of the cross products are all the same, the point is inside the quadrilateral
+	    return Math.abs(Math.signum(crossProducts[0])+
+	    		Math.signum(crossProducts[1])+Math.signum(crossProducts[2])+Math.signum(crossProducts[3]))>3.9;
+//	    for (int i = 0; i < 4; i++) {
+//	        if (crossProducts[i] < 0) {
+//	            sameSign = false;
+//	            break;
+//	        }
+//	    }
+	    if (sameSign) {
+	        return true;
+	    }
 
-		// Check if any of the edges of the two rectangles intersect
-		for (int i = 0; i < 4; i++) {
-			double x1a = corners1[i];
-			double y1a = corners1[i + 1];
-			double x1b = corners1[(i + 1) % 4];
-			double y1b = corners1[(i + 2) % 4];
-
-			for (int j = 0; j < 4; j++) {
-				double x2a = corners2[j];
-				double y2a = corners2[j + 1];
-				double x2b = corners2[(j + 1) % 4];
-				double y2b = corners2[(j + 2) % 4];
-
-				if (doLinesIntersect(x1a, y1a, x1b, y1b, x2a, y2a, x2b, y2b)) {
-					return true;
-				}
-			}
-		}
-
-		// If no collision is detected, return false
-		return false;
+	    // If the signs of the cross products are not all the same, the point is outside the quadrilateral
+	    return false;
 	}
+	
+	public static Point.Double[] findRotatedRectangleCorners(Point.Double center, double heading, double width, double height) {
+	    Point.Double[] corners = new Point.Double[4];
+	    double halfWidth = width / 2;
+	    double halfHeight = height / 2;
+	    double sinHeading = Math.sin(heading);
+	    double cosHeading = Math.cos(heading);
 
-	// Helper method to calculate the corners of a rectangle given its center,
-	// width, height, and angle
-	public static double[] getCorners(double x, double y, double width, double height, double angle) {
-		double[] corners = new double[8];
-		double cos = Math.cos(angle);
-		double sin = Math.sin(angle);
-		double halfWidth = width / 2.0;
-		double halfHeight = height / 2.0;
+	    // Calculate the four corners of the rectangle
+	    corners[0] = new Point.Double(
+	        center.x - halfWidth * cosHeading - halfHeight * sinHeading,
+	        center.y + halfWidth * sinHeading - halfHeight * cosHeading
+	    );
+	    corners[1] = new Point.Double(
+	        center.x + halfWidth * cosHeading - halfHeight * sinHeading,
+	        center.y - halfWidth * sinHeading - halfHeight * cosHeading
+	    );
+	    corners[2] = new Point.Double(
+	        center.x + halfWidth * cosHeading + halfHeight * sinHeading,
+	        center.y - halfWidth * sinHeading + halfHeight * cosHeading
+	    );
+	    corners[3] = new Point.Double(
+	        center.x - halfWidth * cosHeading + halfHeight * sinHeading,
+	        center.y + halfWidth * sinHeading + halfHeight * cosHeading
+	    );
 
-		// Top left corner
-		corners[0] = x + (-halfWidth * cos - halfHeight * sin);
-		corners[1] = y + (-halfWidth * sin + halfHeight * cos);
-
-		// Top right corner
-		corners[2] = x + (halfWidth * cos - halfHeight * sin);
-		corners[3] = y + (halfWidth * sin + halfHeight * cos);
-
-		// Bottom right corner
-		corners[4] = x + (halfWidth * cos + halfHeight * sin);
-		corners[5] = y + (halfWidth * sin - halfHeight * cos);
-
-		// Bottom left corner
-		corners[6] = x + (-halfWidth * cos + halfHeight * sin);
-		corners[7] = y + (-halfWidth * sin - halfHeight * cos);
-
-		return corners;
+	    return corners;
 	}
-
-	// Helper method to check if a point is inside a rectangle
-	public static boolean isPointInsideRectangle(double x, double y, double[] corners) {
-		int numVertices = corners.length / 2;
-		boolean isInside = false;
-		for (int i = 0, j = numVertices - 1; i < numVertices; j = i++) {
-			double xi = corners[i * 2];
-			double yi = corners[i * 2 + 1];
-			double xj = corners[j * 2];
-			double yj = corners[j * 2 + 1];
-
-			boolean intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-			if (intersect) {
-				isInside = !isInside;
-			}
-		}
-
-		return isInside;
-	}
-
-	// Helper method to check if two line segments intersect
-	public static boolean doLinesIntersect(double x1a, double y1a, double x1b, double y1b, double x2a, double y2a,
-			double x2b, double y2b) {
-		double ua = ((x2b - x2a) * (y1a - y2a) - (y2b - y2a) * (x1a - x2a))
-				/ ((y2b - y2a) * (x1b - x1a) - (x2b - x2a) * (y1b - y1a));
-		double ub = ((x1b - x1a) * (y1a - y2a) - (y1b - y1a) * (x1a - x2a))
-				/ ((y2b - y2a) * (x1b - x1a) - (x2b - x2a) * (y1b - y1a));
-		return (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1);
-	}
-
+	
 	public static void main(String[] args) {
 		
-		System.out.println(
-				areRotatedRectanglesColliding(-2.5, 0, 4, 4, 0, 2.5, 0, 4, 4, 0)
-				);
+//		double[] quadX = {1.0, 3.0, 2.0, 0.0};
+//		double[] quadY = {1.0, 2.0, 4.0, 3.0};
+//		double x = .2;
+//		double y = 2.6;
+//		boolean inside = isPointInsideQuadrilateral(x, y, quadX, quadY);
+//		System.out.println(inside); // prints "true"
+//		
+//		Point.Double[] points = findRotatedRectangleCorners(
+//				new Point.Double(2, 2),
+//				-Math.PI/5,
+//				10,
+//				10
+//		);
+//		for(Point.Double a : points) {
+//			System.out.print(",("+a.getX()+","+a.getY()+")");
+//		}
+		
+		Hitbox h1 = new Hitbox(new Point(-25,0), 40, 40, 0);
+		Hitbox h2 = new Hitbox(new Point(25,0), 40, 40, 0);
+		
+		for(int i = 0; i < h1.cornersAmt(); i++) {
+			Point.Double c1 = h1.getCorner(i);
+			Point.Double c2 = h2.getCorner(i);
+			System.out.print(",("+c1.getX()+","+c1.getY()+")");
+			System.out.print(",("+c2.getX()+","+c2.getY()+")");
+		}
+		
+		System.out.println("\n"+h1.isColliding(h2)+" "+h2.isColliding(h1));
+		
 	}
 }
