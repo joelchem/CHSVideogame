@@ -34,6 +34,7 @@ public class DisplayObject {
     	int lengthX = dimensionX/2;
     	int lengthY = dimensionY/2;
     	
+    	//Needs to be changed
     	int playerLengthX = 0;
     	int playerLenthY = 0;
     	
@@ -41,7 +42,7 @@ public class DisplayObject {
     	//NOTE: May need to modify the dimension adding in the future
     	
     	boolean overlapX = overLap(posX-lengthX, posX+lengthX, player.getPositionX()-playerLengthX, player.getPositionX()+playerLengthX);
-    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), player.getPositionX()+playerLengthX);
+    	boolean overlapY = overLap(posY-lengthY, posY+lengthY, player.getPositionY(), player.getPositionX()+playerLengthY);
     			
     	//Player method to be determined in the future
     	if (overlapX && overlapY) {
