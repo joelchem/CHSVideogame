@@ -36,7 +36,7 @@ public class DisplayObject {
     	
     	//Needs to be changed
     	int playerLengthX = 0;
-    	int playerLenthY = 0;
+    	int playerLengthY = 0;
     	
     	//Call overlap with x and y values, if it passes, call onCollision
     	//NOTE: May need to modify the dimension adding in the future
