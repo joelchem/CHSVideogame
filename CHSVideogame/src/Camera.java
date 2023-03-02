@@ -9,7 +9,6 @@ public class Camera {
 	private Game game;
 	Camera(Game gameObj) {
 		game = gameObj;
-
 	}
 	
 	private Point position;
@@ -17,6 +16,8 @@ public class Camera {
 	
 	Camera() {
 //		game = gameObj;
+
+
 
 		heading = 0;
 		position = new Point(10,12);
