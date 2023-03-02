@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import Math.*;
+import java.Math*;
 
 public class GameRunner {
     Game game;
@@ -92,7 +92,6 @@ public class GameRunner {
     }
 
     private void calculateFrame(){
-<<<<<<< HEAD
         if(game.getGameOver()){
             game.ends idk;
         }
@@ -110,18 +109,16 @@ public class GameRunner {
                 game.getOncomingStudents(i).setPositionY(student.getPositionY() + (student.getVelocityY() * (1/FPS)));
 
                 if(Math.abs(player.getPositionY - student.getPositionY()) > certainDistance){
-                    consider adding extra student;
+                  //  consider adding extra student;
                 }
             }
 
             game.testForCollision();
             game.setCamera();
     }
-=======
     	int x = game.getPlayer().getPositionX();
     	int y = game.getPlayer().getPositionY();
-    	
->>>>>>> 2b8949b123e46b196ebed0b53ee3e6a810bc299e
+
     }
     
     public static void main(String[] args) {

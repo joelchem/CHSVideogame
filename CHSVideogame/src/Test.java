@@ -3,9 +3,8 @@ import java.awt.image.BufferedImage;
 
 // display object testing
 public class Test {
-
-	public static void main(String[] args) {
-		//basic getter/setter testing
+	public static void main(String [] args) {
+		//basic getter/setter testin
 		Game theGame = new Game();
 		Image x = new BufferedImage(12, 12, 10);
 		DisplayObject test = new DisplayObject(theGame,15,12,x );
