@@ -114,6 +114,5 @@ public class Test {
 		}
 		
 		System.out.println("\n"+h1.isColliding(h2)+" "+h2.isColliding(h1));
-		
 	}
 }
