@@ -32,5 +32,7 @@ public class Test {
 		thePlayer.setPositionX(15);
 		thePlayer.setPositionX(12);
 		test1.onCollision();
+
+		MainMenuTester menuTest = new MainMenuTester(new Map());
 	}
 }
