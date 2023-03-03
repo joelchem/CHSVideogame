@@ -92,9 +92,8 @@ public class GameRunner {
     }
 
     private void calculateFrame(){
-<<<<<<< HEAD
         if(game.getGameOver()){
-            game.ends idk;
+            game.ends();
         }
         else{
             player.setPositionX(player.getPositionX() + (player.getVelocityX() * (1/FPS)));
@@ -117,11 +116,8 @@ public class GameRunner {
             game.testForCollision();
             game.setCamera();
     }
-=======
     	int x = game.getPlayer().getPositionX();
     	int y = game.getPlayer().getPositionY();
-    	
->>>>>>> 2b8949b123e46b196ebed0b53ee3e6a810bc299e
     }
     
     public static void main(String[] args) {
