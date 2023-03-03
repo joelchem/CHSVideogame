@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import Math.*;
+import java.util.*;
 
 public class GameRunner {
     Game game;
@@ -28,15 +28,15 @@ public class GameRunner {
         //Students logic
         if(game.getDifficulty().equals("EASY")){
             totalStudentCount = 50;
-            totalInteractableObj = 30;
+            totalInteractableObject= 30;
             // maxValue = ;
         } else if(game.getDifficulty().equals("MEDIUM")){
             totalStudentCount = 100;
-            totalInteractableObj = 20;
+            totalInteractableObject= 20;
             // maxValue = ;
         } else if(game.getDifficulty().equals("HARD")){
             totalStudentCount = 200;
-            totalInteractableObj = 10;
+            totalInteractableObject= 10;
             // maxValue = ;
         }
         
@@ -109,7 +109,7 @@ public class GameRunner {
                 game.getOncomingStudents(i).setPositionY(student.getPositionY() + (student.getVelocityY() * (1/FPS)));
 
                 if(Math.abs(player.getPositionY - student.getPositionY()) > certainDistance){
-                    consider adding extra student;
+                  //  consider adding extra student;
                 }
             }
 
@@ -118,6 +118,10 @@ public class GameRunner {
     }
     	int x = game.getPlayer().getPositionX();
     	int y = game.getPlayer().getPositionY();
+<<<<<<< HEAD
+=======
+
+>>>>>>> dc99bfae485cb5274e0fbd8924ff41c8282e8e74
     }
     
     public static void main(String[] args) {

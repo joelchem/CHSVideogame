@@ -16,6 +16,9 @@ public class Camera {
 	
 	Camera() {
 //		game = gameObj;
+
+
+
 		heading = 0;
 		position = new Point(10,12);
 	}
