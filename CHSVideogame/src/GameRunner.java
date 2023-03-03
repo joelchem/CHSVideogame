@@ -118,10 +118,6 @@ public class GameRunner {
     }
     	int x = game.getPlayer().getPositionX();
     	int y = game.getPlayer().getPositionY();
-<<<<<<< HEAD
-=======
-
->>>>>>> dc99bfae485cb5274e0fbd8924ff41c8282e8e74
     }
     
     public static void main(String[] args) {
