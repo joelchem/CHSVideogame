@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
@@ -43,6 +44,10 @@ public class Player {
 		money = false;
 		hasJacket = false;
 		
+	}
+	
+	public Hitbox getHitbox() {
+		return new Hitbox(new Point(positionX, positionY), dimX, dimY, heading);
 	}
 	
 	public void setHeading(double newHead) {

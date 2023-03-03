@@ -20,8 +20,6 @@ public class BakeSale extends DisplayObject{
 		theGame = game;
 	}
 	public void onCollision() {
-		if (theGame.getPlayer().getMoney()) {
-			theGame.getPlayer().updateStrength(5);
-		}
+		System.out.println("hello");
 	}
 }

@@ -48,6 +48,11 @@ public class GameRunner implements ActionListener {
         game.getCamera().setY((int)pos.getY());
         game.getCamera().setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
         player.setDistOnPath(player.getDistOnPath()+20);
+        
+        for(int i = 0; i < game.displayObjectAmt(); i++) {
+        	DisplayObject obj = game.getDisplayObject(i);
+        	obj.testForCollision();
+        }
     }
     
     public static void main(String[] args) {

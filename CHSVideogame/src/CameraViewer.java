@@ -106,6 +106,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 			g.drawImage(obj.getSprite(),  objTransform, this);
 //			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2,
 //					obj.getY()-obj.getDimensionY()/2, this);
+			obj.getHitbox().render(g);
 			
 
 		}
@@ -125,6 +126,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 //		System.out.println(playerTransform+" "+player.getHeading());
 		g.drawImage(player.getSprite(), playerTransform, this);
 		
+		game.getPlayer().getHitbox().render(g);
 
 	}
 	
