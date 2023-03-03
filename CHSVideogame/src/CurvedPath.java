@@ -105,6 +105,13 @@ public class CurvedPath extends PathSegment{
 //		return (startAngle + curveAngle*distOnSegment/length() + Math.signum(curveAngle)*(-Math.PI/2));
 		
 //	    >>>>>>>>>>>>>> working
+		
+		if(distOnSegment < 0) {
+			return heading(0);
+		} else if(distOnSegment > length()) {
+			return heading(length()-.01);
+		}
+		
 		double extra = 0;
 		if(reverse) {
 			extra = Math.PI;
