@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class OncomingStudent extends DisplayObject{
 	private ArrayList<Image> students;
-	private ArrayList<OncomingStudent> currentStudents;
 	private Game game;
 	private int velocityX, velocityY, positionX, positionY, index;
 	private int playPX, playPY, playDX, playDY;
@@ -112,6 +111,7 @@ public class OncomingStudent extends DisplayObject{
 			currentStudents.add(game.getOncomingStudents(i));
 		}
 	}
+	
 	
 	public void checkProximity() {
 		int posX;

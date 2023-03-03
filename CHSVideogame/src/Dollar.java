@@ -23,7 +23,4 @@ public class Dollar extends DisplayObject{
 		if (exists) 
 			super.testForCollision();
 	}
-
-
 }
-

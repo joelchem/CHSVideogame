@@ -15,10 +15,11 @@ public class Game {
 	private boolean lost;
 
 	public Game() {
-		map = new Map(this);
+		map = new Map(this, "medium");
+		difficulty = "medium";
 		camera = new Camera(this);
-		oncomingStudents = new ArrayList<>();
-		displayObjects = new ArrayList<>();
+		oncomingStudents = new ArrayList<OncomingStudent>();
+		displayObjects = new ArrayList<DisplayObject>();
 		player = new Player(this);
 		score = 0;
 		scoreBoard = new File("\\CHSVideogame\\assets\\scoreBoard.txt");
@@ -30,9 +31,14 @@ public class Game {
 		difficulty = " ";
 		gameOver = false;
 	}
+	
 
 	public DisplayObject getDisplayObject(int index) {
 		return displayObjects.get(index);
+	}
+	
+	public int displayObjectAmt() {
+		return displayObjects.size();
 	}
 
 	public void addDisplayObject(DisplayObject obj) {
@@ -49,6 +55,10 @@ public class Game {
 
 	public void addOncomingStudent(OncomingStudent student) {
 		oncomingStudents.add(student);
+	}
+	
+	public int oncomingStudentsAmt() {
+		return oncomingStudents.size();
 	}
 
 	public Map getMap() {
