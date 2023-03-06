@@ -10,19 +10,13 @@ public class Camera {
 	Camera(Game gameObj) {
 		game = gameObj;
 	}
-	
 	private Point position;
-//	private Game game;
-	
-	Camera() {
+//	private Game game;	
+	Camera() {                   
 //		game = gameObj;
-
-
-
 		heading = 0;
 		position = new Point(10,12);
 	}
-	
 //	public Point screenCoords(Point absoluteCoords) {
 //		
 //	}
@@ -38,7 +32,6 @@ public class Camera {
 		
 		int pointX = -6;
 		int pointY = 3;
-		
 		AffineTransform t = new AffineTransform();
 		t.translate(-cameraX, -cameraY);
 		t.rotate(heading,cameraX,cameraY);
