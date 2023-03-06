@@ -22,6 +22,9 @@ public class Player {
 	private final int dimX = 40;
 	private final int dimY = 80;
 	
+	private final int maxHealth = 10;
+	private final int maxStrength = 10;
+	
 	public Player(Game g) {
 		game = g;
 		try {
@@ -33,8 +36,8 @@ public class Player {
 		}
 		
 		spriteFrame = 0;
-		health = 10;
-		strength = 10;
+		health = 6;
+		strength = 6;
 		isCrouching = false;
 		velocity = 0;
 		positionX = 0;
@@ -79,6 +82,7 @@ public class Player {
 	}
 	
 	public void updateMoney(boolean b) {
+		System.out.println("player money changed: "+money+" to "+b);
 		money = b;
 	}
 	
@@ -95,6 +99,7 @@ public class Player {
 	}
 	
 	public void setCrouch(boolean b) {
+		System.out.println("player crocuh changed: "+isCrouching+" to "+b);
 		isCrouching = b;
 	}
 	
@@ -103,6 +108,8 @@ public class Player {
 	}
 	
 	public void setHealth(int x) {
+		x = Math.min(maxHealth, Math.max(0, x));
+		System.out.println("player health changed: "+health+" to "+x);
 		health = x;
 	}
 	
@@ -110,8 +117,10 @@ public class Player {
 		return health;
 	}
 	
-	public void updateStrength(int x) {
-		strength+=x;
+	public void setStrength(int x) {
+		x = Math.min(maxHealth, Math.max(0, x));
+		System.out.println("player strength changed: "+strength+" to "+x);
+		strength = x;
 	}
 	
 	public int getStrength() {
@@ -134,6 +143,7 @@ public class Player {
 	}
 	
 	public void setJacket(boolean b) {
+		System.out.println("player jacket changed: "+hasJacket+" to "+b);
 		hasJacket = b;
 	}
 	

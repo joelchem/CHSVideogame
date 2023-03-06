@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 public class BakeSale extends DisplayObject{
 	Game theGame;
 
+	private final int healthRestored = 5;
 	
 	public BakeSale(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 46*3,44*3);
@@ -20,6 +21,10 @@ public class BakeSale extends DisplayObject{
 		theGame = game;
 	}
 	public void onCollision() {
-		System.out.println("hello");
+		if(theGame.getPlayer().getMoney()) {
+			int healthCurrent = theGame.getPlayer().getHealth();
+			theGame.getPlayer().setHealth(healthRestored+healthCurrent);
+			theGame.getPlayer().updateMoney(false);;
+		}
 	}
 }
