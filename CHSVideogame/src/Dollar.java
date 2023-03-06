@@ -1,29 +1,37 @@
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Dollar extends DisplayObject{
-	Game game;
+	private Game game;
 	private boolean exists;
-	public Dollar(int dimensionX, int dimensionY, Game game, Image sprite) {
-		super(game,dimensionX,dimensionY, sprite);
+	Dollar(Game game, int x, int y, double heading) {
+		super(game,x, y, heading, 80,60);
+		try {
+		    Image im = ImageIO.read(new File("assets/dollar.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    setSprite(im);
+		    
+		} catch (IOException e) {
+			System.out.println("dollar sprites not found.");
+		}
 		this.game = game;
-		exists = true;
-		
+		this.exists = true;
 	}
 	
 	public void onCollision() {
     	Player player = game.getPlayer();
-		if (exists) {
-			exists = false; 
-			player.updateMoney(true);
-			setSprite(null);
-		}
+		exists = false; 
+		player.updateMoney(true);
+		setSprite(null);
     }
 	
 	public void testForCollision() {
 		if (exists) 
 			super.testForCollision();
 	}
-
-
+	
+	
+	
 }
-

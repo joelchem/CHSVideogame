@@ -3,17 +3,18 @@ import java.awt.*;
 
 public class OncomingStudent extends DisplayObject{
 	private ArrayList<Image> students;
-	private ArrayList<OncomingStudent> currentStudents;
 	private Game game;
 	private int velocityX, velocityY, positionX, positionY, index;
 	private int playPX, playPY, playDX, playDY;
 	private Player player;
+	private Path path;
+	private int strafe;
 	public final int DIMENSION_X, DIMENSION_Y, GRAZE_HEALTH, HEAD_ON_HEALTH, STRENGTH_DEC,
 		GRAZE_INT, AVOID_VX, AVOID_VY, AVOID_DISX, AVOID_DISY; //these will equal something later, placeholder
 	//AVOID_V what velocity students change to when splitting
 	//AVOID_DIS distance they separate by 
 	
-	public OncomingStudent(Game g, int posX, int posY) {
+	public OncomingStudent(Game g, int posX, int posY, Path p) {
 		super(g, DIMENSION_X, DIMENSION_Y);
 		game = g;
 		positionX = posX;
@@ -24,6 +25,8 @@ public class OncomingStudent extends DisplayObject{
 		playPY = player.getPositionY();
 		playDX = player.getDimensionX();
 		playDY = player.getDimensionY();
+		path = p;
+		
 		generateList();
 	}
 	
@@ -108,6 +111,7 @@ public class OncomingStudent extends DisplayObject{
 			currentStudents.add(game.getOncomingStudents(i));
 		}
 	}
+	
 	
 	public void checkProximity() {
 		int posX;
