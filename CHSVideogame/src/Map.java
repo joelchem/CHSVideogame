@@ -38,6 +38,8 @@ public class Map {
         placedObjects.add(new BakeSale(game, 233*scale, 199*scale, -Math.PI/2));
         placedObjects.add(new Dollar(game, 200*scale, 210*scale, -Math.PI/2));
         placedObjects.add(new CheeseCracker(game, 170*scale, 215*scale, -Math.PI/2));
+        placedObjects.add(new Jacket(game, 275*scale, 250*scale, -Math.PI));
+        placedObjects.add(new WaterFountain(game, 293*scale, 287*scale, -Math.PI));
        
         
     }
