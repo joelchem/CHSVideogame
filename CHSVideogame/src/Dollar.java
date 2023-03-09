@@ -27,9 +27,10 @@ public class Dollar extends DisplayObject{
 		setSprite(null);
     }
 	
-	public void testForCollision() {
+	public boolean testForCollision() {
 		if (exists) 
-			super.testForCollision();
+			return super.testForCollision();
+		return false;
 	}
 	
 	

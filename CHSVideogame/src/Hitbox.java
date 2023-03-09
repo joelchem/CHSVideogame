@@ -34,6 +34,7 @@ public class Hitbox {
 		lines = new Line2D.Double[lineAmt];
 		for(int i = 0; i < lineAmt; i++) {
 			lines[i] = new Line2D.Double(corners[i], corners[(i+1)%lineAmt]);
+			
 		}
 	}
 	

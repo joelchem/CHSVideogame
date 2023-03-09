@@ -10,6 +10,7 @@ public class GameRunner implements ActionListener {
 	private Game game;
 	private CameraViewer camView;
 	private Timer timer;
+	private long lastFrame;
 	
     public GameRunner(){
     	game = new Game();
@@ -18,7 +19,6 @@ public class GameRunner implements ActionListener {
     }
 
     public void startGameloop(){
-       System.out.println("start");
        
        Map map = game.getMap();
        for(int i = 0; i < map.placedObjectLen(); i++) {
@@ -30,6 +30,7 @@ public class GameRunner implements ActionListener {
        timer = new Timer(20, this);
 	   timer.setInitialDelay(100);
 	   timer.start();
+	   lastFrame = System.currentTimeMillis();
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -38,6 +39,13 @@ public class GameRunner implements ActionListener {
 	}
     
     private void calculateFrame(){
+    	
+    	long currTime = System.currentTimeMillis();
+    	double timeDelta = (double)(currTime - lastFrame)/1000.;
+    	if(timeDelta < 0)
+    		System.out.println(currTime+" "+lastFrame+" "+timeDelta);
+    	lastFrame = currTime;
+    	
     	Player player = game.getPlayer();
         Point strafePos = game.getMap().getPath().getPos(player.getDistOnPath(), player.getOffset());
         Point pos = game.getMap().getPath().getPos(player.getDistOnPath());
@@ -47,7 +55,7 @@ public class GameRunner implements ActionListener {
         game.getCamera().setX((int)pos.getX());
         game.getCamera().setY((int)pos.getY());
         game.getCamera().setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
-        player.setDistOnPath(player.getDistOnPath()+20);
+        player.setDistOnPath(player.getDistOnPath()+(int)(player.getVelocity()*timeDelta));
         
         for(int i = 0; i < game.displayObjectAmt(); i++) {
         	DisplayObject obj = game.getDisplayObject(i);

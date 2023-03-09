@@ -11,6 +11,7 @@ public class Player {
 	private boolean isCrouching;
 	private int velocity;
 	private Image[] sprites; // still need sprites
+	private Image crouchSprite;
 	private int positionX, positionY;
 	private int offset;
 	private int spriteFrame;
@@ -24,6 +25,7 @@ public class Player {
 	
 	private final int maxHealth = 10;
 	private final int maxStrength = 10;
+	private final int defaultVel = 1000;
 	
 	public Player(Game g) {
 		game = g;
@@ -31,6 +33,7 @@ public class Player {
 		    sprites = new Image[] {
 		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
 		    };
+		    crouchSprite = ImageIO.read(new File("assets/player_crouch.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all player sprites not found.");
 		}
@@ -39,7 +42,7 @@ public class Player {
 		health = 6;
 		strength = 6;
 		isCrouching = false;
-		velocity = 0;
+		velocity = defaultVel;
 		positionX = 0;
 		positionY = 0;
 		offset = 0;
@@ -47,6 +50,10 @@ public class Player {
 		money = false;
 		hasJacket = false;
 		
+	}
+	
+	public int getDefaultVelocity() {
+		return defaultVel;
 	}
 	
 	public Hitbox getHitbox() {
@@ -70,6 +77,9 @@ public class Player {
 	}
 	
 	public Image getSprite() {
+		if(getCrouch()) {
+			return crouchSprite;
+		}
 		return sprites[spriteFrame];
 	}
 	
@@ -99,7 +109,7 @@ public class Player {
 	}
 	
 	public void setCrouch(boolean b) {
-		System.out.println("player crocuh changed: "+isCrouching+" to "+b);
+//		System.out.println("player crocuh changed: "+isCrouching+" to "+b);
 		isCrouching = b;
 	}
 	
