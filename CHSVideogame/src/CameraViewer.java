@@ -145,7 +145,9 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		
 	}
 
-	public void mouseDragged(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e) {
+		mouseMoved(e);
+	}
 
 	public void mouseMoved(MouseEvent e) {
 		Point mousePos = e.getPoint();
