@@ -9,8 +9,8 @@ public class BakeSale extends DisplayObject{
 
 	private final int healthRestored = 5;
 	
-	public BakeSale(Game game, int x, int y, double heading) {
-		super(game,x, y, heading, 46*3,44*3);
+	public BakeSale(Game game, Map map, int x, int y, double heading) {
+		super(game,x, y, heading, (int)(6*map.getScale()),(int)(5*map.getScale()));
 		try {
 		    Image im = ImageIO.read(new File("assets/bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);

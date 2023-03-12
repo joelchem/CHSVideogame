@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class Dollar extends DisplayObject{
 	private Game game;
 	private boolean exists;
-	Dollar(Game game, int x, int y, double heading) {
+	Dollar(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 80,60);
 		try {
 		    Image im = ImageIO.read(new File("assets/dollar.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);

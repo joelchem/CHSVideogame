@@ -8,7 +8,7 @@ public class CheeseCracker extends DisplayObject {
 	private final int strengthRestored = 5;
 	private boolean exists;
 	
-	public CheeseCracker(Game game, int x, int y, double heading) {
+	public CheeseCracker(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 80,80);
 		try {
 		    Image im = ImageIO.read(new File("assets/cracker.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);

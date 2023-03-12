@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class Jacket extends DisplayObject{
 	private Game game;
 	private boolean exists;
-	Jacket(Game game, int x, int y, double heading) {
+	Jacket(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 80,80);
 		try {
 		    Image im = ImageIO.read(new File("assets/jacket.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);

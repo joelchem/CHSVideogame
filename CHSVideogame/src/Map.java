@@ -17,7 +17,7 @@ public class Map {
     ArrayList<DisplayObject> placedObjects;
     
     
-    private int scale = 25;
+    private int scale = 15;
     private int dimX = 797;
     private int dimY = 600;
     
@@ -35,11 +35,11 @@ public class Map {
 		}
         
         placedObjects = new ArrayList<DisplayObject>();
-        placedObjects.add(new BakeSale(game, 233*scale, 199*scale, -Math.PI/2));
-        placedObjects.add(new Dollar(game, 200*scale, 210*scale, -Math.PI/2));
-        placedObjects.add(new CheeseCracker(game, 170*scale, 215*scale, -Math.PI/2));
-        placedObjects.add(new Jacket(game, 275*scale, 250*scale, -Math.PI));
-        placedObjects.add(new TrashCan(game, 295*scale, 287*scale, -Math.PI));
+        placedObjects.add(new BakeSale(game, this, 233*scale, 199*scale, -Math.PI/2));
+        placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
+        placedObjects.add(new CheeseCracker(game, this, 170*scale, 215*scale, -Math.PI/2));
+        placedObjects.add(new Jacket(game, this, 275*scale, 250*scale, -Math.PI));
+        placedObjects.add(new TrashCan(game, this, 295*scale, 287*scale, -Math.PI));
        
         
     }

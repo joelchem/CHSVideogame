@@ -10,7 +10,7 @@ public class WaterFountain extends DisplayObject {
 	private Game game;
 	private boolean used;
 	
-	WaterFountain(Game game, int x, int y, double heading) {
+	WaterFountain(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 26*6,26*6);
 		try {
 		    Image im = ImageIO.read(new File("assets/water_fountain.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);

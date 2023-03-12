@@ -86,6 +86,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		Graphics2D g = (Graphics2D) graphics;
 
 		AffineTransform camTransform = game.getCamera().getTransform();
+		
 		g.transform(camTransform);
 		
 		

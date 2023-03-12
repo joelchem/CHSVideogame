@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class TrashCan extends DisplayObject {
     Game theGame;
-    TrashCan(Game game, int x, int y, double heading) {
+    TrashCan(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 17*4,26*4);
 		try {
 		    Image im = ImageIO.read(new File("assets/trash-can.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);

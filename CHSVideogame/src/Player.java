@@ -20,15 +20,20 @@ public class Player {
 	private boolean money;
 	private boolean hasJacket;
 	private double heading;
-	private final int dimX = 40;
-	private final int dimY = 80;
+	private int dimX;
+	private int dimY;
 	
 	private final int maxHealth = 10;
 	private final int maxStrength = 10;
 	private final int defaultVel = 1000;
+
+	private long lastMovement;
+	
 	
 	public Player(Game g) {
 		game = g;
+		dimX = 40*g.getMap().getScale()/25;
+		dimY = 80*g.getMap().getScale()/25;
 		try {
 		    sprites = new Image[] {
 		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
