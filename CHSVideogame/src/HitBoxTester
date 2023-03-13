@@ -1,0 +1,13 @@
+public class HitboxTester{
+    Hitbox box;
+    public HitboxTester(Hitbox box){
+        this.box = box;
+    }
+    public static void main(String [] args) {
+		 
+	}
+    public void testCases(){
+        this.box.populateCorners();
+        
+    }
+}
