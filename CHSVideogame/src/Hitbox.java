@@ -82,12 +82,12 @@ public class Hitbox {
 	}
 	
 	public void render(Graphics2D g) {
-		AffineTransform ogTransform = g.getTransform();
-		try {
-			g.transform(ogTransform.createInverse());
-		} catch (NoninvertibleTransformException e) {
-			e.printStackTrace();
-		}
+//		AffineTransform ogTransform = g.getTransform();
+//		try {
+//			g.transform(ogTransform.createInverse());
+//		} catch (NoninvertibleTransformException e) {
+//			e.printStackTrace();
+//		}
 		
 		for(int i = 0; i < linesAmt(); i++) {
 			Line2D.Double l = getLine(i);
@@ -95,7 +95,7 @@ public class Hitbox {
 			g.drawLine((int)l.getX1(), (int)l.getY1(), (int)l.getX2(), (int)l.getY2());
 		}
 		
-		g.setTransform(ogTransform);
+//		g.setTransform(ogTransform);
 		
 	}
 	

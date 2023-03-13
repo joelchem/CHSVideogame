@@ -1,153 +1,84 @@
 import java.util.*;
+
+import javax.imageio.ImageIO;
+
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class OncomingStudent extends DisplayObject{
-	private ArrayList<Image> students;
 	private Game game;
-	private int velocityX, velocityY, positionX, positionY, index;
-	private int playPX, playPY, playDX, playDY;
-	private Player player;
-	private Path path;
-	private int strafe;
-	public final int DIMENSION_X, DIMENSION_Y, GRAZE_HEALTH, HEAD_ON_HEALTH, STRENGTH_DEC,
-		GRAZE_INT, AVOID_VX, AVOID_VY, AVOID_DISX, AVOID_DISY; //these will equal something later, placeholder
-	//AVOID_V what velocity students change to when splitting
-	//AVOID_DIS distance they separate by 
+	private int posX, posY, velocity, targetStrafe, strafe;
+	private double distOnPath, heading;
+	private Image[] sprites;
 	
-	public OncomingStudent(Game g, int posX, int posY, Path p) {
-		super(g, DIMENSION_X, DIMENSION_Y);
-		game = g;
-		positionX = posX;
-		positionY = posY;
-		player = g.getPlayer();
-		index = (int) (Math.random()*students.size());
-		playPX = player.getPositionX();
-		playPY = player.getPositionY();
-		playDX = player.getDimensionX();
-		playDY = player.getDimensionY();
-		path = p;
+	public OncomingStudent(Game g, double distOnPath, int strafe, int vel) {
+		super(g, 0, 0, 0, 40*g.getMap().getScale()/25, 80*g.getMap().getScale()/25);
 		
-		generateList();
+		this.game = g;
+		this.distOnPath = distOnPath;
+		this.strafe = strafe*game.getMap().getScale();
+		this.velocity = vel;
+		this.targetStrafe = strafe;
+
+		
+		Point pos = g.getMap().getPath().getPos(distOnPath, strafe);
+		
+		try {
+		    sprites = new Image[] {
+		    		ImageIO.read(new File("assets/player_front2.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
+		    };
+		} catch (IOException e) {
+			System.out.println("Some or all oncoming student sprites not found.");
+		}
+		
+	}
+	public int getVelocity() {
+		return velocity;
 	}
 	
-	public void setXVelocity(int vel) {
-		velocityX = vel;
+	public int getStrafe() {
+		return strafe;
 	}
 	
-	public void setYVelocity(int vel) {
-		velocityY = vel;
+	public double getHeading() {
+		return game.getPlayer().getHeading();
+	}
+
+	
+	public double getDistOnPath() {
+		return distOnPath;
 	}
 	
-	public int getVelocityX() {
-		return velocityX;
+	public void setDistOnPath(double newDist) {
+		distOnPath = newDist;
 	}
-	
-	public int getVelocityY() {
-		return velocityY;
-	}
-	
-	public int getPositionX() {
-		return positionX;
-	}
-	
-	public int getPositionY() {
-		return positionY;
-	}
-	
-	public void setPositionX(int x) {
-		positionX = x;
-	}
-	
-	public void setPositionY(int y) {
-		positionY = y;
-	}
-	
-	//specialize on collision
+
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
+    }
+    
+    public void setPosX(int x) {
+    	posX = x;
+    }
+    
+    public void setPosY(int y) {
+    	posY = y;
+    }
 	
 	public void onCollision() {
-		super.onCollision();
-		int xOver=0;
-		int yOver=0;
-		//if right of student and left of player overlap
-		if((positionX+(DIMENSION_X/2)>playPX-(playDX/2)&&playPX+(playDX/2)>positionX+(DIMENSION_X/2))) {
-			xOver = Math.abs(positionX+(DIMENSION_X/2)-playPX+(playDX/2));
-		}
 		
-		//if left of student and right of player overlap
-		if(positionX-(DIMENSION_X/2)>playPX+(playDX/2)&&positionX-(DIMENSION_X/2)>playPX-(playDX/2)) {
-			xOver = Math.abs(positionX-(DIMENSION_X/2)-playPX-(playDX/2));
-		}
-		
-		//if top of student overlaps with bottom of player
-		if(positionY-(DIMENSION_Y/2)<playPY+(playDY/2)&&positionY-(DIMENSION_Y/2)>playPY-(playDY/2)) {
-			yOver = Math.abs(positionY-(DIMENSION_Y/2)-playPY-(playPY/2));
-		}
-		
-		//if bottom of student overlaps with top of player
-		if(positionY+(DIMENSION_Y/2)>playPY-(playDY/2)&&positionY+(DIMENSION_Y/2)<playPY+(playDY/2)) {
-			yOver = Math.abs(positionY+(DIMENSION_Y/2)-playPY+(playDY/2));
-		}
-		
-		if(yOver>xOver) {
-			if(yOver>0) {
-				if(yOver>GRAZE_INT) {
-					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
-				} else {
-					player.setHealth(player.getHealth()-GRAZE_HEALTH);
-				}
-			} else if(xOver>0) {
-				if(xOver>GRAZE_INT) {
-					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
-				}else {
-					player.setHealth(player.getHealth()-GRAZE_HEALTH);
-				}
-			}
-		}
 	}
-	
-	private void generateList() {
-		int i = 0;
-		while(game.getOncomingStudents(i)!=null) {
-			currentStudents.add(game.getOncomingStudents(i));
-		}
-	}
-	
 	
 	public void checkProximity() {
-		int posX;
-		int dimX;
-		if(currentStudents.size()>=1) {
-			for(OncomingStudent stud:currentStudents) {
-				if(positionY==stud.getPositionY()) {
-					posX = stud.getPositionX();
-					dimX = stud.getDimensionX()/2;
-					if(positionX>stud.getPositionX()) {
-						if(positionX-(DIMENSION_X/2)==posX+dimX) {
-							stud.setXVelocity(AVOID_VX);
-							stud.setYVelocity(AVOID_VY);
-							velocityX = -AVOID_VX;
-							velocityY = AVOID_VY;
-						}
-					} else if(positionX<stud.getPositionX()) {
-						if(positionX+(DIMENSION_X/2)==posX-dimX) {
-							stud.setXVelocity(-AVOID_VX);
-							stud.setYVelocity(AVOID_VY);
-							velocityX = AVOID_VX;
-							velocityY = AVOID_VY;
-						}
-					}
-				}
-			}
-		}
-		/*
-		 * check for other incoming students where the player is in between them blah blah blah
-		 * 
-		 * if so, update velocity of current oncoming student and other-->they move in opposite directions and dodge each other
-		 * 
-		 */
+		
 	}
 	
-	public Image getImage() {
-		return students.get(index);
+	public Image getSprite() {
+		return sprites[0];
 	}
 }

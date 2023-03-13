@@ -9,7 +9,7 @@ public class CheeseCracker extends DisplayObject {
 	private boolean exists;
 	
 	public CheeseCracker(Game game, Map map, int x, int y, double heading) {
-		super(game,x, y, heading, 80,80);
+		super(game,x, y, heading, 3*map.getScale(),3*map.getScale());
 		try {
 		    Image im = ImageIO.read(new File("assets/cracker.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);

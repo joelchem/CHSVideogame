@@ -25,7 +25,7 @@ public class Player {
 	
 	private final int maxHealth = 10;
 	private final int maxStrength = 10;
-	private final int defaultVel = 1000;
+	private final int defaultVel = 30;
 
 	private long lastMovement;
 	
@@ -67,10 +67,13 @@ public class Player {
 	
 	public void setHeading(double newHead) {
 		heading = newHead;
+		if(game.getMap().getPath().isCurve(distOnPath)) {
+			lastMovement = System.currentTimeMillis();
+		}
 	}
 	
 	public double getHeading() {
-		return heading;
+		return game.getMap().getPath().heading(getDistOnPath());
 	}
 	
 	public double getDistOnPath() {
@@ -110,7 +113,8 @@ public class Player {
 	}
 	
 	public int getVelocity() {
-		return velocity;
+		double timeDelta = ((System.currentTimeMillis()-lastMovement)/1000.);
+		return (int) (velocity*(1+timeDelta/2)*game.getMap().getScale());
 	}
 	
 	public void setCrouch(boolean b) {
@@ -143,10 +147,12 @@ public class Player {
 	}
 	
 	public int getPositionX() {
+//		return (int) game.getMap().getPath().getPos(getDistOnPath(), offset).getX();
 		return positionX;
 	}
 	
 	public int getPositionY() {
+//		return (int) game.getMap().getPath().getPos(getDistOnPath(), offset).getY();
 		return positionY;
 	}
 	public void setPositionX(int posX) {
@@ -168,7 +174,11 @@ public class Player {
 	
 	public void setOffset(int strafe) {
 		Map map = game.getMap();
+		int oldOffset = offset;
 		offset = Math.max(-1*map.getMaxStrafe()*map.getScale(), Math.min(map.getMaxStrafe()*map.getScale(), strafe));
+		if(oldOffset != offset) {
+			lastMovement = System.currentTimeMillis();
+		}
 	}
 	
 	public int getOffset() {

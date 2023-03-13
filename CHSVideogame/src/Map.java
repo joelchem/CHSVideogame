@@ -17,7 +17,7 @@ public class Map {
     ArrayList<DisplayObject> placedObjects;
     
     
-    private int scale = 15;
+    private int scale = 20;
     private int dimX = 797;
     private int dimY = 600;
     
@@ -26,10 +26,11 @@ public class Map {
 
     public Map(Game game, String level) {
         this.game = game;
+        scale = (int)(20*(game.getCamera().getDimX()/700.));
         difficulty=level;
         
         try {
-		    mapImage = ImageIO.read(new File("assets/map_test2_chillnosie.png")).getScaledInstance(dimX, dimY, 0);
+		    mapImage = ImageIO.read(new File("assets/med_test_map.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all map sprit not found.");
 		}

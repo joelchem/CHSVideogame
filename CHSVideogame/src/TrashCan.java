@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 public class TrashCan extends DisplayObject {
     Game theGame;
     TrashCan(Game game, Map map, int x, int y, double heading) {
-		super(game,x, y, heading, 17*4,26*4);
+		super(game,x, y, heading, 3*map.getScale(),4*map.getScale());
 		try {
 		    Image im = ImageIO.read(new File("assets/trash-can.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);

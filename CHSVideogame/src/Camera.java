@@ -6,8 +6,8 @@ public class Camera {
 	
 	private int posX;
 	private int posY;
-	private final int cameraWidth = 700;
-	private final int cameraHeight = 700;
+	private final int cameraWidth = 1000;
+	private final int cameraHeight = 1000;
 	private double heading;
 	private Game game;
 	

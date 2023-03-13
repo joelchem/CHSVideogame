@@ -62,6 +62,12 @@ public class Path extends PathSegment{
 	public double heading(double distOnSegment) {
 		PathSegment targetSeg = segmentAtDist(distOnSegment);
 		return targetSeg.heading(distOnSegment-sumBeforeSegment(targetSeg));
+		
+	}
+	
+	public boolean isCurve(double distOnSegment) {
+		PathSegment targetSeg = segmentAtDist(distOnSegment);
+		return targetSeg instanceof CurvedPath;
 	}
 	
 	public static void main(String[] args) {
