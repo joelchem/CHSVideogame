@@ -1,7 +1,6 @@
 import java.awt.Point;
 
 public class Test {
-
 	
 	public static boolean isPointInsideQuadrilateral(double x, double y, double[] quadX, double[] quadY) {
 	    // Check if the point is inside the bounds of the quadrilateral

@@ -20,6 +20,7 @@ public class timeDate {
 		scores = t.addToString(scores, "jake", 0);
 		scores = t.addToString(scores, "lol", 0);
 		scores = t.addToString(scores, "AGHIOWF", 0);
+	    scores = t.addToString(scores, "Dia Magnetism", 0);
 		t.writeScores(scores);
 	}
 	public String addToString(String scores, String name, int score) {
