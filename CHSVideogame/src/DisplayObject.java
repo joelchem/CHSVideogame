@@ -34,11 +34,13 @@ public class DisplayObject {
     	return new Hitbox(new Point(getX(), getY()), getDimensionX(), getDimensionY(), getHeading());
     }
 
-    public void testForCollision() {
+    public boolean testForCollision() {
     	Player player = game.getPlayer();
     	if(getHitbox().isColliding(player.getHitbox())) {
     		onCollision();
+    		return true;
     	}
+    	return false;
     	
     }
 

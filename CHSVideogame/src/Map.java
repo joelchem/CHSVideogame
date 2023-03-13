@@ -29,7 +29,7 @@ public class Map {
         difficulty=level;
         
         try {
-		    mapImage = ImageIO.read(new File("assets/map_test2_noise.png")).getScaledInstance(dimX, dimY, 0);
+		    mapImage = ImageIO.read(new File("assets/map_test2_chillnosie.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all map sprit not found.");
 		}
@@ -39,7 +39,7 @@ public class Map {
         placedObjects.add(new Dollar(game, 200*scale, 210*scale, -Math.PI/2));
         placedObjects.add(new CheeseCracker(game, 170*scale, 215*scale, -Math.PI/2));
         placedObjects.add(new Jacket(game, 275*scale, 250*scale, -Math.PI));
-        placedObjects.add(new WaterFountain(game, 293*scale, 287*scale, -Math.PI));
+        placedObjects.add(new TrashCan(game, 295*scale, 287*scale, -Math.PI));
        
         
     }
@@ -74,6 +74,15 @@ public class Map {
 		combinePath.addPath(new CurvedPath(new Point(512*scale, 366*scale), new Point(512*scale, 377*scale), Math.PI/2));
 		combinePath.addPath(new StraightPath(new Point(523*scale, 377*scale), new Point(523*scale, 453*scale)));
 		combinePath.addPath(new CurvedPath(new Point(523*scale, 453*scale), new Point(534*scale, 453*scale), -Math.PI/2));
+    	
+//    	combinePath.addPath(new StraightPath(new Point(124*scale, 210*scale), new Point(248*scale, 210*scale)));
+//		combinePath.addPath(new CurvedPath(new Point(248*scale, 210*scale), new Point(248*scale, 199*scale), -Math.PI/2, true));
+//		combinePath.addPath(new StraightPath(new Point(259*scale, 199*scale), new Point(259*scale, 100*scale)));
+//		combinePath.addPath(new CurvedPath(new Point(285*scale, 355*scale), new Point(296*scale, 355*scale), -Math.PI/2));
+//		combinePath.addPath(new StraightPath(new Point(296*scale, 366*scale), new Point(512*scale, 366*scale)));
+//		combinePath.addPath(new CurvedPath(new Point(512*scale, 366*scale), new Point(512*scale, 377*scale), Math.PI/2));
+//		combinePath.addPath(new StraightPath(new Point(523*scale, 377*scale), new Point(523*scale, 453*scale)));
+//		combinePath.addPath(new CurvedPath(new Point(523*scale, 453*scale), new Point(534*scale, 453*scale), -Math.PI/2));
 		return combinePath;
     }
     

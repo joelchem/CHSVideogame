@@ -102,14 +102,14 @@ public class Test {
 //			System.out.print(",("+a.getX()+","+a.getY()+")");
 //		}
 		
-		Hitbox h1 = new Hitbox(new Point(-25,0), 40, 40, Math.PI/4);
+		Hitbox h1 = new Hitbox(new Point(-25,0), 40, 40, 0);
 		Hitbox h2 = new Hitbox(new Point(25,0), 40, 40, Math.PI/4);
 		
 		for(int i = 0; i < h1.cornersAmt(); i++) {
 			Point.Double c1 = h1.getCorner(i);
 			Point.Double c2 = h2.getCorner(i);
 			System.out.print(",("+c1.getX()+","+c1.getY()+")");
-			System.out.print(",("+c2.getX()+","+c2.getY()+")");
+//			System.out.print(",("+c2.getX()+","+c2.getY()+")");
 		}
 		
 		System.out.println("\n"+h1.isColliding(h2)+" "+h2.isColliding(h1));

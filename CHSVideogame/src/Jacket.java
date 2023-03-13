@@ -20,9 +20,10 @@ public class Jacket extends DisplayObject{
 		this.exists = true;
 	}
 	
-	public void testForCollision() {
+	public boolean testForCollision() {
 		if (exists) 
-			super.testForCollision();
+			return super.testForCollision();
+		return false;
 	}
 
     public void onCollision() {

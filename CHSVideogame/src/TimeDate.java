@@ -6,9 +6,9 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;  
 
-public class timeDate {
+public class TimeDate {
 	public static void main(String[] args) {
-		timeDate t = new timeDate();
+		TimeDate t = new TimeDate();
 		String scores = "name,scores,date,time\n";
 		scores = t.addToString(scores, "Sam", 999999);
 		scores = t.addToString(scores, "Nicole", 4200);

@@ -23,9 +23,10 @@ public class WaterFountain extends DisplayObject {
 		this.used = false;
 	}
 	
-	public void testForCollision() {
+	public boolean testForCollision() {
 		if (!used) 
-			super.testForCollision();
+			return super.testForCollision();
+		return false;
 	}
 	
 	public void onCollision() {
