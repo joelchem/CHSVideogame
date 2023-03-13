@@ -19,13 +19,10 @@ public class GameRunner implements ActionListener {
     }
 
     public void startGameloop(){
-       
        Map map = game.getMap();
        for(int i = 0; i < map.placedObjectLen(); i++) {
     	   game.addDisplayObject(map.getPlacedObject(i));
        }
-       
-       
        CameraViewer.startWindow(camView);
        timer = new Timer(20, this);
 	   timer.setInitialDelay(100);

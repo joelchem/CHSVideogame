@@ -1,49 +1,82 @@
 import java.util.*;
 import java.awt.*;
+import java.awt.geom.*;
 
 public class OncomingStudent extends DisplayObject{
 	private ArrayList<Image> students;
 	private Game game;
-	private int velocityX, velocityY, positionX, positionY, index;
-	private int playPX, playPY, playDX, playDY;
+	private int velocity, positionX, positionY, index;
 	private Player player;
-	private Path path;
-	private int strafe;
-	public final int DIMENSION_X, DIMENSION_Y, GRAZE_HEALTH, HEAD_ON_HEALTH, STRENGTH_DEC,
-		GRAZE_INT, AVOID_VX, AVOID_VY, AVOID_DISX, AVOID_DISY; //these will equal something later, placeholder
+	//private Path path;
+	private ArrayList<OncomingStudent> currentStudents;
+	private int offset;
+	private double heading;
+	private int goal;
+	private boolean set;
+	private double distOnPath;
+	private int dimensionX, dimensionY;
+	private int GRAZE_HEALTH, HEAD_ON_HEALTH, AVOID_DISX, AVOID_V; //these will equal something later, placeholder
 	//AVOID_V what velocity students change to when splitting
 	//AVOID_DIS distance they separate by 
 	
-	public OncomingStudent(Game g, int posX, int posY, Path p) {
-		super(g, DIMENSION_X, DIMENSION_Y);
+	public OncomingStudent(Game g, int posX, int posY, double heading, int dimensionX, int dimensionY) {
+		super(g, posX, posY, heading, dimensionX, dimensionY);
 		game = g;
 		positionX = posX;
 		positionY = posY;
 		player = g.getPlayer();
 		index = (int) (Math.random()*students.size());
-		playPX = player.getPositionX();
-		playPY = player.getPositionY();
-		playDX = player.getDimensionX();
-		playDY = player.getDimensionY();
-		path = p;
+		//path = g.getMap().getPath();
+		offset = 0;
 		
 		generateList();
 	}
 	
-	public void setXVelocity(int vel) {
-		velocityX = vel;
+	public double getDistOnPath() {
+		return distOnPath;
 	}
 	
-	public void setYVelocity(int vel) {
-		velocityY = vel;
+	public void setDistOnPath(double dist) {
+		distOnPath = dist;
 	}
 	
-	public int getVelocityX() {
-		return velocityX;
+	private Point getPoint() {
+		return new Point(this.getPositionX(), this.getPositionY());
 	}
 	
-	public int getVelocityY() {
-		return velocityY;
+	public void setHeading(double head) {
+		heading = head;
+	}
+	
+	public double getHeading() {
+		return heading;
+	}
+	
+	public Hitbox getLHitbox() {
+		//hitbox for grazes
+		return new Hitbox(getPoint(), dimensionX+10, dimensionY+10, heading);
+	}
+	
+	public Hitbox getSepHitbox() {
+		//hitbox for detecting whether or not to separate
+		return new Hitbox(getPoint(), dimensionX+10, dimensionY, heading);
+	}
+	
+	public void setOffset(int strafe) {
+		Map map = game.getMap();
+		offset = Math.max(-1*map.getMaxStrafe()*map.getScale(), Math.min(map.getMaxStrafe()*map.getScale(), strafe));
+	}
+	
+	public int getOffset() {
+		return offset;
+	}
+	
+	public void setVelocity(int vel) {
+		velocity = vel;
+	}
+	
+	public int getVelocity() {
+		return velocity;
 	}
 	
 	public int getPositionX() {
@@ -66,43 +99,13 @@ public class OncomingStudent extends DisplayObject{
 	
 	public void onCollision() {
 		super.onCollision();
-		int xOver=0;
-		int yOver=0;
-		//if right of student and left of player overlap
-		if((positionX+(DIMENSION_X/2)>playPX-(playDX/2)&&playPX+(playDX/2)>positionX+(DIMENSION_X/2))) {
-			xOver = Math.abs(positionX+(DIMENSION_X/2)-playPX+(playDX/2));
-		}
-		
-		//if left of student and right of player overlap
-		if(positionX-(DIMENSION_X/2)>playPX+(playDX/2)&&positionX-(DIMENSION_X/2)>playPX-(playDX/2)) {
-			xOver = Math.abs(positionX-(DIMENSION_X/2)-playPX-(playDX/2));
-		}
-		
-		//if top of student overlaps with bottom of player
-		if(positionY-(DIMENSION_Y/2)<playPY+(playDY/2)&&positionY-(DIMENSION_Y/2)>playPY-(playDY/2)) {
-			yOver = Math.abs(positionY-(DIMENSION_Y/2)-playPY-(playPY/2));
-		}
-		
-		//if bottom of student overlaps with top of player
-		if(positionY+(DIMENSION_Y/2)>playPY-(playDY/2)&&positionY+(DIMENSION_Y/2)<playPY+(playDY/2)) {
-			yOver = Math.abs(positionY+(DIMENSION_Y/2)-playPY+(playDY/2));
-		}
-		
-		if(yOver>xOver) {
-			if(yOver>0) {
-				if(yOver>GRAZE_INT) {
-					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
-				} else {
-					player.setHealth(player.getHealth()-GRAZE_HEALTH);
-				}
-			} else if(xOver>0) {
-				if(xOver>GRAZE_INT) {
-					player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
-				}else {
-					player.setHealth(player.getHealth()-GRAZE_HEALTH);
-				}
+		if(this.getLHitbox().isColliding(player.getHitbox())) {
+			if(this.getHitbox().isColliding(player.getHitbox())){
+				player.setHealth(player.getHealth()-HEAD_ON_HEALTH);
+			} else {
+				player.setHealth(player.getHealth()-GRAZE_HEALTH);
 			}
-		}
+		}	
 	}
 	
 	private void generateList() {
@@ -112,42 +115,80 @@ public class OncomingStudent extends DisplayObject{
 		}
 	}
 	
-	
 	public void checkProximity() {
-		int posX;
-		int dimX;
+		Hitbox studentHB;
+		double playerDist = player.getDistOnPath();
+		int playerOff = player.getOffset();
+		Hitbox thisHB = this.getSepHitbox();
+		double target;
 		if(currentStudents.size()>=1) {
-			for(OncomingStudent stud:currentStudents) {
-				if(positionY==stud.getPositionY()) {
-					posX = stud.getPositionX();
-					dimX = stud.getDimensionX()/2;
-					if(positionX>stud.getPositionX()) {
-						if(positionX-(DIMENSION_X/2)==posX+dimX) {
-							stud.setXVelocity(AVOID_VX);
-							stud.setYVelocity(AVOID_VY);
-							velocityX = -AVOID_VX;
-							velocityY = AVOID_VY;
-						}
-					} else if(positionX<stud.getPositionX()) {
-						if(positionX+(DIMENSION_X/2)==posX-dimX) {
-							stud.setXVelocity(-AVOID_VX);
-							stud.setYVelocity(AVOID_VY);
-							velocityX = AVOID_VX;
-							velocityY = AVOID_VY;
-						}
+			for(OncomingStudent student:currentStudents) {
+				studentHB = student.getSepHitbox();
+				if(studentHB.isColliding(thisHB)) {
+					target = ((student.getOffset()+getOffset())/2);
+					if(Math.abs(target-playerOff)<=5&&distOnPath-playerDist<=dimensionY+5) {
+						set = false;
+						student.setSet(false);
+						separate(student);
 					}
 				}
 			}
 		}
-		/*
-		 * check for other incoming students where the player is in between them blah blah blah
-		 * 
-		 * if so, update velocity of current oncoming student and other-->they move in opposite directions and dodge each other
-		 * 
-		 */
+	}
+	
+	public int getGoal() {
+		return goal;
+	}
+	
+	public void setGoal(int x) {
+		goal = x;
+	}
+	
+	private void setSet(boolean tOrFalse) {
+		set = tOrFalse;
+	}
+	
+	private void separate(OncomingStudent student) {
+		int studentOff = student.getOffset();
+		int studentGoal;
+		//goal is ideally set to half of player's width
+		if(set == false) {
+			goal = Math.abs(studentOff+AVOID_DISX);
+			studentGoal = Math.abs(getOffset()+AVOID_DISX);
+			student.setGoal(studentGoal);
+			student.setSet(true);
+			set = true;
+		} else {
+			studentGoal = student.getGoal();
+		}
+		
+		if(studentOff>getOffset()) {
+			if(Math.abs(studentOff)!=studentGoal&&Math.abs(offset)!=goal) {
+				student.setVelocity(AVOID_V);
+				setVelocity(-AVOID_V);
+			} else {
+				student.setVelocity(0);
+				setVelocity(0);
+			}
+		} else {
+			student.setVelocity(-AVOID_V);
+			setVelocity(AVOID_V);
+			if(Math.abs(studentOff)!=studentGoal&&Math.abs(offset)!=goal) {
+				student.setVelocity(AVOID_V);
+				setVelocity(-AVOID_V);
+			} else {
+				student.setVelocity(0);
+				setVelocity(0);
+			}
+		}
 	}
 	
 	public Image getImage() {
 		return students.get(index);
 	}
+	
+	public static void main(String[]args) {
+		
+	}
 }
+
