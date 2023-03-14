@@ -12,7 +12,9 @@ public class Player {
 	private int velocity;
 	private Image[] sprites; // still need sprites
 	private Image crouchSprite;
+	private Image damageSprite;
 	private int positionX, positionY;
+	private int prevPosX, prevPosY;
 	private int offset;
 	private int spriteFrame;
 	private double distOnPath;
@@ -28,6 +30,7 @@ public class Player {
 	private final int defaultVel = 30;
 
 	private long lastMovement;
+	private long lastHit;
 	
 	
 	public Player(Game g) {
@@ -39,6 +42,7 @@ public class Player {
 		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
 		    };
 		    crouchSprite = ImageIO.read(new File("assets/player_crouch.png")).getScaledInstance(dimX, dimY, 0);
+		    damageSprite = ImageIO.read(new File("assets/player_damage1.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all player sprites not found.");
 		}
@@ -51,10 +55,17 @@ public class Player {
 		positionX = 0;
 		positionY = 0;
 		offset = 0;
-		distOnPath = 0;
+		distOnPath = 50;
 		money = false;
 		hasJacket = false;
+		lastHit = 0;
 		
+	}
+	
+	public boolean isInvulnerable() {
+		long diff = System.currentTimeMillis()%1000000-lastHit%1000000;
+//		System.out.println(diff);
+		return diff < 500;
 	}
 	
 	public int getDefaultVelocity() {
@@ -62,7 +73,7 @@ public class Player {
 	}
 	
 	public Hitbox getHitbox() {
-		return new Hitbox(new Point(positionX, positionY), dimX, dimY, heading);
+		return new MotionHitbox(new Point(positionX, positionY), dimX, dimY, heading, new Point(prevPosX, prevPosY));
 	}
 	
 	public void setHeading(double newHead) {
@@ -87,6 +98,9 @@ public class Player {
 	public Image getSprite() {
 		if(getCrouch()) {
 			return crouchSprite;
+		}
+		if(isInvulnerable() && ((int)(System.currentTimeMillis()-lastHit)/100)%2==0) {
+			return damageSprite;
 		}
 		return sprites[spriteFrame];
 	}
@@ -128,7 +142,11 @@ public class Player {
 	
 	public void setHealth(int x) {
 		x = Math.min(maxHealth, Math.max(0, x));
-		System.out.println("player health changed: "+health+" to "+x);
+		if(x!=health)
+			System.out.println("player health changed: "+health+" to "+x);
+		if(x<health) {
+			lastHit = System.currentTimeMillis();
+		}
 		health = x;
 	}
 	
@@ -156,10 +174,12 @@ public class Player {
 		return positionY;
 	}
 	public void setPositionX(int posX) {
+		prevPosX = positionX;
 		positionX = posX;
 	}
 	
 	public void setPositionY(int posY) {
+		prevPosY = positionY;
 		positionY = posY;
 	}
 	

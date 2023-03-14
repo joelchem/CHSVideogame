@@ -14,6 +14,7 @@ public class GameRunner implements ActionListener {
 	
     public GameRunner(){
     	game = new Game();
+    	System.out.println(game.getPlayer().getDistOnPath());
     	camView = new CameraViewer(game);
     	new MainMenu(game, this);
     }
@@ -45,6 +46,8 @@ public class GameRunner implements ActionListener {
     	double timeDelta = (double)(currTime - lastFrame)/1000.;
     	lastFrame = currTime;
     	
+    	System.out.println(game.getPlayer().getDistOnPath());
+    	
     	for(int i = game.oncomingStudentsAmt()-1; i >= 0; i--) {
     		OncomingStudent student = game.getOncomingStudents(i);
     		Point newPos = game.getMap().getPath().getPos(student.getDistOnPath(), student.getStrafe());
@@ -59,7 +62,6 @@ public class GameRunner implements ActionListener {
     		
     	}
     	
-    	System.out.println(game.oncomingStudentsAmt());
     	
     	Player player = game.getPlayer();
         Point strafePos = game.getMap().getPath().getPos(player.getDistOnPath(), player.getOffset());
@@ -73,13 +75,17 @@ public class GameRunner implements ActionListener {
         game.getCamera().setY((int)pos.getY());
         game.getCamera().setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
         player.setDistOnPath(player.getDistOnPath()+(int)(player.getVelocity()*timeDelta));
-        
+
         for(int i = 0; i < game.displayObjectAmt(); i++) {
         	DisplayObject obj = game.getDisplayObject(i);
         	obj.testForCollision();
         }
+        for(int i = 0; i < game.oncomingStudentsAmt(); i++) {
+        	OncomingStudent student = game.getOncomingStudents(i);
+        	student.testForCollision();
+        }
         
-        if((int)(Math.random()*5)==0) {
+        if((int)(Math.random()*7)==0) {
         	double viewDist = game.getCamera().getDimY();
         	int velocity = (int)(Math.random()*10)*game.getMap().getScale();
         	int strafe = (int)(Math.random()*23-11);

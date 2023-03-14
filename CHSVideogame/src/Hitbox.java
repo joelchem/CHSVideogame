@@ -100,9 +100,9 @@ public class Hitbox {
 	}
 	
 	public boolean isColliding(Hitbox other) {
-		for(int i = 0; i < lines.length; i++) {
+		for(int i = 0; i < linesAmt(); i++) {
 			for(int j = 0; j < other.linesAmt(); j++) {
-				if(lines[i].intersectsLine(other.getLine(j))) {
+				if(getLine(i).intersectsLine(other.getLine(j))) {
 					return true;
 				}
 			}

@@ -71,7 +71,8 @@ public class OncomingStudent extends DisplayObject{
     }
 	
 	public void onCollision() {
-		
+		if(!game.getPlayer().isInvulnerable())
+			game.getPlayer().setHealth(game.getPlayer().getHealth()-1);
 	}
 	
 	public void checkProximity() {
