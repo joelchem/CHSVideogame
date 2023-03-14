@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 public class Dollar extends DisplayObject{
 	private Game game;
 	private boolean exists;
-	Dollar(Game game, int x, int y, double heading) {
-		super(game,x, y, heading, 80,60);
+	Dollar(Game game, Map map, int x, int y, double heading) {
+		super(game,x, y, heading, 3*map.getScale(),(int)(2.4*map.getScale()));
 		try {
 		    Image im = ImageIO.read(new File("assets/dollar.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);

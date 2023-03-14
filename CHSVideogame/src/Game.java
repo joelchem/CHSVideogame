@@ -7,29 +7,33 @@ public class Game {
 	private ArrayList<OncomingStudent> oncomingStudents;
 	private ArrayList<DisplayObject> displayObjects;
 	private Player player;
-	private int score;
 	private File scoreBoard;
 	private double remainingDistance;
 	private String difficulty;
-	private boolean gameOver;
-	private boolean lost;
+	private boolean started;
 
 	public Game() {
-		map = new Map(this, "medium");
+		started = false;
 		difficulty = "medium";
 		camera = new Camera(this);
+		map = new Map(this, "medium");
 		oncomingStudents = new ArrayList<OncomingStudent>();
 		displayObjects = new ArrayList<DisplayObject>();
 		player = new Player(this);
-		score = 0;
 		scoreBoard = new File("\\CHSVideogame\\assets\\scoreBoard.txt");
 		try {
 			scoreBoard.createNewFile();
 		} catch (Exception ex) {
-			System.out.println("LET ME IN!!!!!!");
 		}
 		difficulty = " ";
-		gameOver = false;
+	}
+	
+	public void setStart(boolean s) {
+		started = s;
+	}
+	
+	public boolean getStart() {
+		return started;
 	}
 	
 
@@ -45,8 +49,8 @@ public class Game {
 		displayObjects.add(obj);
 	}
 
-	public void removeDisplayObject(int index) {
-		displayObjects.remove(index);
+	public void removeOncomingStudent(int index) {
+		oncomingStudents.remove(index);
 	}
 
 	public OncomingStudent getOncomingStudents(int index) {
@@ -84,14 +88,6 @@ public class Game {
 		player = play;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int x) {
-		score += x;
-	}
-
 	public File getScoreBoardFile() {
 		return scoreBoard;
 	}
@@ -112,26 +108,15 @@ public class Game {
 		remainingDistance -= x;
 	}
 
-	public void setGameOver() {
-		int health = player.getHealth();
-		int strength = player.getStrength();
-		if (health == 0 || strength == 0) {
-			gameOver = true;
-			lost = true;
-		} else if (remainingDistance == 0) {
-			gameOver = true;
-			lost = false;
-		} else {
-			gameOver = false;
-		}
-	}
-	// also sets lost
-
-	public boolean getLost() {
-		return lost;
+	private void gameOver() {
+		
 	}
 
-	public boolean getGameOver() {
-		return gameOver;
+	public void gameLost() {
+
+	}
+
+	public void gameWon() {
+		
 	}
 }

@@ -84,34 +84,36 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		
-//		double[] quadX = {1.0, 3.0, 2.0, 0.0};
-//		double[] quadY = {1.0, 2.0, 4.0, 3.0};
-//		double x = .2;
-//		double y = 2.6;
-//		boolean inside = isPointInsideQuadrilateral(x, y, quadX, quadY);
-//		System.out.println(inside); // prints "true"
 //		
-//		Point.Double[] points = findRotatedRectangleCorners(
-//				new Point.Double(2, 2),
-//				-Math.PI/5,
-//				10,
-//				10
-//		);
-//		for(Point.Double a : points) {
-//			System.out.print(",("+a.getX()+","+a.getY()+")");
+////		double[] quadX = {1.0, 3.0, 2.0, 0.0};
+////		double[] quadY = {1.0, 2.0, 4.0, 3.0};
+////		double x = .2;
+////		double y = 2.6;
+////		boolean inside = isPointInsideQuadrilateral(x, y, quadX, quadY);
+////		System.out.println(inside); // prints "true"
+////		
+////		Point.Double[] points = findRotatedRectangleCorners(
+////				new Point.Double(2, 2),
+////				-Math.PI/5,
+////				10,
+////				10
+////		);
+////		for(Point.Double a : points) {
+////			System.out.print(",("+a.getX()+","+a.getY()+")");
+////		}
+//		
+//		Hitbox h1 = new Hitbox(new Point(-25,0), 40, 40, 0);
+//		Hitbox h2 = new Hitbox(new Point(25,0), 40, 40, Math.PI/4);
+//		
+//		for(int i = 0; i < h1.cornersAmt(); i++) {
+//			Point.Double c1 = h1.getCorner(i);
+//			Point.Double c2 = h2.getCorner(i);
+//			System.out.print(",("+c1.getX()+","+c1.getY()+")");
+////			System.out.print(",("+c2.getX()+","+c2.getY()+")");
 //		}
+//		
+//		System.out.println("\n"+h1.isColliding(h2)+" "+h2.isColliding(h1));
+	
 		
-		Hitbox h1 = new Hitbox(new Point(-25,0), 40, 40, 0);
-		Hitbox h2 = new Hitbox(new Point(25,0), 40, 40, Math.PI/4);
-		
-		for(int i = 0; i < h1.cornersAmt(); i++) {
-			Point.Double c1 = h1.getCorner(i);
-			Point.Double c2 = h2.getCorner(i);
-			System.out.print(",("+c1.getX()+","+c1.getY()+")");
-//			System.out.print(",("+c2.getX()+","+c2.getY()+")");
-		}
-		
-		System.out.println("\n"+h1.isColliding(h2)+" "+h2.isColliding(h1));
 	}
 }

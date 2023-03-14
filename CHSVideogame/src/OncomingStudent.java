@@ -1,10 +1,18 @@
 import java.util.*;
+
+import javax.imageio.ImageIO;
+
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.geom.*;
+=======
+import java.io.File;
+import java.io.IOException;
+>>>>>>> cd546d79894d8373542908296252304a6bd8b9da
 
 public class OncomingStudent extends DisplayObject{
-	private ArrayList<Image> students;
 	private Game game;
+<<<<<<< HEAD
 	private int velocity, positionX, positionY, index;
 	private Player player;
 	//private Path path;
@@ -28,10 +36,38 @@ public class OncomingStudent extends DisplayObject{
 		index = (int) (Math.random()*students.size());
 		//path = g.getMap().getPath();
 		offset = 0;
+=======
+	private int posX, posY, velocity, targetStrafe, strafe;
+	private double distOnPath, heading;
+	private Image[] sprites;
+	
+	public OncomingStudent(Game g, double distOnPath, int strafe, int vel) {
+		super(g, 0, 0, 0, 40*g.getMap().getScale()/25, 80*g.getMap().getScale()/25);
+>>>>>>> cd546d79894d8373542908296252304a6bd8b9da
 		
-		generateList();
+		this.game = g;
+		this.distOnPath = distOnPath;
+		this.strafe = strafe*game.getMap().getScale();
+		this.velocity = vel;
+		this.targetStrafe = strafe;
+
+		
+		Point pos = g.getMap().getPath().getPos(distOnPath, strafe);
+		
+		try {
+		    sprites = new Image[] {
+		    		ImageIO.read(new File("assets/player_front2.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
+		    };
+		} catch (IOException e) {
+			System.out.println("Some or all oncoming student sprites not found.");
+		}
+		
+	}
+	public int getVelocity() {
+		return velocity;
 	}
 	
+<<<<<<< HEAD
 	public double getDistOnPath() {
 		return distOnPath;
 	}
@@ -181,10 +217,51 @@ public class OncomingStudent extends DisplayObject{
 				setVelocity(0);
 			}
 		}
+=======
+	public int getStrafe() {
+		return strafe;
 	}
 	
-	public Image getImage() {
-		return students.get(index);
+	public double getHeading() {
+		return game.getPlayer().getHeading();
+	}
+
+	
+	public double getDistOnPath() {
+		return distOnPath;
+	}
+	
+	public void setDistOnPath(double newDist) {
+		distOnPath = newDist;
+	}
+
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
+    }
+    
+    public void setPosX(int x) {
+    	posX = x;
+    }
+    
+    public void setPosY(int y) {
+    	posY = y;
+    }
+	
+	public void onCollision() {
+		
+	}
+	
+	public void checkProximity() {
+		
+>>>>>>> cd546d79894d8373542908296252304a6bd8b9da
+	}
+	
+	public Image getSprite() {
+		return sprites[0];
 	}
 	
 	public static void main(String[]args) {

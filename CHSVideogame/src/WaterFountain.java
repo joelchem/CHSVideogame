@@ -10,8 +10,8 @@ public class WaterFountain extends DisplayObject {
 	private Game game;
 	private boolean used;
 	
-	WaterFountain(Game game, int x, int y, double heading) {
-		super(game,x, y, heading, 26*6,26*6);
+	WaterFountain(Game game, Map map, int x, int y, double heading) {
+		super(game,x, y, heading, 4*map.getScale(),4*map.getScale());
 		try {
 		    Image im = ImageIO.read(new File("assets/water_fountain.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);

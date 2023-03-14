@@ -8,6 +8,7 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
@@ -22,7 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class CameraViewer extends JPanel implements MouseMotionListener {
+public class CameraViewer extends JPanel implements MouseMotionListener, MouseListener {
 	
 	private Game game;
 	
@@ -43,6 +44,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		cameraHeight = game.getCamera().getDimY();
 		
 		addMouseMotionListener(this);
+		addMouseListener(this);
 
 		
 		Path combinePath = new Path();
@@ -86,6 +88,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		Graphics2D g = (Graphics2D) graphics;
 
 		AffineTransform camTransform = game.getCamera().getTransform();
+		
 		g.transform(camTransform);
 		
 		
@@ -94,8 +97,13 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		
 		
 		
-		for(int i = 0; i < game.displayObjectAmt(); i++) {
-			DisplayObject obj = game.getDisplayObject(i);
+		for(int i = 0; i < game.displayObjectAmt()+game.oncomingStudentsAmt(); i++) {
+			DisplayObject obj;
+			if(i < game.displayObjectAmt()) {
+				obj = game.getDisplayObject(i);
+			} else {
+				obj = game.getOncomingStudents(i-game.displayObjectAmt());
+			}
 			
 			Image sprite = obj.getSprite();
 			Point objPos = new Point(obj.getX(), obj.getY());
@@ -114,8 +122,11 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		for(int i = 0; i < game.oncomingStudentsAmt(); i++) {
 			OncomingStudent student = game.getOncomingStudents(i);
 			Image sprite = student.getSprite();
-			g.drawImage(sprite, student.getX()-student.getDimensionX()/2,
-					student.getY()-student.getDimensionY()/2, this);
+			Point studentPos = new Point(student.getX(), student.getY());
+			
+//			AffineTransform studentTransform = game.getCamera().getObjectTransform(
+//					studentPos, student.getHeading(), student.getDimensionX(), student.getD
+//			);
 		}
 		
 		Player player = game.getPlayer();
@@ -160,6 +171,36 @@ public class CameraViewer extends JPanel implements MouseMotionListener {
 		
 		int offset = game.getCamera().getDimX()/2-(int)mousePos.getX();
 		game.getPlayer().setOffset(offset);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		game.setStart(true);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
