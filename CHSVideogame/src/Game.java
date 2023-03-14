@@ -20,7 +20,7 @@ public class Game {
 		camera = new Camera(this);
 		oncomingStudents = new ArrayList<OncomingStudent>();
 		displayObjects = new ArrayList<DisplayObject>();
-		player = new Player(this);
+		player = new Player(this);	
 		score = 0;
 		scoreBoard = new File("\\CHSVideogame\\assets\\scoreBoard.txt");
 		try {

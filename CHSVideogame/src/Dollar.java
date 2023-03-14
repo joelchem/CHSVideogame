@@ -10,7 +10,7 @@ public class Dollar extends DisplayObject{
 	Dollar(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 80,60);
 		try {
-		    Image im = ImageIO.read(new File("assets/dollar.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(new File("CHSVideogame/assets/dollar.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {

@@ -11,7 +11,7 @@ public class CheeseCracker extends DisplayObject {
 	public CheeseCracker(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 80,80);
 		try {
-		    Image im = ImageIO.read(new File("assets/cracker.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(new File("CHSVideogame/assets/cracker.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {

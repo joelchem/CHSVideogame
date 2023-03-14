@@ -29,12 +29,12 @@ public class Player {
 		game = g;
 		try {
 		    sprites = new Image[] {
-		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
+		    		ImageIO.read(new File("CHSVideogame/assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
 		    };
 		} catch (IOException e) {
 			System.out.println("Some or all player sprites not found.");
 		}
-		
+		System.out.println("Frame Located");		
 		spriteFrame = 0;
 		health = 6;
 		strength = 6;

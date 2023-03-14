@@ -29,9 +29,9 @@ public class Map {
         difficulty=level;
         
         try {
-		    mapImage = ImageIO.read(new File("assets/map_test2_noise.png")).getScaledInstance(dimX, dimY, 0);
+		    mapImage = ImageIO.read(new File("CHSVideogame/assets/map_test2_noise.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
-			System.out.println("Some or all map sprit not found.");
+			System.out.println("Some or all map sprites not found.");
 		}
         
         placedObjects = new ArrayList<DisplayObject>();

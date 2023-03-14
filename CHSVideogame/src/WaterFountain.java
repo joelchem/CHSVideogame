@@ -13,7 +13,7 @@ public class WaterFountain extends DisplayObject {
 	WaterFountain(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 26*6,26*6);
 		try {
-		    Image im = ImageIO.read(new File("assets/water_fountain.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(new File("CHSVideogame/assets/water_fountain.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {

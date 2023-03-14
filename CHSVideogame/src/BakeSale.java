@@ -12,7 +12,7 @@ public class BakeSale extends DisplayObject{
 	public BakeSale(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 46*3,44*3);
 		try {
-		    Image im = ImageIO.read(new File("assets/bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(new File("CHSVideogame/assets/bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {

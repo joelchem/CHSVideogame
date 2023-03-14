@@ -10,7 +10,7 @@ public class Jacket extends DisplayObject{
 	Jacket(Game game, int x, int y, double heading) {
 		super(game,x, y, heading, 80,80);
 		try {
-		    Image im = ImageIO.read(new File("assets/jacket.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(new File("CHSVideogame/assets/jacket.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {
