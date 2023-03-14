@@ -54,21 +54,21 @@ public class OncomingStudent extends DisplayObject{
 		distOnPath = newDist;
 	}
 
-    public int getX() {
-        return posX;
-    }
+	public int getX() {
+		return posX;
+	}
 
-    public int getY() {
-        return posY;
-    }
-    
-    public void setPosX(int x) {
-    	posX = x;
-    }
-    
-    public void setPosY(int y) {
-    	posY = y;
-    }
+	public int getY() {
+		return posY;
+	}
+
+	public void setPosX(int x) {
+		posX = x;
+	}
+
+	public void setPosY(int y) {
+		posY = y;
+	}
 	
 	public void onCollision() {
 		if(!game.getPlayer().isInvulnerable())
