@@ -17,23 +17,24 @@ public class GameTestDriver {
 		System.out.println(g.getDifficulty());
 		
 		Image placeHolder = new BufferedImage(12, 12, 10);
-		CheeseCracker cheeseCrack = new CheeseCracker(5,7,g,placeHolder);
+		CheeseCracker cheeseCrack = new CheeseCracker(g,5,7,10);
 		g.addDisplayObject(cheeseCrack);
 		System.out.print("CheeseCracker:");
 		System.out.println(g.getDisplayObject(0));
 		
 		Image placeHolder2 = new BufferedImage(12, 12, 10);
-		CheeseCracker cheeseCrack2 = new CheeseCracker(5,7,g,placeHolder2);
+		CheeseCracker cheeseCrack2 = new CheeseCracker(g,5,7,10);
 		g.addDisplayObject(cheeseCrack2);
 		System.out.print("CheeseCracker:");
 		System.out.println(g.getDisplayObject(1));
 		
-		Image placeHolder3 = new BufferedImage(12, 12, 10);
-		Jacket Jack = new Jacket(5,7,g,placeHolder3);
+		Image placeHolder3 = new BufferedImage(14, 13, 10);
+		Jacket Jack = new Jacket(g,5,7,28);
 		g.addDisplayObject(Jack);
 		System.out.print("Jacket:");
 		System.out.println(g.getDisplayObject(2));
 		
+		Game greg = new Game();
 		//do tests for oncoming students. 
 	}
 }

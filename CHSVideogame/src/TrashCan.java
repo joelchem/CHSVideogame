@@ -6,9 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class TrashCan extends DisplayObject {
-    Game theGame;
+	Game theGame;
     TrashCan(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 3*map.getScale(),4*map.getScale());
+
 		try {
 		    Image im = ImageIO.read(new File("assets/trash-can.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
@@ -32,12 +33,16 @@ public class TrashCan extends DisplayObject {
 	
 	public Hitbox getHitbox() {
     	return new Hitbox(new Point(getX(), getY()), getDimensionX(), getDimensionY(), getHeading());
+
     }
 	
     public void onCollision() {
-        // implement separate collision test? cuz you have to come up behind the trashcan, not bump
+        // implement separate collision test? cuz you have to come up behind the trash can, not bump
         theGame.getPlayer().setCrouch(true);
+        // somewhere it will need to stop the movement for while the player is behind the trash can
+
         // somewhere it will need to stop the movement for while the player is behind the trashcan
         theGame.getPlayer().setVelocity(0);
+
     }
 }

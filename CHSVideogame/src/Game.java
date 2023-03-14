@@ -60,7 +60,6 @@ public class Game {
 	public void addOncomingStudent(OncomingStudent student) {
 		oncomingStudents.add(student);
 	}
-	
 	public int oncomingStudentsAmt() {
 		return oncomingStudents.size();
 	}
