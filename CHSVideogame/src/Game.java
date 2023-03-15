@@ -10,30 +10,20 @@ public class Game {
 	private File scoreBoard;
 	private double remainingDistance;
 	private String difficulty;
-	private boolean started;
 
 	public Game() {
-		started = false;
 		difficulty = "medium";
 		camera = new Camera(this);
 		map = new Map(this, "medium");
 		oncomingStudents = new ArrayList<OncomingStudent>();
 		displayObjects = new ArrayList<DisplayObject>();
 		player = new Player(this);
-		scoreBoard = new File("\\CHSVideogame\\assets\\scoreBoard.txt");
+		scoreBoard = new File("assets/scoreBoard.txt");
 		try {
 			scoreBoard.createNewFile();
 		} catch (Exception ex) {
 		}
 		difficulty = " ";
-	}
-	
-	public void setStart(boolean s) {
-		started = s;
-	}
-	
-	public boolean getStart() {
-		return started;
 	}
 	
 
@@ -108,15 +98,4 @@ public class Game {
 		remainingDistance -= x;
 	}
 
-	private void gameOver() {
-		
-	}
-
-	public void gameLost() {
-
-	}
-
-	public void gameWon() {
-		
-	}
 }

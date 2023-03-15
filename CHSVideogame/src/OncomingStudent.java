@@ -39,6 +39,7 @@ public class OncomingStudent extends DisplayObject{
 	public void setDistOnPath(double dist) {
 		distOnPath = dist;
 	}
+<<<<<<< HEAD
 	
 	private Point getPoint() {
 		return new Point(this.getPositionX(), this.getPositionY());
@@ -113,6 +114,28 @@ public class OncomingStudent extends DisplayObject{
 		while(game.getOncomingStudents(i)!=null) {
 			currentStudents.add(game.getOncomingStudents(i));
 		}
+=======
+
+	public int getX() {
+		return posX;
+	}
+
+	public int getY() {
+		return posY;
+	}
+
+	public void setPosX(int x) {
+		posX = x;
+	}
+
+	public void setPosY(int y) {
+		posY = y;
+	}
+	
+	public void onCollision() {
+		if(!game.getPlayer().isInvulnerable())
+			game.getPlayer().setHealth(game.getPlayer().getHealth()-1);
+>>>>>>> 6fb8592e2edf329363c3174932a130d0bce8ee8e
 	}
 	
 	public void checkProximity() {
@@ -139,6 +162,7 @@ public class OncomingStudent extends DisplayObject{
 	public int getGoal() {
 		return goal;
 	}
+<<<<<<< HEAD
 	
 	public void setGoal(int x) {
 		goal = x;
@@ -192,3 +216,6 @@ public class OncomingStudent extends DisplayObject{
 	}
 }
 
+=======
+}
+>>>>>>> 6fb8592e2edf329363c3174932a130d0bce8ee8e
