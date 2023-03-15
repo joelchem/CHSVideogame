@@ -26,7 +26,7 @@ public class Player {
 	private int dimY;
 	
 	private final int maxHealth = 10;
-	private final int maxStrength = 10;
+	private final int maxStrength = 20000;
 	private final int defaultVel = 30;
 
 	private long lastMovement;
@@ -48,8 +48,8 @@ public class Player {
 		}
 		
 		spriteFrame = 0;
-		health = 6;
-		strength = 6;
+		health = 10;
+		strength = 20000;
 		isCrouching = false;
 		velocity = defaultVel;
 		positionX = 0;
@@ -114,7 +114,7 @@ public class Player {
 	}
 	
 	public void updateMoney(boolean b) {
-		System.out.println("player money changed: "+money+" to "+b);
+//		System.out.println("player money changed: "+money+" to "+b);
 		money = b;
 	}
 	
@@ -128,6 +128,8 @@ public class Player {
 	
 	public int getVelocity() {
 		double timeDelta = ((System.currentTimeMillis()-lastMovement)/1000.);
+		if(lastMovement == 0)
+			timeDelta = 0;
 		return (int) (velocity*(1+timeDelta/2)*game.getMap().getScale());
 	}
 	
@@ -142,8 +144,8 @@ public class Player {
 	
 	public void setHealth(int x) {
 		x = Math.min(maxHealth, Math.max(0, x));
-		if(x!=health)
-			System.out.println("player health changed: "+health+" to "+x);
+		if(x!=health) {}
+//			System.out.println("player health changed: "+health+" to "+x);
 		if(x<health) {
 			lastHit = System.currentTimeMillis();
 		}
@@ -154,9 +156,17 @@ public class Player {
 		return health;
 	}
 	
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+	
+	public int getMaxStrength() {
+		return maxStrength;
+	}
+	
 	public void setStrength(int x) {
-		x = Math.min(maxHealth, Math.max(0, x));
-		System.out.println("player strength changed: "+strength+" to "+x);
+		x = Math.min(maxStrength, Math.max(0, x));
+//		System.out.println("player strength changed: "+strength+" to "+x);
 		strength = x;
 	}
 	
@@ -184,7 +194,7 @@ public class Player {
 	}
 	
 	public void setJacket(boolean b) {
-		System.out.println("player jacket changed: "+hasJacket+" to "+b);
+//		System.out.println("player jacket changed: "+hasJacket+" to "+b);
 		hasJacket = b;
 	}
 	

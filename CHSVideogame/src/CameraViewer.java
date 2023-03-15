@@ -26,6 +26,7 @@ import javax.swing.Timer;
 public class CameraViewer extends JPanel implements MouseMotionListener, MouseListener {
 	
 	private Game game;
+	private GameRunner gameRunner;
 	
 	int cameraX = 0;
 	int cameraY = 0;
@@ -43,8 +44,9 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 	Image strengthBar;
 	Image emptyBar;
 	
-	CameraViewer(Game g) {
+	CameraViewer(Game g, GameRunner gr) {
 		game = g;
+		gameRunner = gr;
 		cameraWidth = game.getCamera().getDimX();
 		cameraHeight = game.getCamera().getDimY();
 		
@@ -114,7 +116,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 			g.drawImage(obj.getSprite(),  objTransform, this);
 //			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2,
 //					obj.getY()-obj.getDimensionY()/2, this);
-			obj.getHitbox().render(g);
+//			obj.getHitbox().render(g);
 			
 
 		}
@@ -137,21 +139,46 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 //		System.out.println(playerTransform+" "+player.getHeading());
 		g.drawImage(player.getSprite(), playerTransform, this);
 		
-		game.getPlayer().getHitbox().render(g);
+//		game.getPlayer().getHitbox().render(g);
 		
 		g.setTransform(originalTransform);
 		
 		int gap = (int) (game.getCamera().getDimX()*.01);
 		int barWidth = (int) (game.getCamera().getDimX()*.32);
 		
-		g.drawImage(healthBar, gap, gap, null);
-		g.drawImage(strengthBar, gap*2+barWidth, gap, null);
-		g.drawImage(distBar, gap*3+barWidth*2, gap, null);
+		int height = (int) (game.getCamera().getDimX()*.3*7./48.);
+		
+		Player p = game.getPlayer();
+		
+		Image healthBarActual = cropBarImage(healthBar, (double)p.getHealth()/(double)p.getMaxHealth());
+		Image strengthBarActual = cropBarImage(strengthBar, (double)p.getStrength()/(double)p.getMaxStrength());
+		Image distBarActual = cropBarImage(distBar, p.getDistOnPath()/game.getMap().getPath().length());
+		
+		g.drawImage(emptyBar, gap, gap, null);
+		g.drawImage(emptyBar, gap*2+barWidth, gap, null);
+		g.drawImage(emptyBar, gap*3+barWidth*2, gap, null);
+		
+		g.drawImage(healthBarActual, gap, gap, null);
+		g.drawImage(strengthBarActual, gap*2+barWidth, gap, null);
+		g.drawImage(distBarActual, gap*3+barWidth*2, gap, null);
+		
+		
 
 	}
 	
+	private Image cropBarImage(Image barImage, double ratio) {
+		if((int)(barImage.getWidth(null)*ratio) <= 0)
+			return null;
+		if(ratio > 1)
+			ratio = 1;
+		BufferedImage bimage = new BufferedImage(barImage.getWidth(null), barImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D bGr = bimage.createGraphics();
+	    bGr.drawImage(barImage, 0, 0, null);
+	    bGr.dispose();
+	    return bimage.getSubimage(0, 0, (int)(barImage.getWidth(null)*ratio), barImage.getHeight(null));
+	}
+	
 	public static void startWindow(CameraViewer cam) {
-		System.out.println(cam.getDimX()+" "+cam.getDimY());
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		cam.setSize(new Dimension(cam.getDimX(), cam.getDimY()));
 		cam.setPreferredSize(new Dimension(cam.getDimX(), cam.getDimY()));
@@ -196,7 +223,10 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		game.setStart(true);
+		
+		if(!gameRunner.getStarted()) {
+			gameRunner.startGameloop();
+		}
 		
 	}
 
