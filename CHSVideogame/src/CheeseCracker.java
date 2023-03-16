@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 public class CheeseCracker extends DisplayObject {
 	private Game game;
-	private final int strengthRestored = 5;
+	private final int strengthRestored = 5000;
 	private boolean exists;
 	
 	public CheeseCracker(Game game, Map map, int x, int y, double heading) {
@@ -24,7 +24,7 @@ public class CheeseCracker extends DisplayObject {
 	public void onCollision() {
 		Player player = game.getPlayer();
 		exists = false; 
-		player.setStrength(player.getHealth()+strengthRestored);
+		player.setStrength(player.getStrength()+strengthRestored);
 		setSprite(null);
 	}
 	

@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -26,6 +27,7 @@ import javax.swing.Timer;
 public class CameraViewer extends JPanel implements MouseMotionListener, MouseListener {
 	
 	private Game game;
+	private GameRunner gameRunner;
 	
 	int cameraX = 0;
 	int cameraY = 0;
@@ -38,8 +40,14 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 	Path path;
 	Timer timer;
 	
-	CameraViewer(Game g) {
+	Image distBar;
+	Image healthBar;
+	Image strengthBar;
+	Image emptyBar;
+	
+	CameraViewer(Game g, GameRunner gr) {
 		game = g;
+		gameRunner = gr;
 		cameraWidth = game.getCamera().getDimX();
 		cameraHeight = game.getCamera().getDimY();
 		
@@ -47,23 +55,18 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		addMouseListener(this);
 
 		
-		Path combinePath = new Path();
-//		combinePath.addPath(new StraightPath(new Point(0, 0), new Point(0, 500)));
-//		combinePath.addPath(new CurvedPath(new Point(0, 500), new Point(100, 500), -Math.PI/2));
-//		combinePath.addPath(new StraightPath(new Point(100, 600), new Point(300, 600)));
-//		combinePath.addPath(new CurvedPath(new Point(300, 600), new Point(300,700), Math.PI/2));
-//		combinePath.addPath(new StraightPath(new Point(400, 700), new Point(400, 1000)));
-//		combinePath.addPath(new CurvedPath(new Point(400, 1000), new Point(300, 1000), Math.PI/2, true));
-//		combinePath.addPath(new StraightPath(new Point(300, 1100), new Point(-150, 1100)));
-//		combinePath.addPath(new CurvedPath(new Point(-150, 1100), new Point(-150, 1000), Math.PI/2));
-//		combinePath.addPath(new StraightPath(new Point(-250, 1000), new Point(-250, 100)));
-//		combinePath.addPath(new CurvedPath(new Point(-250, 100), new Point(-350, 100), -Math.PI/2));
-//		combinePath.addPath(new StraightPath(new Point(-350, 0), new Point(-800, 0)));
-//		combinePath.addPath(new CurvedPath(new Point(-800, 0), new Point(-800, 100), -Math.PI/2, true));
-//		combinePath.addPath(new StraightPath(new Point(-900, 100), new Point(-900, 800)));
-
+		try {
+			int barDimX = (int) (game.getCamera().getDimX()*0.3);
+			int barDimY = (int) (game.getCamera().getDimX()*.3*7./48.);
+		    emptyBar = ImageIO.read(new File("assets/empty_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    healthBar = ImageIO.read(new File("assets/health_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    strengthBar = ImageIO.read(new File("assets/strength_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    distBar = ImageIO.read(new File("assets/distance_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    
+		} catch (IOException e) {
+			System.out.println("bake sale sprites not found.");
+		}
 		
-		path = combinePath;
 	}
 	
 	public Timer getTimer() {
@@ -88,7 +91,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		Graphics2D g = (Graphics2D) graphics;
 
 		AffineTransform camTransform = game.getCamera().getTransform();
-		
+		AffineTransform originalTransform = g.getTransform();
 		g.transform(camTransform);
 		
 		
@@ -114,7 +117,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 			g.drawImage(obj.getSprite(),  objTransform, this);
 //			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2,
 //					obj.getY()-obj.getDimensionY()/2, this);
-			obj.getHitbox().render(g);
+//			obj.getHitbox().render(g);
 			
 
 		}
@@ -137,12 +140,52 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 //		System.out.println(playerTransform+" "+player.getHeading());
 		g.drawImage(player.getSprite(), playerTransform, this);
 		
-		game.getPlayer().getHitbox().render(g);
+//		game.getPlayer().getHitbox().render(g);
+		
+		g.setTransform(originalTransform);
+		
+		int gap = (int) (game.getCamera().getDimX()*.01);
+		int barWidth = (int) (game.getCamera().getDimX()*.32);
+		
+		int height = (int) (game.getCamera().getDimX()*.3*7./48.);
+		
+		Player p = game.getPlayer();
+		
+		Image healthBarActual = cropBarImage(healthBar, (double)p.getHealth()/(double)p.getMaxHealth());
+		Image strengthBarActual = cropBarImage(strengthBar, (double)p.getStrength()/(double)p.getMaxStrength());
+		Image distBarActual = cropBarImage(distBar, p.getDistOnPath()/game.getMap().getPath().length());
+		
+		g.drawImage(emptyBar, gap, gap, null);
+		g.drawImage(emptyBar, gap*2+barWidth, gap, null);
+		g.drawImage(emptyBar, gap*3+barWidth*2, gap, null);
+		
+		g.drawImage(healthBarActual, gap, gap, null);
+		g.drawImage(strengthBarActual, gap*2+barWidth, gap, null);
+		g.drawImage(distBarActual, gap*3+barWidth*2, gap, null);
+		
+		g.setColor(Color.white);
+		g.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
+		g.drawString("Health", gap*3, gap+2*height/3);
+		g.drawString("Strength", gap*4+barWidth, gap+2*height/3);
+		g.drawString("Distance", gap*5+barWidth*2, gap+2*height/3);
+		
+		
 
 	}
 	
+	private Image cropBarImage(Image barImage, double ratio) {
+		if((int)(barImage.getWidth(null)*ratio) <= 0)
+			return null;
+		if(ratio > 1)
+			ratio = 1;
+		BufferedImage bimage = new BufferedImage(barImage.getWidth(null), barImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D bGr = bimage.createGraphics();
+	    bGr.drawImage(barImage, 0, 0, null);
+	    bGr.dispose();
+	    return bimage.getSubimage(0, 0, (int)(barImage.getWidth(null)*ratio), barImage.getHeight(null));
+	}
+	
 	public static void startWindow(CameraViewer cam) {
-		System.out.println(cam.getDimX()+" "+cam.getDimY());
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		cam.setSize(new Dimension(cam.getDimX(), cam.getDimY()));
 		cam.setPreferredSize(new Dimension(cam.getDimX(), cam.getDimY()));
@@ -187,7 +230,10 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		game.setStart(true);
+		
+		if(!gameRunner.getStarted()) {
+			gameRunner.startGameloop();
+		}
 		
 	}
 

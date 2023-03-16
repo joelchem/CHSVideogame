@@ -28,6 +28,16 @@ public class TrashCan extends DisplayObject {
 			p.setCrouch(false);
 			p.setVelocity(p.getDefaultVelocity());
 		}
+		
+		for(int i = 0; i < theGame.oncomingStudentsAmt(); i++) {
+			OncomingStudent student = theGame.getOncomingStudents(i);
+			if(student.getHitbox().isColliding(getHitbox())) {
+				
+				student.setTargetStrafe((int)(student.getStrafe()-Math.signum(student.getStrafe())*getDimensionX()));
+			
+			}
+		}
+		
 		return collisionResult;
 	}
 	
