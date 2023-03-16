@@ -132,7 +132,7 @@ public class GameRunner implements ActionListener {
         	student.testForCollision();
         }
         
-        if((int)(Math.random()*7)==0 && game.oncomingStudentsAmt() < 20) {
+        if((int)(Math.random()*7)==0 && game.oncomingStudentsAmt() < 15) {
         	double viewDist = game.getCamera().getDimY();
         	int velocity = (int)(Math.random()*6+3)*game.getMap().getScale();
         	int strafe = (int)(Math.random()*23-11);

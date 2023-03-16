@@ -71,8 +71,22 @@ public class OncomingStudent extends DisplayObject{
 	}
 	
 	public void onCollision() {
-		if(!game.getPlayer().isInvulnerable())
-			game.getPlayer().setHealth(game.getPlayer().getHealth()-1);
+		if(!game.getPlayer().isInvulnerable()) {
+			Player p = game.getPlayer();
+			
+			int healthLost = 10;
+			
+			if(Math.abs(p.getOffset()-getStrafe())<p.getDimensionX()/2) {
+				healthLost +=  10;
+			}
+			
+			if(p.getJacket()) {
+				healthLost /= 2;
+			}
+			
+			game.getPlayer().setHealth(game.getPlayer().getHealth()-healthLost);
+		}
+		
 	}
 	
 	public void checkProximity() {

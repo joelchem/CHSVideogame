@@ -24,7 +24,7 @@ public class CheeseCracker extends DisplayObject {
 	public void onCollision() {
 		Player player = game.getPlayer();
 		exists = false; 
-		player.setStrength(player.getHealth()+strengthRestored);
+		player.setStrength(player.getStrength()+strengthRestored);
 		setSprite(null);
 	}
 	
