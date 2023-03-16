@@ -26,7 +26,7 @@ public class Player {
 	private int dimY;
 	
 	private final int maxHealth = 100;
-	private final int maxStrength = 30000;
+	private final int maxStrength = 31000;
 	private final int defaultVel = 20;
 
 	private long lastMovement;
@@ -59,7 +59,7 @@ public class Player {
 		money = false;
 		hasJacket = false;
 		lastHit = 0;
-		
+		lastMovement=0;
 	}
 	
 	public boolean isInvulnerable() {
@@ -166,7 +166,7 @@ public class Player {
 	
 	public void setStrength(int x) {
 		x = Math.min(maxStrength, Math.max(0, x));
-		System.out.println("player strength changed: "+strength+" to "+x);
+//		System.out.println("player strength changed: "+strength+" to "+x);
 		strength = x;
 	}
 	

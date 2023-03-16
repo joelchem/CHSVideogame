@@ -40,6 +40,8 @@ public class MainMenu extends JPanel implements ActionListener {
     private final int height = 800;
     Game game;
     GameRunner gameRunner;
+    int score;
+    String name;
     File scoreBoard;
 
     public MainMenu(Game g, GameRunner gr) {
@@ -158,6 +160,9 @@ public class MainMenu extends JPanel implements ActionListener {
                     g.drawString(time, x, y);
                     x = 60;
                 }
+                y+=50;
+                g.setColor(Color.YELLOW);
+                g.drawString("Your Score: "+score, x, y);
                 s.close();
                 g.setColor(Color.gray);
 
@@ -170,7 +175,7 @@ public class MainMenu extends JPanel implements ActionListener {
     public void gameOver(int score) throws FileNotFoundException {
         frame3.setVisible(true);
         frame1.setVisible(false);
-
+        this.score = score;
         timeDate t = new timeDate(getName(), score);
         frame3.repaint();
     }

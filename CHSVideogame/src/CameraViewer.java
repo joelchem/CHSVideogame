@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -161,6 +162,12 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		g.drawImage(healthBarActual, gap, gap, null);
 		g.drawImage(strengthBarActual, gap*2+barWidth, gap, null);
 		g.drawImage(distBarActual, gap*3+barWidth*2, gap, null);
+		
+		g.setColor(Color.white);
+		g.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
+		g.drawString("Health", gap*3, gap+2*height/3);
+		g.drawString("Strength", gap*4+barWidth, gap+2*height/3);
+		g.drawString("Distance", gap*5+barWidth*2, gap+2*height/3);
 		
 		
 
