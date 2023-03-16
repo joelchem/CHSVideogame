@@ -19,9 +19,7 @@ public class OncomingStudent extends DisplayObject{
 		this.distOnPath = distOnPath;
 		this.strafe = strafe*game.getMap().getScale();
 		this.velocity = vel;
-		this.targetStrafe = strafe;
-
-		
+		this.targetStrafe = strafe;		
 		Point pos = g.getMap().getPath().getPos(distOnPath, strafe);
 		
 		try {
