@@ -19,6 +19,7 @@ public class OncomingStudent extends DisplayObject{
 	//AVOID_V what velocity students change to when splitting
 	//AVOID_DIS distance they separate by 
 	
+<<<<<<< HEAD
 	public OncomingStudent(Game g, int posX, int posY, double heading, int dimensionX, int dimensionY) {
 		super(g, posX, posY, heading, dimensionX, dimensionY);
 		game = g;
@@ -28,6 +29,26 @@ public class OncomingStudent extends DisplayObject{
 		index = (int) (Math.random()*students.size());
 		//path = g.getMap().getPath();
 		offset = 0;
+=======
+	public OncomingStudent(Game g, double distOnPath, int strafe, int vel) {
+		super(g, 0, 0, 0, 40*g.getMap().getScale()/25, 80*g.getMap().getScale()/25);
+		
+		this.game = g;
+		this.distOnPath = distOnPath;
+		this.strafe = strafe*game.getMap().getScale();
+		this.velocity = vel;
+		this.targetStrafe = strafe;		
+		this.targetStrafe = this.strafe;
+		Point pos = g.getMap().getPath().getPos(distOnPath, strafe);
+		int spriteNum = (int)(Math.random()*4)+1;
+		try {
+		    sprites = new Image[] {
+		    		ImageIO.read(new File("assets/oncoming"+spriteNum+".png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
+		    };
+		} catch (IOException e) {
+			System.out.println("Some or all oncoming student sprites not found.");
+		}
+>>>>>>> 17f24b282b331093330b1b501adcc4a54f5c7245
 		
 		generateList();
 	}
@@ -133,6 +154,7 @@ public class OncomingStudent extends DisplayObject{
 	}
 	
 	public void onCollision() {
+<<<<<<< HEAD
 		if(!game.getPlayer().isInvulnerable())
 			game.getPlayer().setHealth(game.getPlayer().getHealth()-1);
 >>>>>>> 6fb8592e2edf329363c3174932a130d0bce8ee8e
@@ -213,6 +235,69 @@ public class OncomingStudent extends DisplayObject{
 	
 	public static void main(String[]args) {
 		
+=======
+		if(!game.getPlayer().isInvulnerable()) {
+			Player p = game.getPlayer();
+			
+			int healthLost = 10;
+			
+			if(Math.abs(p.getOffset()-getStrafe())<p.getDimensionX()/2) {
+				healthLost +=  10;
+			}
+			
+			if(p.getJacket()) {
+				healthLost /= 2;
+			}
+			
+			game.getPlayer().setHealth(game.getPlayer().getHealth()-healthLost);
+		}
+	}
+
+	
+	public int getTargetStrafe() {
+		return targetStrafe;
+	}
+	
+	public void setTargetStrafe(int strafe) {
+		targetStrafe = strafe;
+	}
+	
+	public void setStrafe(int strafe) {
+		Map map = game.getMap();
+		int oldOffset = strafe;
+		this.strafe = Math.max(-1*map.getMaxStrafe()*map.getScale(), 
+				Math.min(map.getMaxStrafe()*map.getScale(), strafe));
+	}
+	
+	public void checkProximity() {
+		
+		for(int i = 0; i < game.oncomingStudentsAmt(); i++) {
+			OncomingStudent student = game.getOncomingStudents(i);
+			if(student!=this && student.getStrafe()==student.getTargetStrafe()) {
+//				System.out.println("here2");
+				int pOff = game.getPlayer().getOffset();
+				if(Math.abs(student.getDistOnPath()-getDistOnPath())<getDimensionY()*3
+					&& Math.abs(student.getStrafe()-getStrafe())<getDimensionX()*2
+					&& (student.getDistOnPath()-game.getPlayer().getDistOnPath())<getDimensionY()*3
+					&&((student.getStrafe()<=pOff&&pOff<=getStrafe())
+							||(getStrafe()<=pOff&&pOff<=student.getStrafe()))) {
+					int thisStrafe = getStrafe();
+					int otherStrafe = student.getStrafe();
+					
+					double mult = Math.signum(getStrafe()-student.getStrafe());
+					setTargetStrafe((int)(thisStrafe+getDimensionX()*1.5*mult));
+					student.setTargetStrafe((int)(otherStrafe-getDimensionX()*1.5*mult));
+
+				}
+				
+			}
+		}
+
+		
+	}
+	public Image getSprite() {
+		return sprites[0];
+>>>>>>> 17f24b282b331093330b1b501adcc4a54f5c7245
 	}
 }
 

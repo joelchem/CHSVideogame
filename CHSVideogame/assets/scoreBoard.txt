@@ -1,3 +1,1 @@
 Name,Score,Date,Time
-Unnamed,94,2023/03/15,01:37:31
-Unnamed,0,2023/03/15,01:40:58

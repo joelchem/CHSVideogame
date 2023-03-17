@@ -76,7 +76,7 @@ public class GameRunner implements ActionListener {
     	if(p.getDistOnPath()>=game.getMap().getPath().length()) {
     		double s = (double)(p.getHealth())/(double)(p.getMaxHealth()) + (double)(p.getStrength())/(double)(p.getMaxStrength());
 //    		s *= 100.*(double)game.getMap().getPath().length()/(double)(System.currentTimeMillis()-timeStarted);
-    		System.out.println("TIme: "+(System.currentTimeMillis()-timeStarted));
+//    		System.out.println("TIme: "+(System.currentTimeMillis()-timeStarted));
     		int score = (int)(100*s);
     		timer.stop();
     		try {
@@ -108,6 +108,10 @@ public class GameRunner implements ActionListener {
     				student.getDistOnPath()>game.getMap().getPath().length()) {
     			game.removeOncomingStudent(i);
     		}
+    		if(student.getTargetStrafe()!=student.getStrafe()) {
+    			student.setStrafe(student.getTargetStrafe());
+    		}
+    		student.checkProximity();
     		
     	}
     	
@@ -134,7 +138,7 @@ public class GameRunner implements ActionListener {
         	student.testForCollision();
         }
         
-        if((int)(Math.random()*7)==0 && game.oncomingStudentsAmt() < 20) {
+        if((int)(Math.random()*7)==0 && game.oncomingStudentsAmt() < 15) {
         	double viewDist = game.getCamera().getDimY();
         	int velocity = (int)(Math.random()*6+3)*game.getMap().getScale();
         	int strafe = (int)(Math.random()*23-11);

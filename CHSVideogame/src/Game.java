@@ -84,6 +84,7 @@ public class Game {
 
 	public void setDifficulty(String diff) {
 		difficulty = diff;
+		map = new Map(this, diff);
 	}
 
 	public String getDifficulty() {

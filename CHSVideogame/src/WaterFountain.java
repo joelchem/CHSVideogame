@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class WaterFountain extends DisplayObject {
 	//To be changed
-	final static int health_restored = 5;
+	final static int health_restored = 30;
 	private Game game;
 	private boolean used;
 	

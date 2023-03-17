@@ -25,9 +25,9 @@ public class Player {
 	private int dimX;
 	private int dimY;
 	
-	private final int maxHealth = 10;
-	private final int maxStrength = 20000;
-	private final int defaultVel = 30;
+	private final int maxHealth = 100;
+	private final int maxStrength = 31000;
+	private final int defaultVel = 20;
 
 	private long lastMovement;
 	private long lastHit;
@@ -48,8 +48,8 @@ public class Player {
 		}
 		
 		spriteFrame = 0;
-		health = 10;
-		strength = 20000;
+		health = 100;
+		strength = 31000;
 		isCrouching = false;
 		velocity = defaultVel;
 		positionX = 0;
@@ -59,7 +59,7 @@ public class Player {
 		money = false;
 		hasJacket = false;
 		lastHit = 0;
-		
+		lastMovement=0;
 	}
 	
 	public boolean isInvulnerable() {
