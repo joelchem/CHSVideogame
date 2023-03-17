@@ -155,6 +155,7 @@ public class OncomingStudent extends DisplayObject{
 	
 	public void onCollision() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(!game.getPlayer().isInvulnerable())
 			game.getPlayer().setHealth(game.getPlayer().getHealth()-1);
 >>>>>>> 6fb8592e2edf329363c3174932a130d0bce8ee8e
@@ -236,6 +237,8 @@ public class OncomingStudent extends DisplayObject{
 	public static void main(String[]args) {
 		
 =======
+=======
+>>>>>>> 17f24b282b331093330b1b501adcc4a54f5c7245
 		if(!game.getPlayer().isInvulnerable()) {
 			Player p = game.getPlayer();
 			
