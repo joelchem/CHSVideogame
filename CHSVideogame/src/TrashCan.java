@@ -41,11 +41,6 @@ public class TrashCan extends DisplayObject {
 		return collisionResult;
 	}
 	
-	public Hitbox getHitbox() {
-    	return new Hitbox(new Point(getX(), getY()), getDimensionX(), getDimensionY(), getHeading());
-
-    }
-	
     public void onCollision() {
         // implement separate collision test? cuz you have to come up behind the trash can, not bump
         theGame.getPlayer().setCrouch(true);

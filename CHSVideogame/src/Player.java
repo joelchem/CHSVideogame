@@ -127,9 +127,13 @@ public class Player {
 	}
 	
 	public int getVelocity() {
+		if(isInvulnerable()) {
+			lastMovement = System.currentTimeMillis();
+		}
 		double timeDelta = ((System.currentTimeMillis()-lastMovement)/1000.);
 		if(lastMovement == 0)
 			timeDelta = 0;
+		
 		return (int) (velocity*(1+timeDelta/2)*game.getMap().getScale());
 	}
 	

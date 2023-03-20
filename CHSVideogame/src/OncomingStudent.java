@@ -112,7 +112,7 @@ public class OncomingStudent extends DisplayObject{
 				int pOff = game.getPlayer().getOffset();
 				if(Math.abs(student.getDistOnPath()-getDistOnPath())<getDimensionY()*3
 					&& Math.abs(student.getStrafe()-getStrafe())<getDimensionX()*2
-					&& (student.getDistOnPath()-game.getPlayer().getDistOnPath())<getDimensionY()*3
+					&& (student.getDistOnPath()-game.getPlayer().getDistOnPath())<getDimensionY()*2
 					&&((student.getStrafe()<=pOff&&pOff<=getStrafe())
 							||(getStrafe()<=pOff&&pOff<=student.getStrafe()))) {
 					int thisStrafe = getStrafe();
