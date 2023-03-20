@@ -25,7 +25,7 @@ public class OncomingStudent extends DisplayObject{
 		int spriteNum = (int)(Math.random()*4)+1;
 		try {
 		    sprites = new Image[] {
-		    		ImageIO.read(new File("assets/oncoming"+spriteNum+".png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
+		    		ImageIO.read(getClass().getClassLoader().getResource("oncoming"+spriteNum+".png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
 		    };
 		} catch (IOException e) {
 			System.out.println("Some or all oncoming student sprites not found.");

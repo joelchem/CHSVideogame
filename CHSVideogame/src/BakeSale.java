@@ -7,16 +7,17 @@ import javax.imageio.ImageIO;
 public class BakeSale extends DisplayObject{
 	Game theGame;
 
-	private final int healthRestored = 50;
+	private final int strengthRestored = 5000;
 	
 	public BakeSale(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, (int)(6*map.getScale()),(int)(5*map.getScale()));
 		try {
-		    Image im = ImageIO.read(new File("assets/bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(getClass().getClassLoader().getResource("bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {
 			System.out.println("bake sale sprites not found.");
+			e.printStackTrace();
 		}
 		theGame = game;
 	}
@@ -36,8 +37,8 @@ public class BakeSale extends DisplayObject{
 	
 	public void onCollision() {
 		if(theGame.getPlayer().getMoney()) {
-			int healthCurrent = theGame.getPlayer().getHealth();
-			theGame.getPlayer().setHealth(healthRestored+healthCurrent);
+			int strengthCurrent = theGame.getPlayer().getStrength();
+			theGame.getPlayer().setHealth(strengthRestored+strengthCurrent);
 			theGame.getPlayer().updateMoney(false);
 		}
 	}

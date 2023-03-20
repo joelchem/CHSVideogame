@@ -58,10 +58,10 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		try {
 			int barDimX = (int) (game.getCamera().getDimX()*0.3);
 			int barDimY = (int) (game.getCamera().getDimX()*.3*7./48.);
-		    emptyBar = ImageIO.read(new File("assets/empty_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    healthBar = ImageIO.read(new File("assets/health_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    strengthBar = ImageIO.read(new File("assets/strength_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    distBar = ImageIO.read(new File("assets/distance_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    emptyBar = ImageIO.read(getClass().getClassLoader().getResource("empty_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    healthBar = ImageIO.read(getClass().getClassLoader().getResource("health_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    strengthBar = ImageIO.read(getClass().getClassLoader().getResource("strength_bar.png")).getScaledInstance(barDimX, barDimY, 0);
+		    distBar = ImageIO.read(getClass().getClassLoader().getResource("distance_bar.png")).getScaledInstance(barDimX, barDimY, 0);
 		    
 		} catch (IOException e) {
 			System.out.println("bake sale sprites not found.");
@@ -196,6 +196,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		graphFrame.setContentPane(cam);
 		graphFrame.pack();
 		graphFrame.setVisible(true);
+		graphFrame.setDefaultCloseOperation(graphFrame.EXIT_ON_CLOSE);
 		
 	}
 

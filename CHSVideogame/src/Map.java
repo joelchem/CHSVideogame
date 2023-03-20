@@ -31,7 +31,7 @@ public class Map {
         
         if(difficulty.equals("medium")) {
         	 try {
-     		    mapImage = ImageIO.read(new File("assets/med_test_map.png")).getScaledInstance(dimX, dimY, 0);
+     		    mapImage = ImageIO.read(getClass().getClassLoader().getResource("med_test_map.png")).getScaledInstance(dimX, dimY, 0);
      		} catch (IOException e) {
      			System.out.println("Some or all map sprit not found.");
      		}
@@ -45,7 +45,7 @@ public class Map {
              placedObjects.add(new WaterFountain(game, this, 295*scale, 330*scale, -Math.PI));
         } else {
         	try {
-     		    mapImage = ImageIO.read(new File("assets/easy_test_map.png")).getScaledInstance(dimX, dimY, 0);
+     		    mapImage = ImageIO.read(getClass().getClassLoader().getResource("easy_test_map.png")).getScaledInstance(dimX, dimY, 0);
      		} catch (IOException e) {
      			System.out.println("Some or all map sprit not found.");
      		}

@@ -39,10 +39,10 @@ public class Player {
 		dimY = 80*g.getMap().getScale()/25;
 		try {
 		    sprites = new Image[] {
-		    		ImageIO.read(new File("assets/player_back1.png")).getScaledInstance(dimX, dimY, 0)
+		    		ImageIO.read(getClass().getClassLoader().getResource("player_back1.png")).getScaledInstance(dimX, dimY, 0)
 		    };
-		    crouchSprite = ImageIO.read(new File("assets/player_crouch.png")).getScaledInstance(dimX, dimY, 0);
-		    damageSprite = ImageIO.read(new File("assets/player_damage1.png")).getScaledInstance(dimX, dimY, 0);
+		    crouchSprite = ImageIO.read(getClass().getClassLoader().getResource("player_crouch.png")).getScaledInstance(dimX, dimY, 0);
+		    damageSprite = ImageIO.read(getClass().getClassLoader().getResource("player_damage1.png")).getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all player sprites not found.");
 		}

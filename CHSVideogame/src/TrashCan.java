@@ -11,7 +11,7 @@ public class TrashCan extends DisplayObject {
 		super(game,x, y, heading, 3*map.getScale(),4*map.getScale());
 
 		try {
-		    Image im = ImageIO.read(new File("assets/trash-can.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(getClass().getClassLoader().getResource("trash-can.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {

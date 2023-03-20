@@ -18,7 +18,18 @@ public class Game {
 		oncomingStudents = new ArrayList<OncomingStudent>();
 		displayObjects = new ArrayList<DisplayObject>();
 		player = new Player(this);
-		scoreBoard = new File("assets/scoreBoard.txt");
+		scoreBoard = new File("CHSVideogameScoreboard.txt");
+		if(!scoreBoard.exists()) {
+			try {
+				scoreBoard.createNewFile();
+				FileWriter myWriter = new FileWriter(scoreBoard);
+			    myWriter.write("Name,Score,Date,Time\r\n");
+			    myWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		try {
 			scoreBoard.createNewFile();
 		} catch (Exception ex) {
