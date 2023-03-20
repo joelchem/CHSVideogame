@@ -126,6 +126,9 @@ public class MainMenu extends JPanel implements ActionListener {
         frame3.add(contentPane3b);
         frame3.setSize(width, height);
         frame3.setDefaultCloseOperation(frame3.EXIT_ON_CLOSE);
+        frame1.setResizable(false);
+        frame2.setResizable(false);
+        frame3.setResizable(false);
     }
     
     public String getName() {
@@ -225,12 +228,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
             writeScores(fileMatrixToString(lines));
         }
-        public String addToString(String name, int score) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd,HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            return name + "," + score + "," + dtf.format(now) + "\n";
-            // writing files needs to be done with a whole string, not multiple write commands (or else it would erase file between commands)
-        }
+        
         // assumes previous scores are already ordered from most to least
         public void writeScores(String scores) {
             try {

@@ -34,7 +34,6 @@ public class Game {
 			scoreBoard.createNewFile();
 		} catch (Exception ex) {
 		}
-		difficulty = " ";
 	}
 	
 

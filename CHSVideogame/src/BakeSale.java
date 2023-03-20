@@ -38,7 +38,7 @@ public class BakeSale extends DisplayObject{
 	public void onCollision() {
 		if(theGame.getPlayer().getMoney()) {
 			int strengthCurrent = theGame.getPlayer().getStrength();
-			theGame.getPlayer().setHealth(strengthRestored+strengthCurrent);
+			theGame.getPlayer().setStrength(strengthRestored+strengthCurrent);
 			theGame.getPlayer().updateMoney(false);
 		}
 	}
