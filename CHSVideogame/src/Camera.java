@@ -17,7 +17,7 @@ public class Camera {
 	}
 	private Point position;
 //	private Game game;	
-	Camera() {                   
+	private Camera() {                   
 //		game = gameObj;
 
 		heading = 0;
