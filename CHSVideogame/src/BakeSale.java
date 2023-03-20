@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class BakeSale extends DisplayObject{
-	Game theGame;
+	private Game theGame;
 
 	private final int strengthRestored = 5000;
 	
