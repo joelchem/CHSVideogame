@@ -3,7 +3,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 public class Camera {
-	
 	private int posX;
 	private int posY;
 	private final int cameraWidth = 1000;
@@ -16,18 +15,11 @@ public class Camera {
 
 	}
 	private Point position;
-//	private Game game;	
-	Camera() {                   
-//		game = gameObj;
-
+	private Camera() {     
 		heading = 0;
 		posX = 0;
 		posY = 0;
 	}
-
-//	public Point screenCoords(Point absoluteCoords) {
-//		
-//	}
 	
 	public Point getPos() {
 		return position;
@@ -35,7 +27,6 @@ public class Camera {
 	
 	public int getX() {
 		return posX;
-
 	}
 	
 	public int getY() {
@@ -78,12 +69,9 @@ public class Camera {
 		double diag = Math.hypot((double)dimX, (double)dimY)/2;
 		double innerAngle = Math.atan((double)dimY/(double)dimX);
 		
-		
-		
 		double offsetX = diag*Math.cos(innerAngle-heading);
 		double offsetY = diag*Math.sin(innerAngle-heading);
 		
-
 		int pointX = -6;
 		int pointY = 3;
 

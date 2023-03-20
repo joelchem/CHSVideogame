@@ -1,12 +1,10 @@
 import java.awt.Point;
 
 public class CurvedPath extends PathSegment{
-	
 	private Point center;
 	private Point start;
 	private double curveAngle;
 	private double startAngle;
-	
 	private boolean reverse;
 	
 	CurvedPath(Point curveStart, Point curveCenter, double angle) {
@@ -17,12 +15,7 @@ public class CurvedPath extends PathSegment{
 		if((start.getX()-center.getX())<0) {
 			startAngle += Math.PI;
 		}
-		
-		reverse = false;
-		
-//		System.out.print(this+" ");
-//		System.out.println(heading(0));
-		
+		reverse = false;	
 	}
 	
 	CurvedPath(Point curveStart, Point curveCenter, double angle, boolean reverseFix) {
@@ -49,6 +42,7 @@ public class CurvedPath extends PathSegment{
 		return new Point((int)(radius()*Math.cos(newAngle)+center.getX()),
 				(int)(radius()*Math.sin(newAngle)+center.getY()));
 	}
+
 	@Override
 	public Point getPos(double distOnSegment, double strafeOffset) {
 		if(distOnSegment < 0) {
@@ -59,8 +53,7 @@ public class CurvedPath extends PathSegment{
 		double newAngle = curveAngle*distOnSegment/length() + startAngle;
 		
 		double radius = radius()+Math.signum(curveAngle)*strafeOffset;
-		
-		
+
 		return new Point((int)(radius*Math.cos(newAngle)+center.getX()),
 				(int)(radius*Math.sin(newAngle)+center.getY()));
 	}
@@ -69,7 +62,6 @@ public class CurvedPath extends PathSegment{
 		double newAngle = curveAngle*distOnSegment/length() + startAngle;
 		
 		double radius = radius()+Math.signum(curveAngle);
-		
 		
 		return new Point.Double((radius*Math.cos(newAngle)+center.getX()),
 				(radius*Math.sin(newAngle)+center.getY()));
@@ -88,7 +80,8 @@ public class CurvedPath extends PathSegment{
 			}
 			return Math.PI;
 		} else {
-			double angle = Math.atan((endPoint.getY()-startPoint.getY())/(endPoint.getX()-startPoint.getX()));
+			double angle = Math.atan((endPoint.getY()-startPoint.getY())/(endPoint.getX()
+					-startPoint.getX()));
 			if((endPoint.getX()-startPoint.getX())<0) {
 				angle += Math.PI;
 			}
@@ -96,16 +89,8 @@ public class CurvedPath extends PathSegment{
 		}
 		
 	}
-	
-	
 
 	public double heading(double distOnSegment) {
-	
-//		System.out.println(startAngle+" "+curveAngle*distOnSegment/length()+" "+Math.signum(curveAngle)*(Math.PI/2)+" "+(startAngle - curveAngle*distOnSegment/length() + 0* Math.PI));
-//		return (startAngle + curveAngle*distOnSegment/length() + Math.signum(curveAngle)*(-Math.PI/2));
-		
-//	    >>>>>>>>>>>>>> working
-		
 		if(distOnSegment < 0) {
 			return heading(0);
 		} else if(distOnSegment > length()) {
@@ -117,19 +102,7 @@ public class CurvedPath extends PathSegment{
 			extra = Math.PI;
 		}
 		
-		return (startAngle - curveAngle*distOnSegment/length() + extra/* + Math.signum(curveAngle)*(-Math.PI/2)*/);
-//		return (startAngle + curveAngle*distOnSegment/length() + Math.signum(curveAngle)*Math.PI/2);
-//		>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// it works in 3rd and 6th turn when u add Math.PI oaisdhjfioafsdjoji
-//		double closeFrontDist = distOnSegment + 0.000001;
-//		if(closeFrontDist > length()) {
-//			closeFrontDist = distOnSegment;
-//			distOnSegment -= 0.000001;
-//		}
-//		
-//		StraightPath smolPath = new StraightPath(getPos(distOnSegment), getPos(closeFrontDist));
-//		return -straightHeading(accurateGetPos(distOnSegment), accurateGetPos(closeFrontDist))-Math.PI;
-		
+		return (startAngle - curveAngle*distOnSegment/length() + extra);
 	}
 	
 }

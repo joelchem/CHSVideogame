@@ -51,11 +51,6 @@ public class DisplayObject {
     public Image getSprite() {
     	return sprite;
     }
-
-    //To be specialized, used for determining conditions in the event that the player collides with a given interactable object
-    public void onCollision() {
-    	System.out.println("The player has collided with this object");
-    }
     
     public double getHeading() {
     	return heading;

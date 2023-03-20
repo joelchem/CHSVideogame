@@ -25,25 +25,24 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class CameraViewer extends JPanel implements MouseMotionListener, MouseListener {
-	
 	private Game game;
 	private GameRunner gameRunner;
 	
-	int cameraX = 0;
-	int cameraY = 0;
-	double heading = 0;
-	double iterator = 0;
+	private int cameraX = 0;
+	private int cameraY = 0;
+	private double heading = 0;
+	private double iterator = 0;
 	
-	int cameraWidth;
-	int cameraHeight;
+	private int cameraWidth;
+	private int cameraHeight;
 	
-	Path path;
-	Timer timer;
+	private Path path;
+	private Timer timer;
 	
-	Image distBar;
-	Image healthBar;
-	Image strengthBar;
-	Image emptyBar;
+	private Image distBar;
+	private Image healthBar;
+	private Image strengthBar;
+	private Image emptyBar;
 	
 	CameraViewer(Game g, GameRunner gr) {
 		game = g;
@@ -53,16 +52,18 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		
 		addMouseMotionListener(this);
 		addMouseListener(this);
-
 		
 		try {
 			int barDimX = (int) (game.getCamera().getDimX()*0.3);
 			int barDimY = (int) (game.getCamera().getDimX()*.3*7./48.);
-		    emptyBar = ImageIO.read(getClass().getClassLoader().getResource("empty_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    healthBar = ImageIO.read(getClass().getClassLoader().getResource("health_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    strengthBar = ImageIO.read(getClass().getClassLoader().getResource("strength_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    distBar = ImageIO.read(getClass().getClassLoader().getResource("distance_bar.png")).getScaledInstance(barDimX, barDimY, 0);
-		    
+		    emptyBar = ImageIO.read(getClass().getClassLoader().getResource("empty_bar.png")).
+					getScaledInstance(barDimX, barDimY, 0);
+		    healthBar = ImageIO.read(getClass().getClassLoader().getResource("health_bar.png")).
+					getScaledInstance(barDimX, barDimY, 0);
+		    strengthBar = ImageIO.read(getClass().getClassLoader().getResource("strength_bar.png")).
+					getScaledInstance(barDimX, barDimY, 0);
+		    distBar = ImageIO.read(getClass().getClassLoader().getResource("distance_bar.png")).
+					getScaledInstance(barDimX, barDimY, 0);	    
 		} catch (IOException e) {
 			System.out.println("bake sale sprites not found.");
 		}
@@ -94,11 +95,9 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		AffineTransform originalTransform = g.getTransform();
 		g.transform(camTransform);
 		
-		
 		Image mapImg = game.getMap().getMapImage();
-		g.drawImage(mapImg, AffineTransform.getScaleInstance(game.getMap().getScale(), game.getMap().getScale()), this);
-		
-		
+		g.drawImage(mapImg, AffineTransform.getScaleInstance(game.getMap().getScale(),
+				game.getMap().getScale()), this);
 		
 		for(int i = 0; i < game.displayObjectAmt()+game.oncomingStudentsAmt(); i++) {
 			DisplayObject obj;
@@ -113,37 +112,23 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 
 			AffineTransform objTransform = game.getCamera().getObjectTransform(
 					objPos, obj.getHeading(), obj.getDimensionX(), obj.getDimensionY());
-//			System.out.println(objTransform+" "+objPos+" "+obj.getHeading()+" "+obj.getDimensionX()+" "+obj.getDimensionY());
 			g.drawImage(obj.getSprite(),  objTransform, this);
-//			g.drawImage(sprite, obj.getX()-obj.getDimensionX()/2,
-//					obj.getY()-obj.getDimensionY()/2, this);
-//			obj.getHitbox().render(g);
-			
-
 		}
 		
 		for(int i = 0; i < game.oncomingStudentsAmt(); i++) {
 			OncomingStudent student = game.getOncomingStudents(i);
 			Image sprite = student.getSprite();
 			Point studentPos = new Point(student.getX(), student.getY());
-			
-//			AffineTransform studentTransform = game.getCamera().getObjectTransform(
-//					studentPos, student.getHeading(), student.getDimensionX(), student.getD
-//			);
 		}
 		
 		Player player = game.getPlayer();
 
 		Point playerPos = new Point(player.getPositionX(), player.getPositionY());
-		AffineTransform playerTransform = game.getCamera().getObjectTransform(
-				playerPos, player.getHeading(),player.getDimensionX(), player.getDimensionY());
-//		System.out.println(playerTransform+" "+player.getHeading());
+		AffineTransform playerTransform = game.getCamera().getObjectTransform(playerPos, 
+				player.getHeading(),player.getDimensionX(), player.getDimensionY());
 		g.drawImage(player.getSprite(), playerTransform, this);
-		
-//		game.getPlayer().getHitbox().render(g);
-		
 		g.setTransform(originalTransform);
-		
+
 		int gap = (int) (game.getCamera().getDimX()*.01);
 		int barWidth = (int) (game.getCamera().getDimX()*.32);
 		
@@ -152,7 +137,8 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		Player p = game.getPlayer();
 		
 		Image healthBarActual = cropBarImage(healthBar, (double)p.getHealth()/(double)p.getMaxHealth());
-		Image strengthBarActual = cropBarImage(strengthBar, (double)p.getStrength()/(double)p.getMaxStrength());
+		Image strengthBarActual = cropBarImage(strengthBar, 
+				(double)p.getStrength()/(double)p.getMaxStrength());
 		Image distBarActual = cropBarImage(distBar, p.getDistOnPath()/game.getMap().getPath().length());
 		
 		g.drawImage(emptyBar, gap, gap, null);
@@ -168,9 +154,6 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		g.drawString("Health", gap*3, gap+2*height/3);
 		g.drawString("Strength", gap*4+barWidth, gap+2*height/3);
 		g.drawString("Distance", gap*5+barWidth*2, gap+2*height/3);
-		
-		
-
 	}
 	
 	private Image cropBarImage(Image barImage, double ratio) {
@@ -178,17 +161,20 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 			return null;
 		if(ratio > 1)
 			ratio = 1;
-		BufferedImage bimage = new BufferedImage(barImage.getWidth(null), barImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bimage = new BufferedImage(barImage.getWidth(null), 
+				barImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D bGr = bimage.createGraphics();
 	    bGr.drawImage(barImage, 0, 0, null);
 	    bGr.dispose();
-	    return bimage.getSubimage(0, 0, (int)(barImage.getWidth(null)*ratio), barImage.getHeight(null));
+	    return bimage.getSubimage(0, 0, (int)(barImage.getWidth(null)
+				*ratio), barImage.getHeight(null));
 	}
 	
 	public static void startWindow(CameraViewer cam) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		cam.setSize(new Dimension(cam.getDimX(), cam.getDimY()));
 		cam.setPreferredSize(new Dimension(cam.getDimX(), cam.getDimY()));
+		
 		JFrame graphFrame = new JFrame("CHSVideogame");
 		graphFrame.setResizable(false);
 		graphFrame.setSize(new Dimension(cam.getDimX()+11, cam.getDimY()+11));
@@ -197,7 +183,6 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		graphFrame.pack();
 		graphFrame.setVisible(true);
 		graphFrame.setDefaultCloseOperation(graphFrame.EXIT_ON_CLOSE);
-		
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -212,43 +197,31 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		} catch (NoninvertibleTransformException e1) {
 			e1.printStackTrace();
 		}
-		
 		int offset = game.getCamera().getDimX()/2-(int)mousePos.getX();
 		game.getPlayer().setOffset(offset);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		
+	public void mouseReleased(MouseEvent e) {	
 		if(!gameRunner.getStarted()) {
 			gameRunner.startGameloop();
 		}
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
-	
 	
 }

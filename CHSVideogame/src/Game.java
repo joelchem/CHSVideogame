@@ -26,7 +26,6 @@ public class Game {
 			    myWriter.write("Name,Score,Date,Time\r\n");
 			    myWriter.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -34,9 +33,9 @@ public class Game {
 			scoreBoard.createNewFile();
 		} catch (Exception ex) {
 		}
+
 	}
 	
-
 	public DisplayObject getDisplayObject(int index) {
 		return displayObjects.get(index);
 	}

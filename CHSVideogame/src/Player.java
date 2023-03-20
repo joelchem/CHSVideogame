@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Player {
-	
 	private int strength, health;
 	private boolean isCrouching;
 	private int velocity;
@@ -32,17 +31,19 @@ public class Player {
 	private long lastMovement;
 	private long lastHit;
 	
-	
 	public Player(Game g) {
 		game = g;
 		dimX = 40*g.getMap().getScale()/25;
 		dimY = 80*g.getMap().getScale()/25;
 		try {
 		    sprites = new Image[] {
-		    		ImageIO.read(getClass().getClassLoader().getResource("player_back1.png")).getScaledInstance(dimX, dimY, 0)
+		    	ImageIO.read(getClass().getClassLoader().getResource("player_back1.png")).
+						getScaledInstance(dimX, dimY, 0)
 		    };
-		    crouchSprite = ImageIO.read(getClass().getClassLoader().getResource("player_crouch.png")).getScaledInstance(dimX, dimY, 0);
-		    damageSprite = ImageIO.read(getClass().getClassLoader().getResource("player_damage1.png")).getScaledInstance(dimX, dimY, 0);
+		    crouchSprite = ImageIO.read(getClass().getClassLoader().getResource("player_crouch.png")).
+					getScaledInstance(dimX, dimY, 0);
+		    damageSprite = ImageIO.read(getClass().getClassLoader().getResource("player_damage1.png")).
+					getScaledInstance(dimX, dimY, 0);
 		} catch (IOException e) {
 			System.out.println("Some or all player sprites not found.");
 		}
@@ -64,7 +65,6 @@ public class Player {
 	
 	public boolean isInvulnerable() {
 		long diff = System.currentTimeMillis()%1000000-lastHit%1000000;
-//		System.out.println(diff);
 		return diff < 500;
 	}
 	
@@ -114,7 +114,6 @@ public class Player {
 	}
 	
 	public void updateMoney(boolean b) {
-//		System.out.println("player money changed: "+money+" to "+b);
 		money = b;
 	}
 	
@@ -138,7 +137,6 @@ public class Player {
 	}
 	
 	public void setCrouch(boolean b) {
-//		System.out.println("player crocuh changed: "+isCrouching+" to "+b);
 		isCrouching = b;
 	}
 	
@@ -148,8 +146,6 @@ public class Player {
 	
 	public void setHealth(int x) {
 		x = Math.min(maxHealth, Math.max(0, x));
-		if(x!=health) {}
-//			System.out.println("player health changed: "+health+" to "+x);
 		if(x<health) {
 			lastHit = System.currentTimeMillis();
 		}
@@ -170,7 +166,6 @@ public class Player {
 	
 	public void setStrength(int x) {
 		x = Math.min(maxStrength, Math.max(0, x));
-//		System.out.println("player strength changed: "+strength+" to "+x);
 		strength = x;
 	}
 	
@@ -179,12 +174,10 @@ public class Player {
 	}
 	
 	public int getPositionX() {
-//		return (int) game.getMap().getPath().getPos(getDistOnPath(), offset).getX();
 		return positionX;
 	}
 	
 	public int getPositionY() {
-//		return (int) game.getMap().getPath().getPos(getDistOnPath(), offset).getY();
 		return positionY;
 	}
 	public void setPositionX(int posX) {
@@ -198,7 +191,6 @@ public class Player {
 	}
 	
 	public void setJacket(boolean b) {
-//		System.out.println("player jacket changed: "+hasJacket+" to "+b);
 		hasJacket = b;
 	}
 	
