@@ -36,14 +36,16 @@ public class Map {
      		}
 
              placedObjects = new ArrayList<DisplayObject>();
-             placedObjects.add(new BakeSale(game, this, 233*scale, 199*scale, -Math.PI/2));
+             placedObjects.add(new BakeSale(game, this, 533*scale, 396*scale, -Math.PI));
              placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
-             placedObjects.add(new CheeseCracker(game, this, 170*scale, 215*scale, -Math.PI/2));
-             placedObjects.add(new Jacket(game, this, 275*scale, 250*scale, -Math.PI));
+             placedObjects.add(new CheeseCracker(game, this, 292*scale, 242*scale, -Math.PI));
              placedObjects.add(new TrashCan(game, this, 295*scale, 287*scale, -Math.PI));
              placedObjects.add(new WaterFountain(game, this, 295*scale, 330*scale, -Math.PI));
+             
+             int jacketX = (int)(Math.random()*150+320);
+             placedObjects.add(new Jacket(game, this, jacketX*scale, 357*scale, -Math.PI/2));
 
-        } else {
+        } else if(difficulty.equals("easy")){
         	try {
      		    mapImage = ImageIO.read(getClass().getClassLoader().getResource("easy_test_map.png")).
                         getScaledInstance(dimX, dimY, 0);
@@ -52,12 +54,34 @@ public class Map {
      		}
              
              placedObjects = new ArrayList<DisplayObject>();
-             placedObjects.add(new BakeSale(game, this, 400*scale, 199*scale, -Math.PI/2));
+             placedObjects.add(new BakeSale(game, this, 425*scale, 199*scale, -Math.PI/2));
              placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
              placedObjects.add(new CheeseCracker(game, this, 500*scale, 215*scale, -Math.PI/2));
-             placedObjects.add(new Jacket(game, this, 533*scale, 350*scale, -Math.PI));
              placedObjects.add(new TrashCan(game, this, 533*scale, 252*scale, -Math.PI));
              placedObjects.add(new WaterFountain(game, this, 533*scale, 400*scale, -Math.PI));
+             
+             int jacketX = (int)(Math.random()*150+320);
+             placedObjects.add(new Jacket(game, this, jacketX*scale, 220*scale, -Math.PI/2));
+        } else {
+        	try {
+     		    mapImage = ImageIO.read(getClass().getClassLoader().getResource("hard_test_map.png")).
+                        getScaledInstance(dimX, dimY, 0);
+     		} catch (IOException e) {
+     			System.out.println("Some or all map sprit not found.");
+     		}
+        	
+        	placedObjects = new ArrayList<DisplayObject>();
+            placedObjects.add(new BakeSale(game, this, 533*scale, 343*scale, -Math.PI));
+            placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
+            placedObjects.add(new CheeseCracker(game, this, 412*scale, 262*scale, -Math.PI));
+            placedObjects.add(new CheeseCracker(game, this, 406*scale, 365*scale, Math.PI));
+            placedObjects.add(new CheeseCracker(game, this, 412*scale, 463*scale, -Math.PI));
+            placedObjects.add(new TrashCan(game, this, 533*scale, 287*scale, -Math.PI));
+            placedObjects.add(new WaterFountain(game, this, 295*scale, 400*scale, -Math.PI));
+            
+            int jacketX = (int)(Math.random()*150+320);
+            placedObjects.add(new Jacket(game, this, jacketX*scale, 357*scale, Math.PI/2));
+        	
         }
     }
     
@@ -100,7 +124,7 @@ public class Map {
                     new Point(523*scale, 453*scale)));
 			combinePath.addPath(new CurvedPath(new Point(523*scale, 453*scale), 
                     new Point(534*scale, 453*scale), -Math.PI/2));
-    	} else {
+    	} else if(difficulty.equals("easy")) {
     		combinePath.addPath(new StraightPath(new Point(124*scale, 210*scale), 
                     new Point(512*scale, 210*scale))); 
         	combinePath.addPath(new CurvedPath(new Point(512*scale, 210*scale), 
@@ -109,6 +133,34 @@ public class Map {
                     new Point(523*scale, 453*scale)));
         	combinePath.addPath(new CurvedPath(new Point(523*scale, 453*scale), 
                     new Point(534*scale, 453*scale), -Math.PI/2));
+    	} else {
+    		combinePath.addPath(new StraightPath(new Point(124*scale, 210*scale), 
+                    new Point(274*scale, 210*scale)));
+			combinePath.addPath(new CurvedPath(new Point(274*scale, 210*scale), 
+                    new Point(274*scale, 221*scale), Math.PI/2));
+			combinePath.addPath(new StraightPath(new Point(285*scale, 221*scale), 
+                    new Point(285*scale, 249*scale)));
+			combinePath.addPath(new CurvedPath(new Point(285*scale, 249*scale), 
+                    new Point(296*scale, 249*scale), -Math.PI/2));
+			combinePath.addPath(new StraightPath(new Point(296*scale, 260*scale), 
+                    new Point(512*scale, 260*scale)));
+			combinePath.addPath(new CurvedPath(new Point(512*scale, 260*scale), 
+                    new Point(512*scale, 271*scale), Math.PI/2));
+			combinePath.addPath(new StraightPath(new Point(523*scale, 271*scale), 
+                    new Point(523*scale, 355*scale)));
+			combinePath.addPath(new CurvedPath(new Point(523*scale, 355*scale), 
+                    new Point(512*scale, 355*scale), Math.PI/2, true));
+			combinePath.addPath(new StraightPath(new Point(512*scale, 366*scale), 
+                    new Point(296*scale, 366*scale)));
+			combinePath.addPath(new CurvedPath(new Point(296*scale, 366*scale), 
+                    new Point(296*scale, 377*scale), -Math.PI/2, true));
+			combinePath.addPath(new StraightPath(new Point(285*scale, 377*scale), 
+                    new Point(285*scale, 452*scale)));
+			combinePath.addPath(new CurvedPath(new Point(285*scale, 452*scale), 
+                    new Point(296*scale, 452*scale), -Math.PI/2));
+			combinePath.addPath(new StraightPath(new Point(296*scale, 463*scale), 
+                    new Point(534*scale, 463*scale)));
+			
     	}
 		return combinePath;
     }

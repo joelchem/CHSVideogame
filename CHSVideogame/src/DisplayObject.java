@@ -43,6 +43,11 @@ public class DisplayObject {
     	return false;
     	
     }
+    
+    // Left blank to be specialized
+    public void onCollision() {
+    	
+    }
 
     public void setSprite(Image theSprite) {
     	sprite = theSprite;

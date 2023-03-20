@@ -50,7 +50,7 @@ public class Player {
 		
 		spriteFrame = 0;
 		health = 100;
-		strength = 31000;
+		strength = maxStrength;
 		isCrouching = false;
 		velocity = defaultVel;
 		positionX = 0;

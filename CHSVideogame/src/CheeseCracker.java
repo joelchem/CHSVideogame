@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 public class CheeseCracker extends DisplayObject {
 	private Game game;
-	private final int strengthRestored = 5000;
+	private final int strengthRestored = 7000;
 	private boolean exists;
 	
 	public CheeseCracker(Game game, Map map, int x, int y, double heading) {
