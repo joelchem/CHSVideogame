@@ -11,7 +11,7 @@ public class Game {
 	private double remainingDistance;
 	private String difficulty;
 
-	public Game() {
+	Game() {
 		difficulty = "medium";
 		camera = new Camera(this);
 		map = new Map(this, "medium");
