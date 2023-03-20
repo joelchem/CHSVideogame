@@ -29,21 +29,21 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 	private Game game;
 	private GameRunner gameRunner;
 	
-	int cameraX = 0;
-	int cameraY = 0;
-	double heading = 0;
-	double iterator = 0;
+	private int cameraX = 0;
+	private int cameraY = 0;
+	private double heading = 0;
+	private double iterator = 0;
 	
-	int cameraWidth;
-	int cameraHeight;
+	private int cameraWidth;
+	private int cameraHeight;
 	
-	Path path;
-	Timer timer;
+	private Path path;
+	private Timer timer;
 	
-	Image distBar;
-	Image healthBar;
-	Image strengthBar;
-	Image emptyBar;
+	private Image distBar;
+	private Image healthBar;
+	private Image strengthBar;
+	private Image emptyBar;
 	
 	CameraViewer(Game g, GameRunner gr) {
 		game = g;
@@ -94,11 +94,8 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		AffineTransform originalTransform = g.getTransform();
 		g.transform(camTransform);
 		
-		
 		Image mapImg = game.getMap().getMapImage();
 		g.drawImage(mapImg, AffineTransform.getScaleInstance(game.getMap().getScale(), game.getMap().getScale()), this);
-		
-		
 		
 		for(int i = 0; i < game.displayObjectAmt()+game.oncomingStudentsAmt(); i++) {
 			DisplayObject obj;
@@ -168,9 +165,6 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		g.drawString("Health", gap*3, gap+2*height/3);
 		g.drawString("Strength", gap*4+barWidth, gap+2*height/3);
 		g.drawString("Distance", gap*5+barWidth*2, gap+2*height/3);
-		
-		
-
 	}
 	
 	private Image cropBarImage(Image barImage, double ratio) {
@@ -197,7 +191,6 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		graphFrame.pack();
 		graphFrame.setVisible(true);
 		graphFrame.setDefaultCloseOperation(graphFrame.EXIT_ON_CLOSE);
-		
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -219,36 +212,25 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		
+	public void mouseReleased(MouseEvent e) {	
 		if(!gameRunner.getStarted()) {
 			gameRunner.startGameloop();
 		}
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
-	
 	
 }
