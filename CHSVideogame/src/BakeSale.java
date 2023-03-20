@@ -12,7 +12,8 @@ public class BakeSale extends DisplayObject{
 	public BakeSale(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, (int)(6*map.getScale()),(int)(5*map.getScale()));
 		try {
-		    Image im = ImageIO.read(getClass().getClassLoader().getResource("bake_sale.png")).getScaledInstance(getDimensionX(), getDimensionY(), 0);
+		    Image im = ImageIO.read(getClass().getClassLoader().getResource("bake_sale.png")).getScaledInstance(getDimensionX(), 
+															getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {
