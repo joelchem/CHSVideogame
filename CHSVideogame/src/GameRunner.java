@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 public class GameRunner implements ActionListener {
-	
 	private Game game;
 	private CameraViewer camView;
 	private MainMenu mainMenu;
@@ -45,12 +44,10 @@ public class GameRunner implements ActionListener {
     	   game.addDisplayObject(map.getPlacedObject(i));
        }
        
-       
        CameraViewer.startWindow(camView);
        lastFrame = System.currentTimeMillis()%1000000;
        calculateFrame();
        camView.renderFrame();
-       
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -59,7 +56,6 @@ public class GameRunner implements ActionListener {
 	}
     
     private void calculateFrame(){
-    	
     	Player p = game.getPlayer();
     	if(p.getHealth()==0 || p.getStrength() == 0) {
     		int score = 0;
@@ -67,20 +63,18 @@ public class GameRunner implements ActionListener {
     		try {
 				mainMenu.gameOver(score);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
+
     	if(p.getDistOnPath()>=game.getMap().getPath().length()) {
-    		double s = (double)(p.getHealth())/(double)(p.getMaxHealth()) + (double)(p.getStrength())/(double)(p.getMaxStrength());
-//    		s *= 100.*(double)game.getMap().getPath().length()/(double)(System.currentTimeMillis()-timeStarted);
-//    		System.out.println("TIme: "+(System.currentTimeMillis()-timeStarted));
+    		double s = (double)(p.getHealth())/(double)(p.getMaxHealth())
+					+ (double)(p.getStrength())/(double)(p.getMaxStrength());
     		int score = (int)(100*s);
     		timer.stop();
     		try {
 				mainMenu.gameOver(score);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     		
@@ -90,7 +84,6 @@ public class GameRunner implements ActionListener {
     	double timeDelta = (double)(currTime - lastFrame)/1000.;
     	
     	p.setStrength(p.getStrength()-(int)(timeDelta*1000));
-    	
     	
     	lastFrame = currTime;
     	
@@ -112,7 +105,6 @@ public class GameRunner implements ActionListener {
     		student.checkProximity();
     		
     	}
-    	
     	
     	Player player = game.getPlayer();
         Point strafePos = game.getMap().getPath().getPos(player.getDistOnPath(), player.getOffset());

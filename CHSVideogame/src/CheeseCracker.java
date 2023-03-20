@@ -11,12 +11,12 @@ public class CheeseCracker extends DisplayObject {
 	public CheeseCracker(Game game, Map map, int x, int y, double heading) {
 		super(game,x, y, heading, 3*map.getScale(),3*map.getScale());
 		try {
-		    Image im = ImageIO.read(getClass().getClassLoader().getResource("cracker.png")).getScaledInstance(getDimensionX(), 
-														      getDimensionY(), 0);
+		    Image im = ImageIO.read(getClass().getClassLoader().getResource("cracker.png")).
+					getScaledInstance(getDimensionX(), getDimensionY(), 0);
 		    setSprite(im);
 		    
 		} catch (IOException e) {
-			System.out.println("carcker sprites not found.");
+			System.out.println("cracker sprites not found.");
 		}
 		this.game = game;
 		this.exists = true;

@@ -8,8 +8,6 @@ public class StraightPath extends PathSegment{
 	StraightPath(Point start, Point end) {
 		startPoint = start;
 		endPoint = end;
-//		System.out.print(this+" ");
-//		System.out.println(heading(0));
 	}
 
 	public double length() {
@@ -61,15 +59,12 @@ public class StraightPath extends PathSegment{
 			}
 			return Math.PI;
 		} else {
-			double angle = Math.atan((endPoint.getY()-startPoint.getY())/(endPoint.getX()-startPoint.getX()));
+			double angle = Math.atan((endPoint.getY()-startPoint.getY())/(endPoint.getX()
+					-startPoint.getX()));
 			if((endPoint.getX()-startPoint.getX())<0) {
 				angle += Math.PI;
 			}
 			return angle;
 		}
-		
 	}
-	
-	
-	
 }

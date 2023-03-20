@@ -9,7 +9,6 @@ import java.awt.geom.NoninvertibleTransformException;
 import java.util.Arrays;
 
 public class Hitbox {
-	
 	private Point.Double[] corners;
 	private Line2D.Double[] lines;
 	private Point.Double center;
@@ -27,7 +26,6 @@ public class Hitbox {
 	}
 	
 	private void populateLines() {
-		
 		populateCorners();
 		
 		int lineAmt = corners.length;
@@ -78,25 +76,16 @@ public class Hitbox {
 	}
 	
 	public Point.Double getCorner(int i) {
-		return new Point.Double(Math.round(corners[i].getX()*1000)/1000, Math.round(corners[i].getY()*1000)/1000);
+		return new Point.Double(Math.round(corners[i].getX()*1000)/1000, 
+				Math.round(corners[i].getY()*1000)/1000);
 	}
 	
 	public void render(Graphics2D g) {
-//		AffineTransform ogTransform = g.getTransform();
-//		try {
-//			g.transform(ogTransform.createInverse());
-//		} catch (NoninvertibleTransformException e) {
-//			e.printStackTrace();
-//		}
-		
 		for(int i = 0; i < linesAmt(); i++) {
 			Line2D.Double l = getLine(i);
 			g.setColor(Color.RED);
 			g.drawLine((int)l.getX1(), (int)l.getY1(), (int)l.getX2(), (int)l.getY2());
-		}
-		
-//		g.setTransform(ogTransform);
-		
+		}		
 	}
 	
 	public boolean isColliding(Hitbox other) {

@@ -23,9 +23,11 @@ public class OncomingStudent extends DisplayObject{
 		this.targetStrafe = this.strafe;
 		Point pos = g.getMap().getPath().getPos(distOnPath, strafe);
 		int spriteNum = (int)(Math.random()*4)+1;
+		
 		try {
 		    sprites = new Image[] {
-		    		ImageIO.read(getClass().getClassLoader().getResource("oncoming"+spriteNum+".png")).getScaledInstance(getDimensionX(), getDimensionY(), 0)
+		    		ImageIO.read(getClass().getClassLoader().getResource("oncoming"+spriteNum+".png")).
+							getScaledInstance(getDimensionX(), getDimensionY(), 0)
 		    };
 		} catch (IOException e) {
 			System.out.println("Some or all oncoming student sprites not found.");
@@ -86,7 +88,6 @@ public class OncomingStudent extends DisplayObject{
 			game.getPlayer().setHealth(game.getPlayer().getHealth()-healthLost);
 		}
 	}
-
 	
 	public int getTargetStrafe() {
 		return targetStrafe;
@@ -104,12 +105,11 @@ public class OncomingStudent extends DisplayObject{
 	}
 	
 	public void checkProximity() {
-		
 		for(int i = 0; i < game.oncomingStudentsAmt(); i++) {
 			OncomingStudent student = game.getOncomingStudents(i);
 			if(student!=this && student.getStrafe()==student.getTargetStrafe()) {
-//				System.out.println("here2");
 				int pOff = game.getPlayer().getOffset();
+
 				if(Math.abs(student.getDistOnPath()-getDistOnPath())<getDimensionY()*3
 					&& Math.abs(student.getStrafe()-getStrafe())<getDimensionX()*2
 					&& (student.getDistOnPath()-game.getPlayer().getDistOnPath())<getDimensionY()*2
@@ -121,14 +121,11 @@ public class OncomingStudent extends DisplayObject{
 					double mult = Math.signum(getStrafe()-student.getStrafe());
 					setTargetStrafe((int)(thisStrafe+getDimensionX()*1.5*mult));
 					student.setTargetStrafe((int)(otherStrafe-getDimensionX()*1.5*mult));
-
 				}
-				
 			}
 		}
-
-		
 	}
+
 	public Image getSprite() {
 		return sprites[0];
 	}

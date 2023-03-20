@@ -2,7 +2,6 @@ import java.awt.Point;
 import java.awt.geom.Line2D;
 
 public class MotionHitbox extends Hitbox {
-
 	private Line2D.Double trail;
 	
 	MotionHitbox(Point center, int width, int height, double heading, Point prev) {
@@ -21,6 +20,4 @@ public class MotionHitbox extends Hitbox {
 		return super.getLine(i);
 	}
 	
-	
-
 }
