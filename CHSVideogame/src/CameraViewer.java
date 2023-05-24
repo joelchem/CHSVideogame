@@ -44,6 +44,9 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 	private Image strengthBar;
 	private Image emptyBar;
 	
+	private Image dollarIndicator;
+	private Image jacketIndicator;
+	
 	CameraViewer(Game g, GameRunner gr) {
 		game = g;
 		gameRunner = gr;
@@ -56,6 +59,9 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		try {
 			int barDimX = (int) (game.getCamera().getDimX()*0.3);
 			int barDimY = (int) (game.getCamera().getDimX()*.3*7./48.);
+			
+			int iconSize = (int) (game.getCamera().getDimX() * 0.1);
+			
 		    emptyBar = ImageIO.read(getClass().getClassLoader().getResource("empty_bar.png")).
 					getScaledInstance(barDimX, barDimY, 0);
 		    healthBar = ImageIO.read(getClass().getClassLoader().getResource("health_bar.png")).
@@ -63,7 +69,12 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		    strengthBar = ImageIO.read(getClass().getClassLoader().getResource("strength_bar.png")).
 					getScaledInstance(barDimX, barDimY, 0);
 		    distBar = ImageIO.read(getClass().getClassLoader().getResource("distance_bar.png")).
-					getScaledInstance(barDimX, barDimY, 0);	    
+					getScaledInstance(barDimX, barDimY, 0);
+		    
+		    dollarIndicator = ImageIO.read(getClass().getClassLoader().
+		    		getResource("dollar_indicator.png")).getScaledInstance(iconSize, iconSize, 0);
+		    jacketIndicator = ImageIO.read(getClass().getClassLoader().
+		    		getResource("jacket_indicator.png")).getScaledInstance(iconSize, iconSize, 0);
 		} catch (IOException e) {
 			System.out.println("bake sale sprites not found.");
 		}
@@ -154,6 +165,22 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		g.drawString("Health", gap*3, gap+2*height/3);
 		g.drawString("Strength", gap*4+barWidth, gap+2*height/3);
 		g.drawString("Distance", gap*5+barWidth*2, gap+2*height/3);
+		
+		int iconStartX = (int) (game.getCamera().getDimX() * 0.87);
+		int icon1Y = (int) (game.getCamera().getDimY() * 0.85);
+		int icon2Y = (int) (game.getCamera().getDimY() * 0.73);
+		
+		boolean hasMoney = game.getPlayer().getMoney();
+		boolean hasJacket = game.getPlayer().getJacket();
+		
+		if(hasMoney && hasJacket) {
+			g.drawImage(dollarIndicator, iconStartX, icon1Y, null);
+			g.drawImage(jacketIndicator, iconStartX, icon2Y, null);
+		} else if(hasJacket) {
+			g.drawImage(jacketIndicator, iconStartX, icon1Y, null);
+		} else if(hasMoney) {
+			g.drawImage(dollarIndicator, iconStartX, icon1Y, null);
+		}
 	}
 	
 	private Image cropBarImage(Image barImage, double ratio) {
