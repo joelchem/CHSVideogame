@@ -1,9 +1,11 @@
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class GameRunner implements ActionListener {
@@ -113,6 +115,11 @@ public class GameRunner implements ActionListener {
         player.setPositionX((int)strafePos.getX());
         player.setPositionY((int)strafePos.getY());
         player.setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
+        
+		Point mousePos = MouseInfo.getPointerInfo().getLocation();
+		SwingUtilities.convertPointFromScreen(mousePos, camView);
+		int offset = game.getCamera().getDimX()/2-(int)mousePos.getX();
+		game.getPlayer().setOffset(offset);
         
         game.getCamera().setX((int)pos.getX());
         game.getCamera().setY((int)pos.getY());

@@ -198,7 +198,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 			e1.printStackTrace();
 		}
 		int offset = game.getCamera().getDimX()/2-(int)mousePos.getX();
-		game.getPlayer().setOffset(offset);
+//		game.getPlayer().setOffset(offset);
 	}
 
 	@Override

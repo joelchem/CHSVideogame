@@ -5,8 +5,8 @@ import java.awt.geom.Point2D;
 public class Camera {
 	private int posX;
 	private int posY;
-	private final int cameraWidth = 1000;
-	private final int cameraHeight = 1000;
+	private final int cameraWidth = 500;
+	private final int cameraHeight = 500;
 	private double heading;
 	private Game game;
 	
