@@ -71,7 +71,8 @@ public class MainMenu extends JPanel implements ActionListener {
                 getResource("CHS_EasyButton.png"));
         ImageIcon normalButton = new ImageIcon(getClass().getClassLoader().
                 getResource("CHS_NormalButton.png"));
-        ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_Hard.png"));
+        ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().
+        		getResource("CHS_Hard.png"));
 
         JLabel picLabel = new JLabel(title);
         JLabel picLabel2 = new JLabel(title2);
@@ -82,12 +83,12 @@ public class MainMenu extends JPanel implements ActionListener {
         label.add(picLabel);
         label.add(picLabel2);
 
-        start = new JButton("", startButton);
-        start.setBounds(400, 400, 200, 105);
-        start.setActionCommand("Start");
-        start.addActionListener(this);
-
-        label.add(start);
+//        start = new JButton("", startButton);
+//        start.setBounds(400, 400, 200, 105);
+//        start.setActionCommand("Start");
+//        start.addActionListener(this);
+//
+//        label.add(start);
 
         nameInp = new JTextField(8);
         nameInp.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -97,33 +98,38 @@ public class MainMenu extends JPanel implements ActionListener {
         label.add(nameInp);
 
         easy = new JButton("", easyButton);
-        easy.setBounds(425, 250, 170, 70);
+//        easy.setBounds(425, 250, 170, 70);
+        easy.setBounds(425, 400, 170, 70);
         easy.setActionCommand("Easy");
         easy.addActionListener(this);
 
-        label2.add(easy);
-        label2.add(easy);
+//        label2.add(easy);
+        label.add(easy);
 
         medium = new JButton("", normalButton);
-        medium.setBounds(425, 350, 170, 70);
+//        medium.setBounds(425, 350, 170, 70);
+        medium.setBounds(425, 500, 170, 70);
         medium.setActionCommand("Medium");
         medium.addActionListener(this);
 
-        label2.add(medium);
+//        label2.add(medium);
+        label.add(medium);
 
         hard = new JButton("", hardButton);
-        hard.setBounds(425, 450, 170, 70);
+//        hard.setBounds(425, 450, 170, 70);
+        hard.setBounds(425, 600, 170, 70);
         hard.setActionCommand("Hard");
         hard.addActionListener(this);
 
-        label2.add(hard);
+//        label2.add(hard);
+        label.add(hard);
 
         map = new JButton("", mapButton);
         map.setBounds(400, 550, 200, 105);
         map.setActionCommand("Map");
         map.addActionListener(this);
 
-        label.add(map);
+//        label.add(map);
 
         back = new JButton("", backButton);
         back.setBounds(50, 600, 150, 50);
@@ -213,10 +219,10 @@ public class MainMenu extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Start")) {
-            gameRunner.setupGameloop();
-            frame1.setVisible(false);
-        } else if (e.getActionCommand().equals("Easy")) {
+//        if (e.getActionCommand().equals("Start")) {
+//            gameRunner.setupGameloop();
+//            frame1.setVisible(false);
+        /*} else */ if (e.getActionCommand().equals("Easy")) {
             game.setDifficulty("easy");
             easy.setBorder(BorderFactory.createLineBorder(Color.green, 4));
             easy.setBorderPainted(true);
@@ -225,6 +231,8 @@ public class MainMenu extends JPanel implements ActionListener {
             easy.setBackground(Color.ORANGE);
             medium.setBackground(start.getBackground());
             hard.setBackground(start.getBackground());
+            gameRunner.setupGameloop(); //new
+            frame1.setVisible(false); //new
         } else if (e.getActionCommand().equals("Medium")) {
             game.setDifficulty("medium");
             medium.setBorder(BorderFactory.createLineBorder(Color.orange, 4));
@@ -234,6 +242,8 @@ public class MainMenu extends JPanel implements ActionListener {
             medium.setBackground(Color.ORANGE);
             easy.setBackground(start.getBackground());
             hard.setBackground(start.getBackground());
+            gameRunner.setupGameloop(); //new
+            frame1.setVisible(false); //new
         } else if (e.getActionCommand().equals("Hard")) {
             game.setDifficulty("hard");
             hard.setBorder(BorderFactory.createLineBorder(Color.red, 4));
@@ -243,13 +253,15 @@ public class MainMenu extends JPanel implements ActionListener {
             hard.setBackground(Color.ORANGE);
             medium.setBackground(start.getBackground());
             easy.setBackground(start.getBackground());
-        } else if (e.getActionCommand().equals("Map")) {
-            frame1.setVisible(false);
-            frame2.setVisible(true);
-        } else if (e.getActionCommand().equals("Back")) {
-            frame1.setVisible(true);
-            frame2.setVisible(false);
-        }
+            gameRunner.setupGameloop(); //new
+            frame1.setVisible(false); //new
+        } //else if (e.getActionCommand().equals("Map")) {
+//            frame1.setVisible(false);
+//            frame2.setVisible(true);
+//        } else if (e.getActionCommand().equals("Back")) {
+//            frame1.setVisible(true);
+//            frame2.setVisible(false);
+//        }
     }
 
     public class timeDate {
