@@ -171,12 +171,12 @@ public class MainMenu extends JPanel implements ActionListener {
     public class JScoreBoard extends JPanel {
         public void paintComponent(Graphics g) {
             g.setColor(Color.black);
-            g.fillRect(0, 0, 1000, 1000);
+            g.fillRect(0, 75, 1000, 1000);
             Scanner s;
             try {
                 s = new Scanner(game.getScoreBoardFile());
                 int x = 60;
-                int y = 0;
+                int y = 150;
                 while (s.hasNextLine()) {
                     g.setColor(Color.white);
                     g.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
@@ -187,7 +187,7 @@ public class MainMenu extends JPanel implements ActionListener {
                     String date = scoreName[2];
                     String time = scoreName[3];
 
-                    y += 50;
+                    y += 45;
                     g.drawString(name, x, y);
                     x += 80;
                     g.drawString(score, x, y);
@@ -198,7 +198,7 @@ public class MainMenu extends JPanel implements ActionListener {
                     x = 60;
                 }
 
-                y+=50;
+                y+=45;
                 g.setColor(Color.YELLOW);
                 g.drawString("Your Score: "+score, x, y);
                 s.close();
