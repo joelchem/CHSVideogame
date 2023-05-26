@@ -83,12 +83,12 @@ public class MainMenu extends JPanel implements ActionListener {
         label.add(picLabel);
         label.add(picLabel2);
 
-        start = new JButton("", startButton);
-        start.setBounds(400, 400, 200, 105);
-        start.setActionCommand("Start");
-        start.addActionListener(this);
-
-        label.add(start);
+//        start = new JButton("", startButton);
+//        start.setBounds(400, 400, 200, 105);
+//        start.setActionCommand("Start");
+//        start.addActionListener(this);
+//
+//        label.add(start);
 
         nameInp = new JTextField(8);
         nameInp.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -219,18 +219,18 @@ public class MainMenu extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Start")) {
-            gameRunner.setupGameloop();
-            frame1.setVisible(false);
-        } else if (e.getActionCommand().equals("Easy")) {
+//        if (e.getActionCommand().equals("Start")) {
+//            gameRunner.setupGameloop();
+//            frame1.setVisible(false);
+        /*} else */ if (e.getActionCommand().equals("Easy")) {
             game.setDifficulty("easy");
-            easy.setBorder(BorderFactory.createLineBorder(Color.green, 4));
-            easy.setBorderPainted(true);
-            medium.setBorderPainted(false);
-            hard.setBorderPainted(false);
-            easy.setBackground(Color.ORANGE);
-            medium.setBackground(start.getBackground());
-            hard.setBackground(start.getBackground());
+//            easy.setBorder(BorderFactory.createLineBorder(Color.green, 4));
+//            easy.setBorderPainted(true);
+//            medium.setBorderPainted(false);
+//            hard.setBorderPainted(false);
+//            easy.setBackground(Color.ORANGE);
+//            medium.setBackground(start.getBackground());
+//            hard.setBackground(start.getBackground());
             gameRunner.setupGameloop(); //new
             frame1.setVisible(false); //new
         } else if (e.getActionCommand().equals("Medium")) {
