@@ -1,1 +1,5 @@
-/bin/
+/.metadata/
+/CHSVideogame/bin/
+/CHSVideogame/.classpath
+/CHSVideogame/.externalToolBuilders/
+/CHSVideogame/.settings/
