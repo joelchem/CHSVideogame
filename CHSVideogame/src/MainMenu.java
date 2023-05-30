@@ -235,24 +235,24 @@ public class MainMenu extends JPanel implements ActionListener {
             frame1.setVisible(false); //new
         } else if (e.getActionCommand().equals("Medium")) {
             game.setDifficulty("medium");
-            medium.setBorder(BorderFactory.createLineBorder(Color.orange, 4));
-            medium.setBorderPainted(true);
-            easy.setBorderPainted(false);
-            hard.setBorderPainted(false);
-            medium.setBackground(Color.ORANGE);
-            easy.setBackground(start.getBackground());
-            hard.setBackground(start.getBackground());
+//            medium.setBorder(BorderFactory.createLineBorder(Color.orange, 4));
+//            medium.setBorderPainted(true);
+//            easy.setBorderPainted(false);
+//            hard.setBorderPainted(false);
+//            medium.setBackground(Color.ORANGE);
+//            easy.setBackground(start.getBackground());
+//            hard.setBackground(start.getBackground());
             gameRunner.setupGameloop(); //new
             frame1.setVisible(false); //new
         } else if (e.getActionCommand().equals("Hard")) {
             game.setDifficulty("hard");
-            hard.setBorder(BorderFactory.createLineBorder(Color.red, 4));
-            hard.setBorderPainted(true);
-            easy.setBorderPainted(false);
-            medium.setBorderPainted(false);
-            hard.setBackground(Color.ORANGE);
-            medium.setBackground(start.getBackground());
-            easy.setBackground(start.getBackground());
+//            hard.setBorder(BorderFactory.createLineBorder(Color.red, 4));
+//            hard.setBorderPainted(true);
+//            easy.setBorderPainted(false);
+//            medium.setBorderPainted(false);
+//            hard.setBackground(Color.ORANGE);
+//            medium.setBackground(start.getBackground());
+//            easy.setBackground(start.getBackground());
             gameRunner.setupGameloop(); //new
             frame1.setVisible(false); //new
         } //else if (e.getActionCommand().equals("Map")) {
