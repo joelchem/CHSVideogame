@@ -7,9 +7,14 @@ import javax.imageio.ImageIO;
 
 public class TrashCan extends DisplayObject {
 	private Game theGame;
-    TrashCan(Game game, Map map, int x, int y, double heading) {
-		super(game,x, y, heading, 3*map.getScale(),4*map.getScale());
-
+	private int distOnPath;
+    TrashCan(Game game, Map map, int distance, int offset, double heading) {
+//    	super(game,distance, offset, heading, 3*map.getScale(),4*map.getScale());
+		super(game, (int) map.getPath().getPos(distance, offset).getX(),
+				(int) map.getPath().getPos(distance, offset).getY(),
+				heading, 3*map.getScale(),4*map.getScale());
+//		
+		distOnPath = distance;
 		try {
 		    Image im = ImageIO.read(getClass().getClassLoader().getResource("trash-can.png")).
 					getScaledInstance(getDimensionX(), getDimensionY(), 0);
@@ -24,6 +29,7 @@ public class TrashCan extends DisplayObject {
 	public boolean testForCollision() {
 		Player p = theGame.getPlayer();
 		boolean collisionResult = super.testForCollision();
+		collisionResult = collisionResult && p.getDistOnPath() < distOnPath;
 		if(!collisionResult
 				&& p.getCrouch()) {
 			p.setCrouch(false);

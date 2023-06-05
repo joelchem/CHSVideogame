@@ -39,7 +39,7 @@ public class Map {
              placedObjects.add(new BakeSale(game, this, 533*scale, 396*scale, -Math.PI));
              placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
              placedObjects.add(new CheeseCracker(game, this, 292*scale, 242*scale, -Math.PI));
-             placedObjects.add(new TrashCan(game, this, 295*scale, 287*scale, -Math.PI));
+             placedObjects.add(new TrashCan(game, this, 236*scale, 10*scale, -Math.PI));
              placedObjects.add(new WaterFountain(game, this, 295*scale, 330*scale, -Math.PI));
              
              int jacketX = (int)(Math.random()*150+320);
@@ -57,7 +57,7 @@ public class Map {
              placedObjects.add(new BakeSale(game, this, 425*scale, 199*scale, -Math.PI/2));
              placedObjects.add(new Dollar(game, this, 200*scale, 210*scale, -Math.PI/2));
              placedObjects.add(new CheeseCracker(game, this, 500*scale, 215*scale, -Math.PI/2));
-             placedObjects.add(new TrashCan(game, this, 533*scale, 252*scale, -Math.PI));
+             placedObjects.add(new TrashCan(game, this, 438*scale, 10*scale, -Math.PI));
              placedObjects.add(new WaterFountain(game, this, 533*scale, 400*scale, -Math.PI));
              
              int jacketX = (int)(Math.random()*150+320);
@@ -76,7 +76,7 @@ public class Map {
             placedObjects.add(new CheeseCracker(game, this, 412*scale, 262*scale, -Math.PI));
             placedObjects.add(new CheeseCracker(game, this, 406*scale, 365*scale, Math.PI));
             placedObjects.add(new CheeseCracker(game, this, 412*scale, 463*scale, -Math.PI));
-            placedObjects.add(new TrashCan(game, this, 533*scale, 287*scale, -Math.PI));
+            placedObjects.add(new TrashCan(game, this, 460*scale, 10*scale, -Math.PI));
             placedObjects.add(new WaterFountain(game, this, 295*scale, 400*scale, -Math.PI));
             
             int jacketX = (int)(Math.random()*150+320);
