@@ -47,6 +47,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	private int score;
 	private String name;
 	private File scoreBoard;
+	private JLabel label3;
 
 	public MainMenu(Game g, GameRunner gr) {
 		game = g;
@@ -56,7 +57,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		frame2 = new JFrame();
 		JLabel label = new JLabel();
 		JLabel label2 = new JLabel();
-		JLabel label3 = new JLabel();
+		label3 = new JLabel();
 		label3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("test.jpg")));
 		label2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("CHS_MenuBackground.png")));
 		label.setIcon(new ImageIcon(getClass().getClassLoader().getResource("CHS_MenuBackground.png")));
@@ -161,6 +162,18 @@ public class MainMenu extends JPanel implements ActionListener {
 		frame3.setResizable(false);
 	}
 
+	public void reload() {
+		frame3 = new JFrame();
+		frame3.setLayout(null);
+		frame3.add(contentPane3a);
+		frame3.add(contentPane3b);
+		frame3.setSize(width, height);
+		frame3.setDefaultCloseOperation(frame3.EXIT_ON_CLOSE);
+		frame1.setResizable(false);
+		frame2.setResizable(false);
+		frame3.setResizable(false);
+	}
+
 	public String getName() {
 		return nameInp.getText();
 	}
@@ -177,9 +190,15 @@ public class MainMenu extends JPanel implements ActionListener {
 				g.setColor(Color.red);
 				g.fillRect(0, 0, 5000, 100);
 				g.setColor(Color.white);
-				g.setFont(new Font(Font.DIALOG, Font.BOLD, 50));
-				g.drawString("So close. Try again!", 10, 60);
+				g.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
+				if (game.getPlayer().getStrength() == 0) {
+					g.drawString("You ran out of strength!", 25, 60);
+				}
+				else if (game.getPlayer().getHealth() == 0) {
+					g.drawString("You ran out of health!", 40, 60);
+				}
 			}
+			// contentPane3b.add(label3);
 			g.setColor(Color.black);
 			g.fillRect(0, 85, 1000, 950);
 			Scanner s;
