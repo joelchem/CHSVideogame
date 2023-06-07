@@ -69,9 +69,12 @@ public class MainMenu extends JPanel implements ActionListener {
 		ImageIcon title2 = new ImageIcon(getClass().getClassLoader().getResource("CHSVideogame_title2.png"));
 		ImageIcon mapButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_MapButton.png"));
 		ImageIcon backButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_BackButton.png"));
-		ImageIcon easyButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_EasyButton.png"));
-		ImageIcon normalButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_NormalButton.png"));
-		ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_Hard.png"));
+//		ImageIcon easyButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_EasyButton.png"));
+//		ImageIcon normalButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_NormalButton.png"));
+//		ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_Hard.png"));
+		ImageIcon easyButton = new ImageIcon(getClass().getClassLoader().getResource("easy-button.png"));
+		ImageIcon normalButton = new ImageIcon(getClass().getClassLoader().getResource("medium-button.png"));
+		ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().getResource("hard-button.png"));
 
 		JLabel picLabel = new JLabel(title);
 		JLabel picLabel2 = new JLabel(title2);
