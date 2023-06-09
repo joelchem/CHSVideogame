@@ -32,12 +32,14 @@ public class MainMenu extends JPanel implements ActionListener {
 	private JButton hard;
 	private JButton map;
 	private JButton back;
+   private JButton replay;
 	private JTextField nameInp;
 	private JFrame frame1;
 	private JFrame frame2;
 	private JFrame frame3;
 	private JPanel contentPane3a;
 	private JPanel contentPane3b;
+   private JPanel contentPane3c;
 	private ImageIcon background = null;
 	private Image pic;
 	private final int width = 1000;
@@ -75,6 +77,19 @@ public class MainMenu extends JPanel implements ActionListener {
 		ImageIcon easyButton = new ImageIcon(getClass().getClassLoader().getResource("easy-button.png"));
 		ImageIcon normalButton = new ImageIcon(getClass().getClassLoader().getResource("medium-button.png"));
 		ImageIcon hardButton = new ImageIcon(getClass().getClassLoader().getResource("hard-button.png"));
+      ImageIcon replayButton = new ImageIcon(getClass().getClassLoader().getResource("CHS_BackButton.png"));
+
+      ImageIcon imageIcon = replayButton; 
+      Image image = imageIcon.getImage(); 
+      Image newimg = image.getScaledInstance(240, 120,  java.awt.Image.SCALE_SMOOTH);   
+      replayButton = new ImageIcon(newimg);  
+      replay = new JButton("", replayButton);
+      replay.addActionListener(this);
+      replay.setActionCommand("Replay");	
+      replay.setOpaque(false);
+      replay.setContentAreaFilled(false);
+      replay.setBorderPainted(false);
+
 
 		JLabel picLabel = new JLabel(title);
 		JLabel picLabel2 = new JLabel(title2);
@@ -92,12 +107,12 @@ public class MainMenu extends JPanel implements ActionListener {
 //
 //        label.add(start);
 
-		nameInp = new JTextField(8);
-		nameInp.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-		nameInp.setText("Unnamed");
-		nameInp.setBounds(400, 300, 200, 50);
+		nameInp = new JTextField("Unnamed", 8);
+      nameInp.setDocument(new JTextFieldLimit(8));
+      nameInp.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+      nameInp.setBounds(400, 300, 200, 50);
+      label.add(nameInp);
 
-		label.add(nameInp);
 
 		easy = new JButton("", easyButton);
 //        easy.setBounds(425, 250, 170, 70);
@@ -153,11 +168,18 @@ public class MainMenu extends JPanel implements ActionListener {
 		contentPane3b = new JPanel();
 		contentPane3b.add(label3);
 		contentPane3b.setSize(width, height);
+      contentPane3c = new JPanel();
+      contentPane3c.setBounds(width/2+replayButton.getIconWidth()+10, 
+      height/2 - replayButton.getIconHeight()/2, replayButton.getIconWidth(), replayButton.getIconHeight());
+      contentPane3c.add(replay, BorderLayout.SOUTH);
+      contentPane3c.setSize(replayButton.getIconWidth(), replayButton.getIconHeight());
+
 
 		frame3 = new JFrame();
 		frame3.setLayout(null);
 		frame3.add(contentPane3a);
 		frame3.add(contentPane3b);
+      frame3.add(contentPane3c);
 		frame3.setSize(width, height);
 		frame3.setDefaultCloseOperation(frame3.EXIT_ON_CLOSE);
 		frame1.setResizable(false);
@@ -170,6 +192,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		frame3.setLayout(null);
 		frame3.add(contentPane3a);
 		frame3.add(contentPane3b);
+      frame3.add(contentPane3c);
 		frame3.setSize(width, height);
 		frame3.setDefaultCloseOperation(frame3.EXIT_ON_CLOSE);
 		frame1.setResizable(false);
@@ -289,7 +312,12 @@ public class MainMenu extends JPanel implements ActionListener {
 //			easy.setBackground(start.getBackground());
 			gameRunner.setupGameloop(); // new
 			frame1.setVisible(false); // new
-		} // else if (e.getActionCommand().equals("Map")) {
+		} else if (e.getActionCommand().equals("Replay")) {
+			frame3.setVisible(false);
+			new GameRunner();
+		}
+
+// else if (e.getActionCommand().equals("Map")) {
 //            frame1.setVisible(false);
 //            frame2.setVisible(true);
 //        } else if (e.getActionCommand().equals("Back")) {
@@ -305,6 +333,30 @@ public class MainMenu extends JPanel implements ActionListener {
 
 			writeScores(fileMatrixToString(lines));
 		}
+      
+      class JTextFieldLimit extends PlainDocument {
+		   private int limit;
+		   JTextFieldLimit(int limit) {
+		      super();
+		      this.limit = limit;
+		   }
+		   JTextFieldLimit(int limit, boolean upper) {
+		      super();
+		      this.limit = limit;
+		   }
+		   public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) {
+		      if (str == null)
+		         return;
+		      if ((getLength() + str.length()) <= limit) {
+		         try {
+					super.insertString(offset, str, attr);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+		      }
+	   }
+}
+
 
 		// assumes previous scores are already ordered from most to least
 		public void writeScores(String scores) {
