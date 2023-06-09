@@ -113,6 +113,7 @@ public class MainMenu extends JPanel implements ActionListener {
       nameInp.setDocument(new JTextFieldLimit(8));
       nameInp.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
       nameInp.setBounds(400, 300, 200, 50);
+      nameInp.setText("Unnamed");
       label.add(nameInp);
 
 

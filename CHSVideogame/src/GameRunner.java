@@ -115,6 +115,15 @@ public class GameRunner implements ActionListener {
         player.setPositionX((int)strafePos.getX());
         player.setPositionY((int)strafePos.getY());
         player.setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath())); 
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
+        player.setHeading(game.getMap().getPath().heading(player.getDistOnPath()));
         
 		Point mousePos = MouseInfo.getPointerInfo().getLocation();
 		SwingUtilities.convertPointFromScreen(mousePos, camView);
