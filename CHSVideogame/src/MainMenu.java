@@ -205,6 +205,29 @@ public class MainMenu extends JPanel implements ActionListener {
 	public String getName() {
 		return nameInp.getText();
 	}
+   class JTextFieldLimit extends PlainDocument {
+		   private int limit;
+		   JTextFieldLimit(int limit) {
+		      super();
+		      this.limit = limit;
+		   }
+		   JTextFieldLimit(int limit, boolean upper) {
+		      super();
+		      this.limit = limit;
+		   }
+		   public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) {
+		      if (str == null)
+		         return;
+		      if ((getLength() + str.length()) <= limit) {
+		         try {
+					super.insertString(offset, str, attr);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+		      }
+	   }
+}
+
 
 	public class JScoreBoard extends JPanel {
 		public void paintComponent(Graphics g) {
@@ -336,29 +359,6 @@ public class MainMenu extends JPanel implements ActionListener {
 			writeScores(fileMatrixToString(lines));
 		}
       
-      class JTextFieldLimit extends PlainDocument {
-		   private int limit;
-		   JTextFieldLimit(int limit) {
-		      super();
-		      this.limit = limit;
-		   }
-		   JTextFieldLimit(int limit, boolean upper) {
-		      super();
-		      this.limit = limit;
-		   }
-		   public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) {
-		      if (str == null)
-		         return;
-		      if ((getLength() + str.length()) <= limit) {
-		         try {
-					super.insertString(offset, str, attr);
-				} catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-		      }
-	   }
-}
-
 
 		// assumes previous scores are already ordered from most to least
 		public void writeScores(String scores) {
