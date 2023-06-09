@@ -10,6 +10,8 @@ import javax.swing.text.DefaultFormatterFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.io.BufferedReader;
@@ -171,7 +173,7 @@ public class MainMenu extends JPanel implements ActionListener {
       contentPane3c = new JPanel();
       contentPane3c.setBounds(width/2+replayButton.getIconWidth()+10, 
       height/2 - replayButton.getIconHeight()/2, replayButton.getIconWidth(), replayButton.getIconHeight());
-      contentPane3c.add(replay, BorderLayout.SOUTH);
+      contentPane3c.add(replay);
       contentPane3c.setSize(replayButton.getIconWidth(), replayButton.getIconHeight());
 
 
