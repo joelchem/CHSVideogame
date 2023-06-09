@@ -197,7 +197,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 				*ratio), barImage.getHeight(null));
 	}
 	
-	public static void startWindow(CameraViewer cam) {
+	public static JFrame startWindow(CameraViewer cam) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		cam.setSize(new Dimension(cam.getDimX(), cam.getDimY()));
 		cam.setPreferredSize(new Dimension(cam.getDimX(), cam.getDimY()));
@@ -210,6 +210,7 @@ public class CameraViewer extends JPanel implements MouseMotionListener, MouseLi
 		graphFrame.pack();
 		graphFrame.setVisible(true);
 		graphFrame.setDefaultCloseOperation(graphFrame.EXIT_ON_CLOSE);
+		return graphFrame;
 	}
 
 	public void mouseDragged(MouseEvent e) {

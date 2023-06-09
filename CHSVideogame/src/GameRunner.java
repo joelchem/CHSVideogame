@@ -2,15 +2,18 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class GameRunner implements ActionListener {
 	private Game game;
 	private CameraViewer camView;
+	private JFrame camFrame;
 	private MainMenu mainMenu;
 	private Timer timer;
 	private boolean started;
@@ -46,10 +49,14 @@ public class GameRunner implements ActionListener {
     	   game.addDisplayObject(map.getPlacedObject(i));
        }
        
-       CameraViewer.startWindow(camView);
+       camFrame = CameraViewer.startWindow(camView);
        lastFrame = System.currentTimeMillis()%1000000000;
        calculateFrame();
        camView.renderFrame();
+    }
+    
+    public void end() {
+    	camFrame.setVisible(false);
     }
     
     public void actionPerformed(ActionEvent e) {

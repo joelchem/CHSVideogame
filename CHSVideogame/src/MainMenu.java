@@ -340,6 +340,7 @@ public class MainMenu extends JPanel implements ActionListener {
 			frame1.setVisible(false); // new
 		} else if (e.getActionCommand().equals("Replay")) {
 			frame3.setVisible(false);
+			gameRunner.end();
 			new GameRunner();
 		}
 
