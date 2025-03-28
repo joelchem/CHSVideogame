@@ -2,6 +2,8 @@
 
 A hallway obstacle-racing game where you sprint to the cafeteria, dodge classmates, and grab power-ups to boost your speed — all in the name of lunch.
 
+<img src="screenshot.png" alt="Screenshot" width="400"/>
+
 ## 🎮 About the Game
 
 **CHS Videogame** is a fast-paced hallway runner set in Centennial High School. Players race through crowded halls, avoiding obstacles and collecting power-ups to reach the cafeteria as quickly as possible.
